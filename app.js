@@ -9,8 +9,9 @@ fetch('http://localhost:3000/riders')
 
 function displayUsers(users) {
     users.map( user => {
+        console.log(user)
         listItem = document.createElement('li')
-        listItem.innerHTML = (`<a href="main.html?id=<${user.id}">${user.name}</a>`)
-        userList.append(li)    
+        listItem.innerHTML = (`<a href="main.html?id=<${user.id}">${user.first_name} ${user.last_name}</a>`)
+        userList.append(listItem)    
 })
 }
