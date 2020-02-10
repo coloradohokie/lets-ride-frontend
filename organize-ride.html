@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="theme.css">
     <link rel="stylesheet" href="form.css">
+    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <title>Organize a Ride - Motorcycle App</title>
 </head>
 <body>
@@ -17,18 +18,16 @@
         <label id="date" for="date">Date:</label>
         <input type="datetime-local" id="date" placeholder="date">
 
-        <label for="location">Location</label>
-        <select id="location">
-            <option>Location 1</option>
-            <option>Location 2</option>
+        <label for="route">Route</label>
+        <select id="route">
         </select>
-        <a href="create-location.html">Create New Location</a>
+        <a href="create-route.html">Create New Route</a>
         <label for="description">Description</label>
         <input type="textarea" id="description" placeholder="description" rows="10" cols="40">
 
         <input type="submit" value="Create Ride">
     
-
+        <script src="organize-ride.js"></script>
     </form>
 </body>
 </html>
