@@ -1,8 +1,13 @@
+* {
+    box-sizing: border-box;
+}
+
 form {
     width: 500px;
     margin: auto;
     border: 2px solid gold;
     border-radius: 4px;
+    padding: 2rem;
 }
 
 label {
@@ -11,8 +16,10 @@ label {
 
 input, select {
     width: 100%;
-    margin: 0.5rem;
+    /* margin: 0.5rem; */
     padding: 0.5rem;
+    display: block;
+    margin-bottom: 1rem;
 }
 
 textarea {
