@@ -1,5 +1,8 @@
 form {
     width: 500px;
+    margin: auto;
+    border: 2px solid gold;
+    border-radius: 4px;
 }
 
 label {
