@@ -1,0 +1,13 @@
+form {
+    width: 500px;
+}
+
+label {
+    display: none;
+}
+
+input, select {
+    width: 100%;
+    margin: 0.5rem;
+    padding: 0.5rem;
+}
