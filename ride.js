@@ -10,6 +10,7 @@ fetch(`http://localhost:3000/rides/${id}`)
         console.log(ride)
         displayTitle(ride)
         displayDescription(ride)
+        displayPhotoTitle()
     })
 
 function displayTitle(ride) {
@@ -22,4 +23,13 @@ function displayDescription(ride) {
     let description = document.createElement('p')
     description.innerText = ride.description
     document.body.append(description)
+}
+
+function displayPhotoTitle() {
+    let title = document.createElement('table')
+    title.innerHTML = (`<tr>
+                        <td><h2>Photos</h2></td>
+                        <td><a href="photo-upload.html">Add Photos</a></td>
+                        </tr>`)
+    document.body.append(title)
 }
