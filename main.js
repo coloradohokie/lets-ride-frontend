@@ -11,8 +11,10 @@ fetch('http://localhost:3000/rides')
 
 function displayRides(rides) {
     rides.map(ride => {
-        listItem = document.createElement('li class="ride"')
-        listItem.innerHTML = (`<a href="ride.html?id=${ride.id}">${ride.route.name} ${ride.date_time} </a>`)
+        listItem = document.createElement('li')
+        listItem.classList.add('ride')
+        console.log(listItem)
+        listItem.innerHTML = (`<a href="ride.html?id=${ride.id}"> ${ride.date_time} ${ride.route.name}</a>`)
         listOfRides.append(listItem)
     })
 }

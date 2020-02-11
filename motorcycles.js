@@ -1,6 +1,6 @@
 let motorcycleListElement = document.getElementById('motorcycle-list')
 
-fetch("http://localhost:3000/riders/1")
+fetch("http://localhost:3000/riders/3")
     .then(response => response.json())
     .then(rider => {
         const motorcycles = rider.motorcycle
