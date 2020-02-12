@@ -1,5 +1,39 @@
-localStorage.setItem('rider_id', 1)
+function appLogin() {
+    const UsernameInputElement = document.getElementById('username')
+    const PasswordInputElement = document.getElementById('password')
+    const LoginMessageElement = document.getElementById('login-msg')
+    let userFound = false
+
+    if(UsernameInputElement.value == "" || PasswordInputElement.value == "") {
+        LoginMessageElement.innerText = `Please specify a user name and password.`
+    }
+    else {
+        fetch("http://localhost:3000/riders")
+            .then(response => response.json())
+            .then(riders => {riders.forEach(rider => {
+                    if (rider.username == UsernameInputElement.value) {
+                        localStorage.setItem('rider_id', rider.id)
+                        userFound = true
+                        location.reload()
+                    }
+                })
+                if(userFound == false) {
+                    LoginMessageElement.innerText = `User ${UsernameInputElement.value} not found.`
+                }
+            })
+    }
+}
+
+function logout () {
+    localStorage.setItem('rider_id', 0)
+    location.reload()
+}
+
 const CurrentRiderId = localStorage.getItem('rider_id')
+const LoginFormElement = document.getElementById('login-form')
+const LogoutButtonElement = document.getElementById('logout-button')
+const RidesSection = document.getElementById('rides-section')
+const MotorcyclesSection = document.getElementById('motorcycles-section')
 
 if(CurrentRiderId > 0) {
     // Page Elements
@@ -8,9 +42,11 @@ if(CurrentRiderId > 0) {
     const UpcomingRidesElement = document.getElementById('upcoming-rides')
     const MotorcycleListElement = document.getElementById('motorcycle-container')
     const RiderIdInputElement = document.getElementById('rider-id')
-    const LoginFormElement = document.getElementById('login-form')
 
     LoginFormElement.style.display = 'none'
+    LogoutButtonElement.style.display = 'block'
+    RidesSection.style.display = 'block'
+    MotorcyclesSection.style.display = 'block'
 
     // Local Storage Values
     let today = Date.parse(new Date())
@@ -64,9 +100,8 @@ if(CurrentRiderId > 0) {
     }
 }
 else {
-    const RidesSection = document.getElementById('rides-section')
-    const MotorcyclesSection = document.getElementById('motorcycles-section')
-
+    LoginFormElement.style.display = 'block'
+    LogoutButtonElement.style.display = 'none'
     RidesSection.style.display = 'none'
     MotorcyclesSection.style.display = 'none'
 }
