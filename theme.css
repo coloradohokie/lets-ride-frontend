@@ -63,7 +63,7 @@ input, button, select {
     margin-bottom: 1rem;
 }
 
-header {
+#index.header {
     display: flex;
     align-content: flex-end;
 }
@@ -117,6 +117,19 @@ p {
 a {
     text-decoration: none;
     color: black;
+}
+
+#content-container {
+    /* display: flex; */
+    background-color: lightgray;
+    width: 90%;
+    margin: 2rem;
+    text-align: left;
+}
+
+#ride-header {
+    width: 100%;
+    background-image: linear-gradient(hsla(0,0%,80%,1), hsla(0,0%,0%,0));
 }
 
 .ride-container {

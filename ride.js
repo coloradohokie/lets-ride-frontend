@@ -1,13 +1,12 @@
-console.log('hit')
-
 const params = new URLSearchParams(document.location.search)
 const id = params.get('id')
-console.log(id)
+
+header =document.querySelector('header')
+contentContainer=document.getElementById('content-container')
 
 fetch(`http://localhost:3000/rides/${id}`)
     .then(response => response.json())
     .then(ride => {
-        console.log(ride)
         displayTitle(ride)
         displayDescription(ride)
         displayPhotoTitle()
@@ -15,21 +14,22 @@ fetch(`http://localhost:3000/rides/${id}`)
 
 function displayTitle(ride) {
     let title = document.createElement('h1')
-    title.innerText = (`${ride.route.name} - ${ride.date_time}`)
-    document.body.append(title)
+    title.textContent = (`${ride.route.name} - ${ride.date_time}`)
+    header.append(title)
 }
 
 function displayDescription(ride) {
     let description = document.createElement('p')
     description.innerText = ride.description
-    document.body.append(description)
+    contentContainer.append(description)
 }
 
 function displayPhotoTitle() {
     let title = document.createElement('table')
+    title.width = ("90%")
     title.innerHTML = (`<tr>
                         <td><h2>Photos</h2></td>
                         <td><a href="photo-upload.html">Add Photos</a></td>
                         </tr>`)
-    document.body.append(title)
+    contentContainer.append(title)
 }
