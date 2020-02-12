@@ -34,6 +34,15 @@ time, mark, audio, video {
     padding: 2rem;
 }
 
+.logout-button {
+    float: right;
+    height: 40px;
+    width: 100px;
+    border-radius: 15px;
+    background-color: slateblue;
+    color: white
+}
+
 label {
     display: none;
 }
@@ -82,18 +91,16 @@ h1 {
 
 h2 {
     font-size: 1.25rem;
-    padding: 0.5rem;
-    margin: 1rem;
-}
-
-h2 {
-    font-size: 30px;
     padding: 1rem;
     margin: 3rem;
 }
 
+
 h3 {
     font-size: 30px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-top: 1.5rem;
 }
 
 h4 {
@@ -106,11 +113,6 @@ p {
     margin: 3rem;
 }
 
-h3 {
-    font-size: 1rem;
-    padding: 0.5rem;
-    margin-top: 1.5rem;
-}
 
 a {
     text-decoration: none;

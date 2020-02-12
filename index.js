@@ -44,7 +44,7 @@ if(CurrentRiderId > 0) {
     const RiderIdInputElement = document.getElementById('rider-id')
 
     LoginFormElement.style.display = 'none'
-    LogoutButtonElement.style.display = 'block'
+    // LogoutButtonElement.style.display = 'block'
     RidesSection.style.display = 'block'
     MotorcyclesSection.style.display = 'block'
 
@@ -57,7 +57,7 @@ if(CurrentRiderId > 0) {
     fetch(`http://localhost:3000/riders/${CurrentRiderId}`)
         .then(response => response.json())
         .then(rider => {
-            const welcomeMsg = `Welcome, ${rider.first_name} ${rider.last_name}!`
+            const welcomeMsg = `Welcome, ${rider.first_name}!`
             WelcomeHeadingElement.innerText = welcomeMsg
 
             const motorcycles = rider.motorcycle
