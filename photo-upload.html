@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="form.css">
+    <title>Document</title>
+</head>
+<body>
+    <h1>Upload Photos</h1>
+    <form method="POST" action="http://localhost:3000/photos">
+        <label for="picture">Photo:</label>
+        <input type="file" name="photo" value="Choose File">
+        <input type="text" name="location" placeholder="Location">
+        <input type="text" name="description" placeholder="Description (not hooked up)">
+        <input type="submit" value="Upload Photo">
+    </form>
+    
+    <script src="photo-upload.js"></script>
+</body>
+</html>
