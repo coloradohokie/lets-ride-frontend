@@ -21,50 +21,93 @@ time, mark, audio, video {
 	vertical-align: baseline;
 }
 
-
-h1 {
-    font-size: 40px;
-    padding: 0.5rem;
+/*Begin styles*/
+header {
+    display: flex;
+    align-content: flex-end;
 }
 
-#sign-in {
-    width: 500px;
-    height: 500px;
-    justify-content: center;
+section {
+    margin-bottom: 5rem;
 }
 
 body {
-    background-color: aliceblue;
+    background-color: whitesmoke;
     font-family: 'Roboto', sans-serif;
 }
-#main-body {
-    display: flex;
-    justify-content: space-evenly;
-    align-items: stretch;
-    
+
+h1 {
+    margin-left: 1rem;
+    width: 15rem;
+    font-size: 2rem;
+    padding: 1rem;
+    border-radius: 0.5rem;
 }
-.sub-content {
-    width: 300px;
-    height: 300px;
-    background-color: bisque;
-    margin: 10px;
-    padding: 40px;
-    border-radius: 10px;
+
+h2 {
+    font-size: 1.25rem;
+    padding: 0.5rem;
+}
+
+h3 {
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-top: 1.5rem;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
+.ride-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    width: 100%;
+}
+
+.ride-list {
+    display: flex;
+    flex-direction: column;
+    width: 75%;
+    margin: 2rem;
+    background-color: lightgrey;
+    padding: 1.5rem;
     box-shadow: 10px 10px 10px gray;
 }
 
-#list-of-rides {
+.ride {
     list-style-type: none;
+    width: 95%;
+    padding: 1.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.25rem;
 }
 
+.motorcycle-container {
+    display: flex;
+    justify-content: space-evenly;
+    width: 75%;
+    background-color: whitesmoke;
+}
 
-.ride {
-        width: 100%;
-        height: 40px;
-        background-color: blueviolet;
-        margin: 10px;
-        padding: 10px;
-        border-radius: 10px;
-    }
-        
-        
+.motorcycle {
+    padding: 1.5rem;
+    border-radius: 0.25rem;
+    margin-bottom: 0.25rem;
+    background-color: lightgrey;
+    padding: 1.5rem;
+    box-shadow: 10px 10px 10px gray;
+    width: 25rem;
+    height: 25rem;
+    margin: 2rem;
+}
+
+.user-ride {
+    background-color: slateblue;
+}
+
+.non-user-ride {
+    background-color: gray;
+}
