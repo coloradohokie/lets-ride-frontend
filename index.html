@@ -11,16 +11,18 @@
 </head>
 <body>
     <header> 
-        <h2 id="welcome">Ride on</h2>
+        <h2 id="welcome">Welcome, Please Log In!</h2>
+        <button id="logout-button" class="logout-button" onclick="logout()">Logout</button>
     </header>
 
-    <form id="login-form">
+    <div id="login-form" class="all-forms">
         <label for="username">User Name</label>
-        <input type="text" name="username" class=".login-input" placeholder="User Name"></select>
+        <input type="text" id="username" name="username" placeholder="User Name"></select>
         <label for="model">Password</label>
-        <input type="password" name="password" class=".login-input" placeholder="Password"></select>
-        <input type="submit" class=".login-button" value="Login">
-    </form>
+        <input type="password" id="password" name="password" placeholder="Password"></select>
+        <button onclick="appLogin()">Login</button>
+        <h3 id="login-msg"></h3>
+    </div>
 
     <section id="rides-section">
         <h1>Let's Ride!</h1>
@@ -40,7 +42,7 @@
     <section id="motorcycles-section">
         <h1>My Garage</h1>
         <div id="motorcycle-container" class="motorcycle-container"></div>
-        <form id="create-motorcycle" method="POST" action="http://localhost:3000/motorcycles">
+        <form id="create-motorcycle" class="all-forms" method="POST" action="http://localhost:3000/motorcycles">
             <label for="make">Make</label>
             <input type="text" name="make" placeholder="Make"></select>
             <label for="model">Model</label>
@@ -52,9 +54,5 @@
             <input type="submit" value="Add To My Garage">
         </form>
     </section>
-
-    <footer>
-        <h2>Ride on!</h2>
-    </footer>
 </body>
 </html>
