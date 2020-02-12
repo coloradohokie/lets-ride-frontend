@@ -1,4 +1,4 @@
-let motorcycleListElement = document.getElementById('motorcycle-list')
+
 
 fetch(`http://localhost:3000/riders/${localStorage.getItem("rider_id")}`)
     .then(response => response.json())
