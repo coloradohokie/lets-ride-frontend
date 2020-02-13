@@ -29,6 +29,18 @@ function logout () {
     location.reload()
 }
 
+function showElement (elementID) {
+    const targetElement = document.getElementById(elementID)
+
+    targetElement.style.display = "block"
+}
+
+function hideElement (elementID) {
+    const targetElement = document.getElementById(elementID)
+
+    targetElement.style.display = "none"
+}
+
 const CurrentRiderId = localStorage.getItem('rider_id')
 const LoginFormElement = document.getElementById('login-form')
 const LogoutButtonElement = document.getElementById('logout-button')
@@ -57,15 +69,25 @@ if(CurrentRiderId > 0) {
     fetch(`http://localhost:3000/riders/${CurrentRiderId}`)
         .then(response => response.json())
         .then(rider => {
-            const welcomeMsg = `Welcome, ${rider.first_name} ${rider.last_name}!`
+            const welcomeMsg = `Welcome, ${rider.first_name}!`
             WelcomeHeadingElement.innerText = welcomeMsg
 
             const motorcycles = rider.motorcycle
             motorcycles.map(motorcycle => {
                 motorcycleElement = document.createElement('div')
                 motorcycleElement.classList.add("motorcycle")
-                motorcycleElement.innerText = `${motorcycle.year} ${motorcycle.make} ${motorcycle.model}`
+                motorcycleElement.innerHTML = `<h3>${motorcycle.year} ${motorcycle.make}</h3></h4>${motorcycle.model}</h4>`
                 MotorcycleListElement.appendChild(motorcycleElement)
+                if(motorcycle.image_path == null) {
+                    motorcycleAddButtonElement = document.createElement('button')
+                    motorcycleAddButtonElement.innerText = "Add Picture"
+                    motorcycleElement.appendChild(motorcycleAddButtonElement)
+                }
+                else {
+                    motorcycleUpdateButtonElement = document.createElement('button')
+                    motorcycleUpdateButtonElement.innerText = "Update Picture"
+                    motorcycleElement.appendChild(motorcycleUpdateButtonElement)
+                }
             });
         })
 
@@ -75,8 +97,9 @@ if(CurrentRiderId > 0) {
 
     function displayRides(rides) {
         rides.map(ride => {
+            let isUserRide = false
             listItem = document.createElement('li')
-            listItem.innerHTML = (`<a href="ride.html?id=${ride.id}"> ${ride.date_time} ${ride.route.name}</a>`)
+            listItem.innerHTML = (`<a href="ride.html?id=${ride.id}"><h3>${ride.date_time}</h3><h4>${ride.route.name}</h4></a>`)
             rideDate = Date.parse(ride.date_time)
 
             listItem.classList.add("ride")
@@ -85,6 +108,7 @@ if(CurrentRiderId > 0) {
 
             ride.riders.forEach(rider => {
                 if(rider.id == CurrentRiderId) {
+                    isUserRide = true
                     listItem.classList.remove("non-user-ride")               
                     listItem.classList.add("user-ride")
                 }
@@ -92,6 +116,16 @@ if(CurrentRiderId > 0) {
             
             if(rideDate >= today) {
                 UpcomingRidesElement.append(listItem)
+                if(isUserRide == false) {
+                    rideJoinButtonElement = document.createElement('button')
+                    rideJoinButtonElement.innerText = "Join Ride :)"
+                    listItem.appendChild(rideJoinButtonElement)
+                }
+                else {
+                    rideLeaveButtonElement = document.createElement('button')
+                    rideLeaveButtonElement.innerText = "Leave Ride :("
+                    listItem.appendChild(rideLeaveButtonElement)
+                }
             }
             else {
                 PastRidesElement.append(listItem)

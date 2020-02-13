@@ -4,15 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="theme.css">
-    <link rel="stylesheet" href="form.css">
     <title>Organize a Ride - Motorcycle App</title>
 </head>
 <body>
     <h1>Organize a Ride</h1>
 
-    <form method="POST" action="http://localhost:3000/rides">
+    <form method="POST" action="http://localhost:3000/rides" class="all-forms">
         <label for="name">Name</label>
-        <input type="text" name="name" id="name" placeholder="name (not currently hooked up)">
+        <input type="text" name="name" id="name" placeholder="Name">
+        <label for="description">Description</label>
+        <textarea id="description" name="description" placeholder="Description"></textarea>
 
         <label id="date" for="date">Date:</label>
         <input type="datetime-local" name="date" id="date" placeholder="date">
@@ -20,8 +21,6 @@
         <label for="route">Route</label>
         <select id="route" name="route"></select>
         <a href="create-route.html">Create New Route</a>
-        <label for="description">Description</label>
-        <input type="textarea" id="description" name="description" placeholder="description" rows="10" cols="40">
 
         <input type="submit" value="Create Ride">
     
