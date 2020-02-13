@@ -26,6 +26,12 @@ time, mark, audio, video {
     box-sizing: border-box;
 }
 
+.ride-photo {
+    border: 2px solid black;
+    margin: 10px;
+    /* box-shadow: 10px 10px 10px gray; */
+}
+
 .all-forms {
     width: 500px;
     margin: auto;
@@ -83,7 +89,6 @@ body {
 
 h1 {
     margin-left: 1rem;
-    width: 15rem;
     font-size: 2rem;
     padding: 1rem;
     border-radius: 0.5rem;
