@@ -5,11 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="theme.css">
-    <link rel="stylesheet" href="form.css">
     <script src="index.js" defer></script>
     <title>Main Page - Motorcycle App</title>
 </head>
 <body>
+
     <header id="index-header">
         <table width="100%">
             <TR>
@@ -35,33 +35,38 @@
 
     <section id="rides-section">
         <h1>Let's Ride!</h1>
-        <div class="ride-container">
-            <div class="ride-list">
-                <h2>Upcoming Rides</h2>
-                <ul id="upcoming-rides"></ul>
-                <h3><a href="organize-ride.html">Organize a New Ride...</a></h3>
-            </div>
-            <div class="ride-list">
-                <h2>Past Rides</h2>
-                <ul id="past-rides"></ul>       
+        <div class="section-container">
+            <div class="ride-container">
+                <div class="ride-list">
+                    <h2>Upcoming Rides</h2>
+                    <ul id="upcoming-rides"></ul><br>
+                    <h3><a href="organize-ride.html">Organize a New Ride...</a></h3>
+                </div>
+                <div class="ride-list">
+                    <h2>Past Rides</h2>
+                    <ul id="past-rides"></ul>       
+                </div>
             </div>
         </div>
     </section>
 
     <section id="motorcycles-section">
         <h1>My Garage</h1>
-        <div id="motorcycle-container" class="motorcycle-container"></div>
-        <form id="create-motorcycle" class="all-forms" method="POST" action="http://localhost:3000/motorcycles">
-            <label for="make">Make</label>
-            <input type="text" name="make" placeholder="Make"></select>
-            <label for="model">Model</label>
-            <input type="text" name="model" placeholder="Model"></select>
-            <label for="year">Year</label>
-            <input type="number" name="year" placeholder="Year" min="1895" max="2020"></select>
-            <label for="rider">Rider</label>
-            <input type="number" id ="rider-id" name="rider" placeholder="Model" value=""></select>
-            <input type="submit" value="Add To My Garage">
-        </form>
+        <div class="section-container">
+            <div id="motorcycle-container" class="motorcycle-container"></div>
+            <form id="create-motorcycle" class="all-forms" method="POST" action="http://localhost:3000/motorcycles">
+                <h2>Add a Motorcycle</h2>
+                <label for="make">Make</label>
+                <input type="text" name="make" placeholder="Make"></select>
+                <label for="model">Model</label>
+                <input type="text" name="model" placeholder="Model"></select>
+                <label for="year">Year</label>
+                <input type="number" name="year" placeholder="Year" min="1895" max="2020"></select>
+                <label for="rider">Rider</label>
+                <input type="hidden" id ="rider-id" name="rider_id" placeholder="Rider" value=""></select>
+                <input type="submit" value="Add To My Garage">
+            </form>
+        </div>
     </section>
 </body>
 </html>
