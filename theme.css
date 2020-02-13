@@ -99,7 +99,6 @@ h2 {
     margin: 3rem;
 }
 
-
 h3 {
     font-size: 30px;
     font-size: 1rem;
@@ -120,6 +119,14 @@ p {
 a {
     text-decoration: none;
     color: rgb(20, 20, 20);
+}
+
+img {
+    width: 100%;
+}
+
+.add-image {
+    opacity: 40%;
 }
 
 .section-container {

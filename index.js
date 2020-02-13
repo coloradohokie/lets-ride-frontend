@@ -78,12 +78,19 @@ if(CurrentRiderId > 0) {
                 motorcycleElement.classList.add("motorcycle")
                 motorcycleElement.innerHTML = `<h3>${motorcycle.year} ${motorcycle.make}</h3></h4>${motorcycle.model}</h4>`
                 MotorcycleListElement.appendChild(motorcycleElement)
+
+                motorcycleImageElement = document.createElement('img')
+                motorcycleElement.appendChild(motorcycleImageElement)
+
                 if(motorcycle.image_path == null) {
+                    motorcycleImageElement.src = "https://images.unsplash.com/photo-1541612885762-0396fa9ac943?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=250&q=80"
+                    motorcycleImageElement.classList.add("add-image")
                     motorcycleAddButtonElement = document.createElement('button')
                     motorcycleAddButtonElement.innerText = "Add Picture"
                     motorcycleElement.appendChild(motorcycleAddButtonElement)
                 }
                 else {
+                    motorcycleImageElement.src = motorcycle.image_path
                     motorcycleUpdateButtonElement = document.createElement('button')
                     motorcycleUpdateButtonElement.innerText = "Update Picture"
                     motorcycleElement.appendChild(motorcycleUpdateButtonElement)
