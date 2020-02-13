@@ -26,12 +26,27 @@ time, mark, audio, video {
     box-sizing: border-box;
 }
 
+.ride-photo {
+    border: 2px solid black;
+    margin: 10px;
+    /* box-shadow: 10px 10px 10px gray; */
+}
+
 .all-forms {
     width: 30%;
     margin: auto;
     padding: 2rem;
     background-color: whitesmoke;
     box-shadow: 5px 5px 5px lightgray;
+}
+
+.logout-button {
+    float: right;
+    height: 40px;
+    width: 100px;
+    border-radius: 15px;
+    background-color: slateblue;
+    color: white
 }
 
 label {
@@ -49,7 +64,7 @@ textarea {
     resize: none;
 }
 
-header {
+#index.header {
     display: flex;
     align-items: center;
     /*position: fixed;
@@ -73,18 +88,23 @@ body {
 h1 {
     width: 80%;
     margin-left: 1rem;
-    font-size: 3rem;
+    font-size: 2rem;
     padding: 1rem;
     border-radius: 0.5rem;
 }
 
 h2 {
-    font-size: 1.75rem;
-    padding: 0.5rem;
+    font-size: 1.25rem;
+    padding: 1rem;
+    margin: 3rem;
 }
 
+
 h3 {
-    font-size: 1.5rem;
+    font-size: 30px;
+    font-size: 1rem;
+    padding: 0.5rem;
+    margin-top: 1.5rem;
 }
 
 h4 {
@@ -105,6 +125,19 @@ a {
 .section-container {
     display: flex;
     justify-content: flex-start;
+}
+
+#content-container {
+    /* display: flex; */
+    background-color: lightgray;
+    width: 90%;
+    margin: 2rem;
+    text-align: left;
+}
+
+#ride-header {
+    width: 100%;
+    background-image: linear-gradient(hsla(0,0%,80%,1), hsla(0,0%,0%,0));
 }
 
 .ride-container {

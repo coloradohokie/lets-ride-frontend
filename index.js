@@ -56,7 +56,7 @@ if(CurrentRiderId > 0) {
     const RiderIdInputElement = document.getElementById('rider-id')
 
     LoginFormElement.style.display = 'none'
-    LogoutButtonElement.style.display = 'block'
+    // LogoutButtonElement.style.display = 'block'
     RidesSection.style.display = 'block'
     MotorcyclesSection.style.display = 'block'
 
