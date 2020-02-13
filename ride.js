@@ -10,14 +10,31 @@ fetch(`http://localhost:3000/rides/${id}`)
         displayTitle(ride)
         displaySubTitle("Description")
         displayDescription(ride)
+        displaySubTitle("Route")
+        displayRoute(ride)
+
         displaySubTitle("Photos")
+        fetch(`http://localhost:3000/photos`)
+            .then(response => response.json())
+            .then(photos => {
+                displayPhotos(photos)
+            })
     })
 
-fetch(`http://localhost:3000/photos`)
-    .then(response => response.json())
-    .then(photos => {
-        displayPhotos(photos)
-    })
+function displayRoute(ride) {
+    const routeHeader = document.getElementById('Route')
+    let routeLocation = document.createElement('p')
+    let routeDescription = document.createElement('p')
+    let routeMap = document.createElement('p')
+    routeLocation.innerText = (`Start Location: ${ride.route.start_location}. End Location: ${ride.route.end_location}`)
+    routeDescription.innerText = ride.route.description
+    routeMap.innerHTML = ride.route.map_path
+    routeMap.id = ('map')
+    routeHeader.append(routeLocation, routeDescription, routeMap)
+
+
+}
+
 
 function displayTitle(ride) {
     let title = document.createElement('table')
@@ -38,6 +55,7 @@ function displayDescription(ride) {
 
 function displaySubTitle(titleName) {
     let title = document.createElement('h3')
+    title.id = titleName
     title.textContent = titleName
     contentContainer.append(title)
 }

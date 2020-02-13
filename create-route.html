@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="theme.css">
+    <title>Create New Route</title>
+</head>
+<body>
+    <h1>Create New Route</h1>
+    <form method="POST" action="http://localhost:3000/routes" class="all-forms">
+        <input type="text" name="route_name" placeholder="Route Name">
+        <input type="text" name="start_location" placeholder="Starting Location">
+        <input type="text" name="end_location" placeholder="End Location">
+        <textarea name="description" placeholder="Description"></textarea>
+        <input type="text" name="map_path" placeholder="Insert a link to the Google Map">
+        <input type="submit" value="Add Route!">
+    </form>
+    
+    <script src="create-route.js"></script>
+</body>
+</html>
