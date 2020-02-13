@@ -24,7 +24,7 @@ function displayTitle(ride) {
     title.width = ("100%")
     title.innerHTML = (`<tr>
                         <td><h2>${ride.route.name} - ${ride.date_time}</h2></td>
-                        <td><a href="photo-upload.html">Add Photos</a> |
+                        <td><a href="photo-upload.html?ride_id=${id}">Add Photos</a> |
                         <a href="">Edit Description</a></td>
                         </tr>`)
     header.append(title)
