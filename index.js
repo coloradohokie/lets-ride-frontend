@@ -103,6 +103,10 @@ function hideElement (elementID) {
     targetElement.style.display = "none"
 }
 
+function displayDate(date) {
+    return moment(date).format('MMMM Do, YYYY')
+}
+
 const LoginFormElement = document.getElementById('login-form')
 const LogoutElement = document.getElementById('logout-button')
 const RidesSection = document.getElementById('rides-section')
@@ -199,7 +203,7 @@ if(CurrentRiderId > 0) {
             let rideAttendanceID = 0
             listItem = document.createElement('li')
             listItem.dataset.id = ride.id
-            listItem.innerHTML = (`<a href="ride.html?id=${ride.id}"><h3>${ride.date_time}</h3><h4>${ride.route.name}</h4></a>`)
+            listItem.innerHTML = (`<a href="ride.html?id=${ride.id}"><h3>${displayDate(ride.date_time)}</h3><h4>${ride.route.name}</h4></a>`)
             rideDate = Date.parse(ride.date_time)
 
             listItem.classList.add("ride")

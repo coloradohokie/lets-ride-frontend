@@ -3,26 +3,24 @@ const id = params.get('id')
 
 header =document.querySelector('header')
 contentContainer=document.getElementById('content-container')
-// const displayDate = moment(ride.date_time).format('YYYY, MM DD')
-// console.log("display date", displayDate)
 
 fetch(`http://localhost:3000/rides/${id}`)
+.then(response => response.json())
+.then(ride => {
+    displayTitle(ride)
+    displaySubTitle("Description")
+    displayDescription(ride)
+    displaySubTitle("Route")
+    displayRoute(ride)
+    
+    
+    displaySubTitle("Photos")
+    fetch(`http://localhost:3000/photos`)
     .then(response => response.json())
-    .then(ride => {
-        displayTitle(ride)
-        displaySubTitle("Description")
-        displayDescription(ride)
-        displaySubTitle("Route")
-        displayRoute(ride)
-
-
-        displaySubTitle("Photos")
-        fetch(`http://localhost:3000/photos`)
-            .then(response => response.json())
-            .then(photos => {
-                displayPhotos(photos)
-            })
+    .then(photos => {
+        displayPhotos(photos)
     })
+})
 
 
 function displayRoute(ride) {
@@ -35,16 +33,22 @@ function displayRoute(ride) {
     routeMap.innerHTML = ride.route.map_path
     routeMap.id = ('map')
     routeHeader.append(routeLocation, routeDescription, routeMap)
+    
+    
+}
 
-
+function displayDate(date) {
+    return moment(date).format('MMMM Do, YYYY')
 }
 
 
-function displayTitle(ride) {
+function displayTitle(ride) {  
+    // const displayDate = moment(ride.date_time).format('MMMM Do, YYYY')
+    // console.log("display date", displayDate)
     let title = document.createElement('table')
     title.width = ("100%")
     title.innerHTML = (`<tr>
-                        <td><h2>${ride.route.name} - ${ride.date_time}</h2></td>
+                        <td><h2>${ride.route.name} - ${displayDate(ride.date_time)}</h2></td>
                         <td><a href="photo-upload.html?ride_id=${id}">Add Photos</a> |
                         <a href="">Edit Description</a></td>
                         </tr>`)
@@ -111,12 +115,3 @@ function displayPhotos(photos) {
 }
 
 
-
-
-
-
-
-// import './moment'
-// const moment = require('moment');
-let m = moment().format('YYYY, MM DD');
-console.log(m)
