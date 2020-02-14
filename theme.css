@@ -41,12 +41,13 @@ time, mark, audio, video {
 }
 
 .logout-button {
-    float: right;
+    text-align: right;
+/*    float: right;
     height: 40px;
     width: 100px;
     border-radius: 15px;
     background-color: slateblue;
-    color: white
+    color: white*/
 }
 
 label {
@@ -57,6 +58,12 @@ textarea, input, button, select {
     width: 100%;
     padding: 0.5rem;
     margin-top: 1rem;
+}
+
+button {
+    font-size = 2rem;
+    border: none;
+    background-color: Transparent;
 }
 
 textarea {
@@ -117,8 +124,14 @@ p {
 }
 
 a {
+    font-size = 2rem;
     text-decoration: none;
     color: rgb(20, 20, 20);
+}
+
+.warn-a {
+    color: darkred;
+    font-weight: bold;
 }
 
 img {
@@ -131,7 +144,7 @@ img {
 
 .section-container {
     display: flex;
-    justify-content: flex-start;
+    align-items: flex-start;
 }
 
 #content-container {
@@ -151,7 +164,7 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 25%;
+    width: 35%;
 }
 
 .ride-list {
@@ -178,7 +191,6 @@ img {
     display: flex;
     flex-wrap: wrap;
     justify-content: space-evenly;
-
     width: 60%;
     opacity: 95%;
 }
