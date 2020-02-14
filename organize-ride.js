@@ -1,5 +1,3 @@
-console.log ('hit')
-
 routeSelector = document.getElementById('route')
 
 fetch('http://localhost:3000/routes')

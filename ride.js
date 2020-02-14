@@ -43,14 +43,13 @@ function displayDate(date) {
 
 
 function displayTitle(ride) {  
-    // const displayDate = moment(ride.date_time).format('MMMM Do, YYYY')
-    // console.log("display date", displayDate)
     let title = document.createElement('table')
     title.width = ("100%")
     title.innerHTML = (`<tr>
                         <td><h2>${ride.route.name} - ${displayDate(ride.date_time)}</h2></td>
                         <td><a href="photo-upload.html?ride_id=${id}">Add Photos</a> |
-                        <a href="">Edit Description</a></td>
+                        <a href="update-ride.html?ride_id=${id}">Edit Ride</a>
+                        </td>
                         </tr>`)
     header.append(title)
 }
@@ -107,7 +106,6 @@ function displayPhotos(photos) {
         
         let image = document.createElement('img')
         image.src = photo.image_path
-        console.log(photo.image_path)
         image.setAttribute('style',"width:100%")
         numberText.append(image)
 
