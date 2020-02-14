@@ -3,6 +3,8 @@ const id = params.get('id')
 
 header =document.querySelector('header')
 contentContainer=document.getElementById('content-container')
+// const displayDate = moment(ride.date_time).format('YYYY, MM DD')
+// console.log("display date", displayDate)
 
 fetch(`http://localhost:3000/rides/${id}`)
     .then(response => response.json())
@@ -13,6 +15,7 @@ fetch(`http://localhost:3000/rides/${id}`)
         displaySubTitle("Route")
         displayRoute(ride)
 
+
         displaySubTitle("Photos")
         fetch(`http://localhost:3000/photos`)
             .then(response => response.json())
@@ -20,6 +23,7 @@ fetch(`http://localhost:3000/rides/${id}`)
                 displayPhotos(photos)
             })
     })
+
 
 function displayRoute(ride) {
     const routeHeader = document.getElementById('Route')
@@ -62,11 +66,57 @@ function displaySubTitle(titleName) {
 
 function displayPhotos(photos) {
     const photoList = photos.filter(photo => photo.ride_id == id)
+    let imageNumber = 1
+    let numImages = photoList.length
+
+    let code = document.createElement('div')
+    code.id=("myModal")
+    code.classList.add("modal")
+    code.innerHTML = (`<span class="close cursor" onclick="closeModal()">&times;</span>`)
+
+    modalContent=document.createElement('div')
+    modalContent.classList.add('modal-content')
+    code.appendChild(modalContent)
+    
+    //thumbnails
     photoList.forEach(photo => {
         image = document.createElement('img')
         image.src = photo.image_path
-        image.width ="400"
-        image.classList.add("ride-photo")
+        image.setAttribute("onclick",(`openModal();currentSlide(${imageNumber})`))
+        image.classList.add("ride-photo", "hover-shadow")
         contentContainer.append(image)
+        imageNumber++
+    })
+    contentContainer.append(code)
+
+    // slides
+    photoList.forEach(photo => {
+        // modalContent.append('this is some text')
+        let slides = document.createElement('div')
+        slides.classList.add('mySlides')
+        modalContent.append(slides)
+
+        let numberText = document.createElement('div')
+        numberText.classList.add('numbertext')
+        // numberText.innerText = (`${imageNumber}/${numImages}`)
+        slides.append(numberText)
+        
+        let image = document.createElement('img')
+        image.src = photo.image_path
+        console.log(photo.image_path)
+        image.setAttribute('style',"width:100%")
+        numberText.append(image)
+
     })
 }
+
+
+
+
+
+
+
+// import './moment'
+// const moment = require('moment');
+let m = moment().format('YYYY, MM DD');
+console.log(m)

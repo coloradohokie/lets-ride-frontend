@@ -30,6 +30,7 @@ time, mark, audio, video {
     border: 2px solid black;
     margin: 10px;
     /* box-shadow: 10px 10px 10px gray; */
+    width: 100px;
 }
 
 .all-forms {
@@ -94,27 +95,33 @@ h1 {
 }
 
 h2 {
-    font-size: 1.25rem;
+    font-size: 1.5rem;
     padding: 1rem;
-    margin: 3rem;
+    font-weight: bold;
+    margin-top: 0.2rem;
+    margin-left: 1rem;
+    margin-right: 3rem;
+    margin-bottom:2rem;
 }
 
 
 h3 {
-    font-size: 30px;
-    font-size: 1rem;
+    font-size: 1.25rem;
     padding: 0.5rem;
     margin-top: 1.5rem;
 }
 
 h4 {
-    font-size: 20px;
+    font-size: 1rem;
 }
 
 p {
-    font-size: 18px;
+    font-size: 1rem;
     padding: 0.5rem;
-    margin: 3rem;
+    margin-top: 0.2rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    margin-bottom:2rem;
 }
 
 a {
@@ -135,7 +142,7 @@ a {
     text-align: left;
 }
 
-#ride-header {
+.header {
     width: 100%;
     background-image: linear-gradient(hsla(0,0%,80%,1), hsla(0,0%,0%,0));
 }

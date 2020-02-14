@@ -4,13 +4,21 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="theme.css">
+    <link rel="stylesheet" href="modal.css">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <title>Ride Details - Motorcycle App</title>
 </head>
 <body>
     <header width="100%" id="ride-header"></header>
-    <div id="content-container"></div>
+    <div id="content-container">
+        <!-- <div include-html="lightbox.html"></div> -->
+    </div>
 
+    <script src="moment.js"></script>
+    <script>
+        moment().format();
+    </script>
+    <script src="./modal.js"></script>
     <script src="ride.js"></script>
 </body>
 </html>
