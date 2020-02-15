@@ -1,7 +1,5 @@
-console.log ('hit')
 const params = new URLSearchParams(document.location.search)
 const id = params.get('ride_id')
-
 
 
 fetch(`http://localhost:3000/rides/${id}`)
@@ -14,8 +12,12 @@ fetch(`http://localhost:3000/rides/${id}`)
 
 function displayTitle(ride) {
     title = document.createElement('h1')
-    title.innerText = (`Update ${ride.route.name} - ${ride.date_time}`)
+    title.innerText = (`Update ${ride.route.name} - ${displayDate(ride.date_time)}`)
     document.body.prepend(title)
+}
+
+function displayDate(date) {
+    return moment(date).format('MMMM Do, YYYY')
 }
 
 function displayForm(ride) {
@@ -34,18 +36,18 @@ function displayForm(ride) {
     date.value = ride.date_time
 
     route = document.createElement('select')
-    route.name = ("date")
-    route.id = ("date")
+    route.name = ("route_id")
+    route.id = ("route_id")
     fetch('http://localhost:3000/routes')
     .then(response => response.json())
     .then(routes =>{routes.forEach( routeOption => {
         option = document.createElement('option')
-        option.id = routeOption.id
+        option.value = routeOption.id
         option.innerHTML = routeOption.name
         route.append(option)
     })
     })
-    route.value = ride.route_id
+
     
 
     submit = document.createElement('input')

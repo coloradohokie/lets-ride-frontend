@@ -8,8 +8,14 @@
 </head>
 <body>
 
-    <form method="POST" class="all-forms">    
-        <script src="update-ride.js"></script>
+    <form  class="all-forms">   
+        <input type="hidden" name="_method" value="put" /> 
     </form>
+    
+    <script src="update-ride.js"></script>
+    <script src="moment.js"></script>
+    <script>
+        moment().format();
+    </script>
 </body>
 </html>
