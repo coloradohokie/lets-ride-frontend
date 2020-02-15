@@ -91,21 +91,16 @@ function removeMotorcycle (motorcycle_id) {
         })
 }
 
-function showElement (elementID) {
-    const targetElement = document.getElementById(elementID)
+// function showElement (elementID) {
+//     const targetElement = document.getElementById(elementID)
+//     targetElement.style.display = "block"
+// }
 
-    targetElement.style.display = "block"
-}
+// function hideElement (elementID) {
+//     const targetElement = document.getElementById(elementID)
+//     targetElement.style.display = "none"
+// }
 
-function hideElement (elementID) {
-    const targetElement = document.getElementById(elementID)
-
-    targetElement.style.display = "none"
-}
-
-function displayDate(date) {
-    return moment(date).format('MMMM Do, YYYY')
-}
 
 const LoginFormElement = document.getElementById('login-form')
 const LogoutElement = document.getElementById('logout-button')

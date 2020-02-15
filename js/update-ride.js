@@ -16,55 +16,27 @@ function displayTitle(ride) {
     document.body.prepend(title)
 }
 
-function displayDate(date) {
-    return moment(date).format('MMMM Do, YYYY')
-}
 
 function displayForm(ride) {
-
     form = document.querySelector('form')
     form.setAttribute("action",`http://localhost:3000/rides/${id}`)
-    description = document.createElement('textarea')
-    description.name = ("description")
-    description.id = ("description")
+
+    description = document.getElementById('description')
     description.value = ride.description
 
-    date = document.createElement('input')
-    date.type = ('datetime-local')
-    date.name = ("date")
-    date.id = ("date")
+    date = document.getElementById('date')
     date.value = ride.date_time
 
-    route = document.createElement('select')
-    route.name = ("route_id")
-    route.id = ("route_id")
+    route = document.getElementById('route')
     fetch('http://localhost:3000/routes')
     .then(response => response.json())
     .then(routes =>{routes.forEach( routeOption => {
         option = document.createElement('option')
         option.value = routeOption.id
         option.innerHTML = routeOption.name
+        if (routeOption.id == ride.route.id) {option.setAttribute("selected", "selected")}
         route.append(option)
     })
     })
-
-    
-
-    submit = document.createElement('input')
-    submit.type = "submit"
-    submit.value = "Update Ride"
-
-    descriptionLabel = document.createElement('label')
-    descriptionLabel.setAttribute("for", "description")
-
-    dateLabel = document.createElement('label')
-    dateLabel.setAttribute("for", "date")
-
-    routeLabel = document.createElement('label')
-    routeLabel.setAttribute("for", "route")
-
-
-    form.append(descriptionLabel, description, dateLabel, date, routeLabel, route, submit)
-
 }
 

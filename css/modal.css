@@ -16,13 +16,15 @@
   
   /* The Modal (background) */
   .modal {
+    margin: auto;
     display: none;
     position: fixed;
     z-index: 1;
-    padding-top: 60px;
-    left: 0;
-    top: 0;
-    width: 900px;
+    padding-top: 40px;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    width: 80%;
     height: 80%;
     overflow: auto;
     background-color: black;
@@ -31,7 +33,6 @@
   /* Modal Content */
   .modal-content {
     position: relative;
-    background-color: #fefefe;
     margin: auto;
     padding: 0;
     width: 90%;

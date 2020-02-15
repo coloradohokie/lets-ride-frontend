@@ -37,10 +37,6 @@ function displayRoute(ride) {
     
 }
 
-function displayDate(date) {
-    return moment(date).format('MMMM Do, YYYY')
-}
-
 
 function displayTitle(ride) {  
     let title = document.createElement('table')
@@ -68,48 +64,47 @@ function displaySubTitle(titleName) {
 }
 
 function displayPhotos(photos) {
-    const photoList = photos.filter(photo => photo.ride_id == id)
-    let imageNumber = 1
-    let numImages = photoList.length
-
-    let code = document.createElement('div')
-    code.id=("myModal")
-    code.classList.add("modal")
-    code.innerHTML = (`<span class="close cursor" onclick="closeModal()">&times;</span>`)
-
+    
+    //modal box
+    let myModal = document.createElement('div')
+    myModal.id=("myModal")
+    myModal.classList.add("modal")
+    myModal.innerHTML = (`<span class="close cursor" onclick="hideElement('myModal')">&times;</span>`)
+    
     modalContent=document.createElement('div')
     modalContent.classList.add('modal-content')
-    code.appendChild(modalContent)
     
     //thumbnails
+    const photoList = photos.filter(photo => photo.ride_id == id)
+    let imageNumber = 1
     photoList.forEach(photo => {
         image = document.createElement('img')
         image.src = photo.image_path
-        image.setAttribute("onclick",(`openModal();currentSlide(${imageNumber})`))
+        image.setAttribute("onclick",(`showElement('myModal');showSlide(${imageNumber})`))
         image.classList.add("ride-photo", "hover-shadow")
         contentContainer.append(image)
         imageNumber++
     })
-    contentContainer.append(code)
+
+    myModal.appendChild(modalContent)
+    contentContainer.append(myModal)
 
     // slides
     photoList.forEach(photo => {
-        // modalContent.append('this is some text')
         let slides = document.createElement('div')
         slides.classList.add('mySlides')
-        modalContent.append(slides)
-
-        let numberText = document.createElement('div')
-        numberText.classList.add('numbertext')
-        // numberText.innerText = (`${imageNumber}/${numImages}`)
-        slides.append(numberText)
-        
         let image = document.createElement('img')
         image.src = photo.image_path
-        image.setAttribute('style',"width:100%")
-        numberText.append(image)
-
+        
+        modalContent.append(slides)
+        slides.append(image)
     })
 }
 
-
+function showSlide(slideIndex) {
+    var i;
+    var slides = document.getElementsByClassName("mySlides");
+    for (i = 0; i < slides.length; i++) {slides[i].style.display = "none";}
+    slides[slideIndex-1].style.display = "block";
+  }
+  
