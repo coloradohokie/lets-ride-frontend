@@ -91,16 +91,6 @@ function removeMotorcycle (motorcycle_id) {
         })
 }
 
-// function showElement (elementID) {
-//     const targetElement = document.getElementById(elementID)
-//     targetElement.style.display = "block"
-// }
-
-// function hideElement (elementID) {
-//     const targetElement = document.getElementById(elementID)
-//     targetElement.style.display = "none"
-// }
-
 
 const LoginFormElement = document.getElementById('login-form')
 const LogoutElement = document.getElementById('logout-button')

@@ -62,9 +62,10 @@ textarea, input, button, select {
 }
 
 button {
-    font-size = 2rem;
-    border: none;
-    background-color: Transparent;
+    font-size: 14px;
+    width: 40px
+    border: 1px solid steelblue;
+    background-color: gray;
 }
 
 textarea {
@@ -131,7 +132,7 @@ p {
 }
 
 a {
-    font-size = 2rem;
+    font-size: 14px;
     text-decoration: none;
     color: rgb(20, 20, 20);
 }
@@ -139,6 +140,9 @@ a {
 .warn-a {
     color: darkred;
     font-weight: bold;
+    width: 140px;
+    border-radius: 4px;
+    float: right;
 }
 
 img {
