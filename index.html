@@ -1,75 +1,80 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="./css/theme.css">
-    <script src="./js/index.js" defer></script>
-    <title>Let's Ride!</title>
-</head>
-<body>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Welcome to Firebase Hosting</title>
 
-    <header id="index-header">
-        <table width="100%">
-            <tr>
-                <td><h2 id="welcome">Welcome, Please Log In!</h2></td>
-                <td><a id="logout-button" class="logout-button" onclick="logout()">Logout</a></td>
-            </tr>
-        </table> 
-    </header>
+    <!-- update the version number as needed -->
+    <script defer src="/__/firebase/7.23.0/firebase-app.js"></script>
+    <!-- include only the Firebase features as you need -->
+    <script defer src="/__/firebase/7.23.0/firebase-auth.js"></script>
+    <script defer src="/__/firebase/7.23.0/firebase-database.js"></script>
+    <script defer src="/__/firebase/7.23.0/firebase-messaging.js"></script>
+    <script defer src="/__/firebase/7.23.0/firebase-storage.js"></script>
+    <script defer src="/__/firebase/7.23.0/firebase-analytics.js"></script>
+    <script defer src="/__/firebase/7.23.0/firebase-remote-config.js"></script>
+    <script defer src="/__/firebase/7.23.0/firebase-performance.js"></script>
+    <!-- initialize the SDK after all desired features are loaded -->
+    <script defer src="/__/firebase/init.js"></script>
 
-    <div id="login-form" class="all-forms">
-        <label for="username">User Name</label>
-        <input type="text" id="username" name="username" placeholder="User Name"></select>
-        <label for="model">Password</label>
-        <input type="password" id="password" name="password" placeholder="Password"></select>
-        <button onclick="appLogin()">Login</button>
-        <h3 id="login-msg"></h3>
+    <style media="screen">
+      body { background: #ECEFF1; color: rgba(0,0,0,0.87); font-family: Roboto, Helvetica, Arial, sans-serif; margin: 0; padding: 0; }
+      #message { background: white; max-width: 360px; margin: 100px auto 16px; padding: 32px 24px; border-radius: 3px; }
+      #message h2 { color: #ffa100; font-weight: bold; font-size: 16px; margin: 0 0 8px; }
+      #message h1 { font-size: 22px; font-weight: 300; color: rgba(0,0,0,0.6); margin: 0 0 16px;}
+      #message p { line-height: 140%; margin: 16px 0 24px; font-size: 14px; }
+      #message a { display: block; text-align: center; background: #039be5; text-transform: uppercase; text-decoration: none; color: white; padding: 16px; border-radius: 4px; }
+      #message, #message a { box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.24); }
+      #load { color: rgba(0,0,0,0.4); text-align: center; font-size: 13px; }
+      @media (max-width: 600px) {
+        body, #message { margin-top: 0; background: white; box-shadow: none; }
+        body { border-top: 16px solid #ffa100; }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="message">
+      <h2>Welcome</h2>
+      <h1>Firebase Hosting Setup Complete</h1>
+      <p>You're seeing this because you've successfully setup Firebase Hosting. Now it's time to go build something extraordinary!</p>
+      <a target="_blank" href="https://firebase.google.com/docs/hosting/">Open Hosting Documentation</a>
     </div>
+    <p id="load">Firebase SDK Loading&hellip;</p>
 
-    <section id="rides-section">
-        <a name="rides-section"></a>
-        <h1>Let's Ride!</h1>
-        <div class="section-container">
-            <div class="ride-container">
-                <div class="ride-list">
-                    <h2>Upcoming Rides</h2>
-                    <ul id="upcoming-rides"></ul><br>
-                    <h3><a href="organize-ride.html">Organize a New Ride...</a></h3>
-                </div>
-                <div class="ride-list">
-                    <h2>Past Rides</h2>
-                    <ul id="past-rides"></ul>       
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="motorcycles-section">
-        <a name="motorcycles-section"></a>
-        <h1>My Garage</h1>
-        <div class="section-container">
-            <div id="motorcycle-container" class="motorcycle-container"></div>
-            <form id="create-motorcycle" class="all-forms" method="POST" action="https://lets-ride-motorcycle-app.herokuapp.com/motorcycles">
-                <h2>Add a Motorcycle</h2>
-                <label for="make">Make</label>
-                <input type="text" name="make" placeholder="Make"></select>
-                <label for="model">Model</label>
-                <input type="text" name="model" placeholder="Model"></select>
-                <label for="year">Year</label>
-                <input type="number" name="year" placeholder="Year" min="1895" max="2020"></select>
-                <label for="rider">Rider</label>
-                <input type="hidden" id ="rider-id" name="rider_id" placeholder="Rider" value=""></select>
-                <input type="submit" value="Add To My Garage">
-            </form>
-        </div>
-    </section>
-
-    <script src="./js/common.js"></script>
-    <script src="./js/moment.js"></script>
     <script>
-        moment().format();
+      document.addEventListener('DOMContentLoaded', function() {
+        const loadEl = document.querySelector('#load');
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+        // // The Firebase SDK is initialized and available here!
+        //
+        // firebase.auth().onAuthStateChanged(user => { });
+        // firebase.database().ref('/path/to/ref').on('value', snapshot => { });
+        // firebase.messaging().requestPermission().then(() => { });
+        // firebase.storage().ref('/path/to/ref').getDownloadURL().then(() => { });
+        // firebase.analytics(); // call to activate
+        // firebase.analytics().logEvent('tutorial_completed');
+        // firebase.performance(); // call to activate
+        //
+        // // 🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥🔥
+
+        try {
+          let app = firebase.app();
+          let features = [
+            'auth', 
+            'database', 
+            'messaging', 
+            'storage', 
+            'analytics', 
+            'remoteConfig',
+            'performance',
+          ].filter(feature => typeof app[feature] === 'function');
+          loadEl.textContent = `Firebase SDK loaded with ${features.join(', ')}`;
+        } catch (e) {
+          console.error(e);
+          loadEl.textContent = 'Error loading the Firebase SDK, check the console.';
+        }
+      });
     </script>
-</body>
+  </body>
 </html>
