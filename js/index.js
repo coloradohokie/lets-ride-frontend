@@ -1,4 +1,5 @@
 const CurrentRiderId = localStorage.getItem('rider_id')
+const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com/`
 
 function appLogin() {
     const UsernameInputElement = document.getElementById('username')
@@ -10,7 +11,7 @@ function appLogin() {
         LoginMessageElement.innerText = `Please specify a user name and password.`
     }
     else {
-        fetch("http://localhost:3000/riders")
+        fetch(`${BASEURL}/riders`)
             .then(response => response.json())
             .then(riders => {riders.forEach(rider => {
                     if (rider.username == UsernameInputElement.value) {
@@ -32,27 +33,27 @@ function logout () {
 }
 
 function leaveRide(ride_attendance_id) {
-    fetch(`http://localhost:3000/ride_attendances/${ride_attendance_id}`, {method: "DELETE"})
+    fetch(`${BASEURL}/ride_attendances/${ride_attendance_id}`, {method: "DELETE"})
     .then(response => {
         response.json()
-        window.location.href = 'http://localhost:3001/index.html'
+        window.location.href = 'index.html'
         window.location.reload(true);
     })
 }
 
 function join (rider_id, ride_id, moto_id) {
-    let fetchURL = `http://localhost:3000/ride_attendances/?rider_id=${rider_id}&ride_id=${ride_id}&motorcycle_id=${moto_id}`
+    let fetchURL = `${BASEURL}/ride_attendances/?rider_id=${rider_id}&ride_id=${ride_id}&motorcycle_id=${moto_id}`
 
     fetch(fetchURL, {method: "POST"})
     .then(response => {
         response.json()
-        window.location.href = 'http://localhost:3001/index.html'
+        window.location.href = 'index.html'
         window.location.reload(true);
     })
 }
 
 function joinRide(ride_element) {
-    fetch(`http://localhost:3000/riders/${CurrentRiderId}`)
+    fetch(`${BASEURL}/riders/${CurrentRiderId}`)
         .then(response => response.json())
         .then(rider => {
             const MotorcycleCount = rider.motorcycle.length
@@ -83,7 +84,7 @@ function joinRide(ride_element) {
 }
 
 function removeMotorcycle (motorcycle_id) {
-    fetch(`http://localhost:3000/motorcycles/${motorcycle_id}` ,{method: "DELETE"})
+    fetch(`${BASEURL}/motorcycles/${motorcycle_id}` ,{method: "DELETE"})
         .then(response => {
             response.json()
             window.location.href = 'http://localhost:3001/index.html#motorcycles-section'
@@ -115,7 +116,7 @@ if(CurrentRiderId > 0) {
 
     RiderIdInputElement.value = CurrentRiderId
 
-    fetch(`http://localhost:3000/riders/${CurrentRiderId}`)
+    fetch(`${BASEURL}/riders/${CurrentRiderId}`)
         .then(response => response.json())
         .then(rider => {
             const welcomeMsg = `Welcome, ${rider.first_name}!`
@@ -178,7 +179,7 @@ if(CurrentRiderId > 0) {
             });
         })
 
-    fetch('http://localhost:3000/rides')
+    fetch(`${BASEURL}/rides`)
         .then(response => response.json())
         .then(rides => displayRides(rides))
 

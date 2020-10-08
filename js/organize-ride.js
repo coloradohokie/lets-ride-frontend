@@ -1,6 +1,8 @@
 routeSelector = document.getElementById('route')
+const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com/`
 
-fetch('http://localhost:3000/routes')
+
+fetch(`${BASEURL}/routes`)
     .then(response => response.json())
     .then(routes => getRoutes(routes))
 

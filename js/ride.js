@@ -1,10 +1,11 @@
 const params = new URLSearchParams(document.location.search)
 const id = params.get('id')
+const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com/`
 
 header =document.querySelector('header')
 contentContainer=document.getElementById('content-container')
 
-fetch(`http://localhost:3000/rides/${id}`)
+fetch(`${BASEURL}/rides/${id}`)
 .then(response => response.json())
 .then(ride => {
     displayTitle(ride)
@@ -15,7 +16,7 @@ fetch(`http://localhost:3000/rides/${id}`)
     
     
     displaySubTitle("Photos")
-    fetch(`http://localhost:3000/photos`)
+    fetch(`${BASEURL}/photos`)
     .then(response => response.json())
     .then(photos => {
         displayPhotos(photos)

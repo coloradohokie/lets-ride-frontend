@@ -1,8 +1,9 @@
 const params = new URLSearchParams(document.location.search)
 const id = params.get('ride_id')
+const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com/`
 
 
-fetch(`http://localhost:3000/rides/${id}`)
+fetch(`${BASEURL}/rides/${id}`)
 .then(response => response.json())
 .then(ride => {
     displayTitle(ride)
@@ -19,7 +20,7 @@ function displayTitle(ride) {
 
 function displayForm(ride) {
     form = document.querySelector('form')
-    form.setAttribute("action",`http://localhost:3000/rides/${id}`)
+    form.setAttribute("action",`${BASEURL}/rides/${id}`)
 
     description = document.getElementById('description')
     description.value = ride.description
@@ -28,7 +29,7 @@ function displayForm(ride) {
     date.value = ride.date_time
 
     route = document.getElementById('route')
-    fetch('http://localhost:3000/routes')
+    fetch(`${BASEURL}/routes`)
     .then(response => response.json())
     .then(routes =>{routes.forEach( routeOption => {
         option = document.createElement('option')
