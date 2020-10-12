@@ -26,6 +26,28 @@ time, mark, audio, video {
     box-sizing: border-box;
 }
 
+header {
+    background-color: #5D5C61;
+    color: whitesmoke;
+    height: 4rem;
+    padding: 0, 1rem;
+    opacity: 0.9;
+    border-bottom: 1px solid steelblue;
+}
+
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logout-button {
+    width: 4rem;
+    height: 100%;
+    background-color: #7395AE;
+    color: white;
+}
 .ride-photo {
     border: 2px solid black;
     margin: 10px;
@@ -41,21 +63,14 @@ time, mark, audio, video {
     box-shadow: 5px 5px 5px lightgray;
 }
 
-.logout-button {
-    text-align: right;
-/*    float: right;
-    height: 40px;
-    width: 100px;
-    border-radius: 15px;
-    background-color: slateblue;
-    color: white*/
-}
+
+
 
 label {
     display: none;
 }
 
-textarea, input, button, select {
+textarea, input, select {
     width: 100%;
     padding: 0.5rem;
     margin-top: 1rem;
@@ -63,7 +78,7 @@ textarea, input, button, select {
 
 button {
     font-size: 14px;
-    width: 40px
+    width: 40px;
     border: 1px solid steelblue;
     background-color: gray;
 }
@@ -71,14 +86,6 @@ button {
 textarea {
     height: 8rem;
     resize: none;
-}
-
-#index.header {
-    display: flex;
-    align-items: center;
-    /*position: fixed;
-    top: 0;
-    width: 100%;*/
 }
 
 section {
@@ -95,11 +102,9 @@ body {
 }
 
 h1 {
-    width: 80%;
-    margin-left: 1rem;
-    font-size: 2rem;
-    padding: 1rem;
-    border-radius: 0.5rem;
+    font-size: 1.5rem;
+    margin-right: 3rem;
+
 }
 
 h2 {
@@ -225,18 +230,5 @@ img {
     background-color: lightgray;
 }
 
-.rides-section {
-    background-color: black;
-}
 
-.logout-button {
-    width: 10rem;
-    height: 2.5rem;
-    margin-top: 1rem;
-}
 
-nav {
-    display: flex;
-    justify-content: space-evenly;
-    width: 100%;
-}

@@ -10,27 +10,32 @@
 </head>
 <body>
 
-    <header id="index-header">
-        <table width="100%">
-            <tr>
-                <td><h2 id="welcome">Welcome, Please Log In!</h2></td>
-                <td><a id="logout-button" class="logout-button" onclick="logout()">Logout</a></td>
-            </tr>
-        </table> 
+    <header>
+        <nav>
+            <div>
+                <h1>Welcome, Friend! Let's Ride!</h1>
+                1990 Kawasaki Vulcan 750
+            </div>
+            <a href="organize-ride.html">Organize Group Ride</a>
+            <a href="solo-ride.html">Solo Ride</a>
+            <a href="garage.html">My Garage</a>
+            <button class="logout-button" onclick="logout()">Logout</button>
+        </nav>
     </header>
 
-    <div id="login-form" class="all-forms">
+    <section class="update-bar">
+        
+    </section>
+    <!-- <div id="login-form" class="all-forms">
         <label for="username">User Name</label>
         <input type="text" id="username" name="username" placeholder="User Name"></select>
         <label for="model">Password</label>
         <input type="password" id="password" name="password" placeholder="Password"></select>
         <button onclick="appLogin()">Login</button>
         <h3 id="login-msg"></h3>
-    </div>
+    </div> -->
 
     <section id="rides-section">
-        <a name="rides-section"></a>
-        <h1>Let's Ride!</h1>
         <div class="section-container">
             <div class="ride-container">
                 <div class="ride-list">
@@ -48,7 +53,7 @@
 
     <section id="motorcycles-section">
         <a name="motorcycles-section"></a>
-        <h1>My Garage</h1>
+        <h2>My Garage</h2>
         <div class="section-container">
             <div id="motorcycle-container" class="motorcycle-container"></div>
             <form id="create-motorcycle" class="all-forms" method="POST" action="https://lets-ride-motorcycle-app.herokuapp.com/motorcycles">
