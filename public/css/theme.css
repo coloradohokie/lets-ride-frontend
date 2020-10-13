@@ -27,12 +27,26 @@ time, mark, audio, video {
 }
 
 header {
+    width: 100%;
     background-color: #5D5C61;
     color: whitesmoke;
     height: 4rem;
     padding: 0, 1rem;
+    padding-left: 1rem;
     opacity: 0.9;
-    border-bottom: 1px solid steelblue;
+    border-bottom: 2px solid #557A95;
+}
+
+footer {
+    width: 100%;
+    background-color: #5D5C61;
+    height: 2rem;
+    padding: 0.5rem;
+    border-top: 2px solid #557A95;
+    font-size: 0.7rem;
+    color: rgb(20, 20, 20);
+    text-align: center;
+    
 }
 
 nav {
@@ -48,6 +62,8 @@ nav {
     background-color: #7395AE;
     color: white;
 }
+
+
 .ride-photo {
     border: 2px solid black;
     margin: 10px;
@@ -112,15 +128,14 @@ h2 {
     padding: 1rem;
     font-weight: bold;
     margin-top: 0.2rem;
-    margin-left: 1rem;
+    margin-left: 0.2rem;
     margin-right: 3rem;
-    margin-bottom:2rem;
+    margin-bottom: 0.2rem;
 }
 
 h3 {
     font-size: 1.25rem;
     padding: 0.5rem;
-    margin-top: 1.5rem;
 }
 
 h4 {
@@ -129,11 +144,9 @@ h4 {
 
 p {
     font-size: 1rem;
-    padding: 0.5rem;
+    padding: 0.2rem 0rem;
     margin-top: 0.2rem;
-    margin-left: 1rem;
     margin-right: 1rem;
-    margin-bottom:2rem;
 }
 
 a {
@@ -158,17 +171,12 @@ img {
     opacity: 40%;
 }
 
-.section-container {
-    display: flex;
-    align-items: flex-start;
-}
-
 #content-container {
-    /* display: flex; */
-    background-color: lightgray;
+    display: flex;
+    justify-content: flex-start;
+    margin: 1rem;
     width: 90%;
-    margin: 2rem;
-    text-align: left;
+    
 }
 
 .header {
@@ -180,28 +188,93 @@ img {
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
-    width: 35%;
+    width: 100%;
 }
 
 .ride-list {
     display: flex;
     flex-direction: column;
     width: 100%;
-    margin: 2rem;
-    background-color: whitesmoke;
-    padding: 1.5rem;
-    box-shadow: 5px 5px 5px lightgray;
+    margin: 1rem;
+    border-radius: 3px;
+    color: #9C9C9C;
+    background-color: #557A95;
+    /* padding: 1.5rem; */
+    box-shadow: 5px 5px 5px #7395AE;
 }
 
 .ride {
     list-style-type: none;
-
-    width: 100%;
-    padding: 0.5rem;
-    padding-left: 1.5rem;
-    border-radius: 0.25rem;
-    margin-bottom: 0.25rem;
+    width: 85%;
+    border-radius: 4px 0 0 4px;
+    margin-bottom: 1rem;
+    margin-left: 0.5rem;
+    display: flex;
+    justify-content: flex-start;
 }
+
+.selected-ride {
+    width: 100%
+}
+
+.date {
+    background-color: #9C9C9C;
+    color: #557A95;
+    padding: 0.8rem 0.5rem;
+    text-align: center;
+    border-radius: 4px 0 0 4px;
+}
+
+.ride-listing {
+    display: flex;
+    align-items: center;
+    padding: 0.1rem;
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+    align-items: center;
+}
+
+#selected-ride-section {
+    /* max-width: 80%; */
+    min-height: 5rem;
+    background-color: #7395AE;
+    /* min-width: 2rem; */
+    box-sizing: border-box;
+    width: 80%;
+    padding-left: 1rem;
+    padding-top: 1rem;
+}
+
+.selected-ride-section-titlebar {
+    display: flex;
+    justify-content: flex-start;
+    border-bottom: 2px solid; 
+    border-image: linear-gradient(90deg, #557A95, transparent) 1;
+}
+
+.whos-going {
+    list-style-type: none;
+    display: flex;
+    flex-direction: flex-start;
+}
+
+.whos-going li {
+    background-color: #9C9C9C;
+    width: 100px;
+    height: 100px;
+    margin: 0.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    padding: 6px;
+}
+
+.whos-going li img {
+    max-width: 60px;
+    max-height: 60px;
+}
+
 
 .motorcycle-container {
     display: flex;
@@ -223,7 +296,7 @@ img {
 }
 
 .user-ride {
-    background-color: slateblue;
+    background-color: #7395AE;
 }
 
 .non-user-ride {

@@ -23,9 +23,6 @@
         </nav>
     </header>
 
-    <section class="update-bar">
-        
-    </section>
     <!-- <div id="login-form" class="all-forms">
         <label for="username">User Name</label>
         <input type="text" id="username" name="username" placeholder="User Name"></select>
@@ -34,42 +31,109 @@
         <button onclick="appLogin()">Login</button>
         <h3 id="login-msg"></h3>
     </div> -->
+    <div id=content-container>
+        <section id="rides-section">
+                <div class="ride-container">
+                    <div class="ride-list">
+                        <h2>Upcoming Rides</h2>
+                        <ul id="upcoming-rides">
+                            <li class="ride user-ride selected-ride">   
+                                <div class="date">
+                                    Oct<br>
+                                    22
+                                </div>
+                                <a class="ride-listing" href="ride.html?id=${ride.id}">Cruisers & Casinos</h4></a>
+                            </li>
 
-    <section id="rides-section">
-        <div class="section-container">
-            <div class="ride-container">
-                <div class="ride-list">
-                    <h2>Upcoming Rides</h2>
-                    <ul id="upcoming-rides"></ul><br>
-                    <h3><a href="organize-ride.html">Organize a New Ride...</a></h3>
+                            <li class="ride user-ride">   
+                                <div class="date">
+                                    Oct<br>
+                                    22
+                                </div>
+                                <a class="ride-listing" href="ride.html?id=${ride.id}">Fall Colors</h4></a>
+                            </li>
+
+                            <li class="ride user-ride">   
+                                <div class="date">
+                                    Oct<br>
+                                    22
+                                </div>
+                                <a class="ride-listing" href="ride.html?id=${ride.id}">Thanksgiving Ride</h4></a>
+                            </li>
+                        </ul>
+                        <br>
+                    </div>
+                    <div class="ride-list">
+                        <h2>Past Rides</h2>
+                        <ul id="past-rides">
+                            <li class="ride user-ride">   
+                                <a href="ride.html?id=${ride.id}">
+                                    <h3>October 22, 2020</h3>
+                                    <h4>Cruisers & Casinos</h4>
+                                </a>
+                            </li>
+
+                            <li class="ride non-user-ride">   
+                                <a href="ride.html?id=${ride.id}">
+                                    <h3>October 22, 2020</h3>
+                                    <h4>Cruisers & Casinos</h4>
+                                </a>
+                            </li>
+
+                            <li class="ride user-ride">   
+                                <a href="ride.html?id=${ride.id}">
+                                    <h3>October 22, 2020</h3>
+                                    <h4>Cruisers & Casinos</h4>
+                                </a>
+                            </li>
+
+                        </ul>       
+                    </div>
                 </div>
-                <div class="ride-list">
-                    <h2>Past Rides</h2>
-                    <ul id="past-rides"></ul>       
+        </section>
+
+        <section id=selected-ride-section>
+            <div class="selected-ride-section-titlebar">
+                <div>
+                    <h1>Cruisers & Casinos</h1>
+                    <p>October 22, 2020 8:00 AM</p>
+                    <p>Organizer: Michael Newman</p>
+                </div>
+                <div>
+                    <button>Join</button>
+                    <p>Add Photos | Edit Route</p>
                 </div>
             </div>
-        </div>
-    </section>
+            <p>A nice fall ride though the mountains near Idaho Springs</p>
+            <h2>Route</h2>
+            <p>Start: Idaho Springs</p>
+            <p>Blackhawk</p>
+            <p>Central City</p>
+            <p>End: Idaho Springs</p>
+            <p>Notes: Meet outside Beau Jo's gassed up and ready to go. We leave at 8am sharp</p>
+            <p>Map</p>
+            <h2>Who's Going (3)</h2>
+            <ul class="whos-going">
+                <li>
+                    <img src="./assets/smile.png" />
+                    Doug
+                </li>
+                <li>
+                    <img src="./assets/smile.png" />
+                    Ahmed
+                </li>
+                <li>
+                    <img src="./assets/smile.png" />
+                    Miwha
+                </li>
+            </ul>
+        </section>
+    </div>
 
-    <section id="motorcycles-section">
-        <a name="motorcycles-section"></a>
-        <h2>My Garage</h2>
-        <div class="section-container">
-            <div id="motorcycle-container" class="motorcycle-container"></div>
-            <form id="create-motorcycle" class="all-forms" method="POST" action="https://lets-ride-motorcycle-app.herokuapp.com/motorcycles">
-                <h2>Add a Motorcycle</h2>
-                <label for="make">Make</label>
-                <input type="text" name="make" placeholder="Make"></select>
-                <label for="model">Model</label>
-                <input type="text" name="model" placeholder="Model"></select>
-                <label for="year">Year</label>
-                <input type="number" name="year" placeholder="Year" min="1895" max="2020"></select>
-                <label for="rider">Rider</label>
-                <input type="hidden" id ="rider-id" name="rider_id" placeholder="Rider" value=""></select>
-                <input type="submit" value="Add To My Garage">
-            </form>
-        </div>
-    </section>
+
+    <footer>
+        Copyright: 2020 Michael Newman
+    </footer>
 
     <script src="./js/common.js"></script>
     <script src="./js/moment.js"></script>
