@@ -1,183 +1,155 @@
-const CurrentRiderId = localStorage.getItem('rider_id')
+const token = localStorage.getItem('token')
+const username = localStorage.getItem('username')
 const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com/`
 
-function appLogin() {
-    const UsernameInputElement = document.getElementById('username')
-    const PasswordInputElement = document.getElementById('password')
-    const LoginMessageElement = document.getElementById('login-msg')
-    let userFound = false
 
-    if(UsernameInputElement.value == "" || PasswordInputElement.value == "") {
-        LoginMessageElement.innerText = `Please specify a user name and password.`
-    }
-    else {
-        fetch(`${BASEURL}/riders`)
-            .then(response => response.json())
-            .then(riders => {riders.forEach(rider => {
-                    if (rider.username == UsernameInputElement.value) {
-                        localStorage.setItem('rider_id', rider.id)
-                        userFound = true
-                        location.reload()
-                    }
-                })
-                if(userFound == false) {
-                    LoginMessageElement.innerText = `User ${UsernameInputElement.value} not found.`
-                }
-            })
-    }
-}
+// function logout () {
+//     localStorage.setItem('user_id', 0)
+//     localStorage.setItem('username', 0)
+//     location.reload()
+// }
 
-function logout () {
-    localStorage.setItem('rider_id', 0)
-    location.reload()
-}
+// function leaveRide(ride_attendance_id) {
+//     fetch(`${BASEURL}/ride_attendances/${ride_attendance_id}`, {method: "DELETE"})
+//     .then(response => {
+//         response.json()
+//         window.location.href = 'index.html'
+//         window.location.reload(true);
+//     })
+// }
 
-function leaveRide(ride_attendance_id) {
-    fetch(`${BASEURL}/ride_attendances/${ride_attendance_id}`, {method: "DELETE"})
-    .then(response => {
-        response.json()
-        window.location.href = 'index.html'
-        window.location.reload(true);
-    })
-}
+// function join (rider_id, ride_id, moto_id) {
+//     let fetchURL = `${BASEURL}/ride_attendances/?rider_id=${rider_id}&ride_id=${ride_id}&motorcycle_id=${moto_id}`
 
-function join (rider_id, ride_id, moto_id) {
-    let fetchURL = `${BASEURL}/ride_attendances/?rider_id=${rider_id}&ride_id=${ride_id}&motorcycle_id=${moto_id}`
+//     fetch(fetchURL, {method: "POST"})
+//     .then(response => {
+//         response.json()
+//         window.location.href = 'index.html'
+//         window.location.reload(true);
+//     })
+// }
 
-    fetch(fetchURL, {method: "POST"})
-    .then(response => {
-        response.json()
-        window.location.href = 'index.html'
-        window.location.reload(true);
-    })
-}
+// function joinRide(ride_element) {
+//     fetch(`${BASEURL}/riders/${userId}`)
+//         .then(response => response.json())
+//         .then(rider => {
+//             const MotorcycleCount = rider.motorcycle.length
+//             const motorcycles = rider.motorcycle
 
-function joinRide(ride_element) {
-    fetch(`${BASEURL}/riders/${CurrentRiderId}`)
-        .then(response => response.json())
-        .then(rider => {
-            const MotorcycleCount = rider.motorcycle.length
-            const motorcycles = rider.motorcycle
+//             if (MotorcycleCount == 0) {
+//                 join(userId, ride_element.dataset.id, "nil")
+//             }
+//             else if (MotorcycleCount == 1) {
+//                 join(userId, ride_element.dataset.id, rider.motorcycle[0].id)                
+//             }
+//             else {
+//                 selectMotorcyclePrompt = document.createElement('h4')
+//                 selectMotorcyclePrompt.innerText = "Select Bike:"
 
-            if (MotorcycleCount == 0) {
-                join(CurrentRiderId, ride_element.dataset.id, "nil")
-            }
-            else if (MotorcycleCount == 1) {
-                join(CurrentRiderId, ride_element.dataset.id, rider.motorcycle[0].id)                
-            }
-            else {
-                selectMotorcyclePrompt = document.createElement('h4')
-                selectMotorcyclePrompt.innerText = "Select Bike:"
-
-                selectMotorcycle = document.createElement('select')
-                selectMotorcycle.setAttribute("onchange",`join(${CurrentRiderId}, ${ride_element.dataset.id}, this.value)`)
-                motorcycles.forEach(motorcycle => {
-                    motoOptionElement = document.createElement('option')
-                    motoOptionElement.value = motorcycle.id
-                    motoOptionElement.innerText = `${motorcycle.year} ${motorcycle.make} ${motorcycle.model}`
-                    selectMotorcycle.appendChild(motoOptionElement)
-                })
-                ride_element.appendChild(selectMotorcyclePrompt)
-                ride_element.appendChild(selectMotorcycle)
-            }
-        })
-}
-
-function removeMotorcycle (motorcycle_id) {
-    fetch(`${BASEURL}/motorcycles/${motorcycle_id}` ,{method: "DELETE"})
-        .then(response => {
-            response.json()
-            window.location.href = 'http://localhost:3001/index.html#motorcycles-section'
-            window.location.reload(true);
-        })
-}
+//                 selectMotorcycle = document.createElement('select')
+//                 selectMotorcycle.setAttribute("onchange",`join(${userId}, ${ride_element.dataset.id}, this.value)`)
+//                 motorcycles.forEach(motorcycle => {
+//                     motoOptionElement = document.createElement('option')
+//                     motoOptionElement.value = motorcycle.id
+//                     motoOptionElement.innerText = `${motorcycle.year} ${motorcycle.make} ${motorcycle.model}`
+//                     selectMotorcycle.appendChild(motoOptionElement)
+//                 })
+//                 ride_element.appendChild(selectMotorcyclePrompt)
+//                 ride_element.appendChild(selectMotorcycle)
+//             }
+//         })
+// }
 
 
-const LoginFormElement = document.getElementById('login-form')
-const LogoutElement = document.getElementById('logout-button')
-const RidesSection = document.getElementById('rides-section')
-const MotorcyclesSection = document.getElementById('motorcycles-section')
 
-if(CurrentRiderId > 0) {
+// const LoginFormElement = document.getElementById('login-form')
+// const LogoutElement = document.getElementById('logout-button')
+// const RidesSection = document.getElementById('rides-section')
+// const MotorcyclesSection = document.getElementById('motorcycles-section')
+
+if(!token) {
+    window.location.href = 'login.html'
+    const displayWindow = document.getElementById('content-container')
+    displayWindow.style.display = 'none'
+} else {
     const WelcomeHeadingElement = document.getElementById('welcome')
     const PastRidesElement = document.getElementById('past-rides')
     const UpcomingRidesElement = document.getElementById('upcoming-rides')
     const MotorcycleListElement = document.getElementById('motorcycle-container')
     const RiderIdInputElement = document.getElementById('rider-id')
 
-    LoginFormElement.style.display = 'none'
-    LogoutElement.style.display = 'block'
-    RidesSection.style.display = 'block'
-    MotorcyclesSection.style.display = 'block'
+    // LogoutElement.style.display = 'block'
+    // RidesSection.style.display = 'block'
+    // MotorcyclesSection.style.display = 'block'
 
     let today = Date.parse(new Date())
     let rideDate = new Date()
-    let riderMotorcyleCount = 0
+    // let riderMotorcyleCount = 0
 
-    RiderIdInputElement.value = CurrentRiderId
+    // RiderIdInputElement.value = userId
 
-    fetch(`${BASEURL}/riders/${CurrentRiderId}`)
-        .then(response => response.json())
-        .then(rider => {
-            const welcomeMsg = `Welcome, ${rider.first_name}!`
-            WelcomeHeadingElement.innerText = welcomeMsg
+    // fetch(`${BASEURL}/riders/${userId}`)
+    //     .then(response => response.json())
+    //     .then(rider => {
+    //         const welcomeMsg = `Welcome, ${username}!`
+    //         WelcomeHeadingElement.innerText = welcomeMsg
 
-            const motorcyclesOnRide = []
-            const ride_attendances = rider.ride_attendances
+    //         const motorcyclesOnRide = []
+    //         const ride_attendances = rider.ride_attendances
             
-            ride_attendances.forEach (ride_attendance => {
-                motorcyclesOnRide.push(ride_attendance.motorcycle_id)
-            })
+    //         ride_attendances.forEach (ride_attendance => {
+    //             motorcyclesOnRide.push(ride_attendance.motorcycle_id)
+    //         })
 
-            const motorcycles = rider.motorcycle
-            riderMotorcyleCount = motorcycles.length
-            motorcycles.map(motorcycle => {
-                motorcycleElement = document.createElement('div')
-                motorcycleElement.classList.add("motorcycle")
-                motorcycleElement.innerHTML = `<h3>${motorcycle.year} ${motorcycle.make}</h3></h4>${motorcycle.model}</h4><br>`
-                MotorcycleListElement.appendChild(motorcycleElement)
+    //         const motorcycles = rider.motorcycle
+    //         riderMotorcyleCount = motorcycles.length
+    //         motorcycles.map(motorcycle => {
+    //             motorcycleElement = document.createElement('div')
+    //             motorcycleElement.classList.add("motorcycle")
+    //             motorcycleElement.innerHTML = `<h3>${motorcycle.year} ${motorcycle.make}</h3></h4>${motorcycle.model}</h4><br>`
+    //             MotorcycleListElement.appendChild(motorcycleElement)
 
-                let motorcycleIsOnRide = false
-                motorcyclesOnRide.forEach(motorcycleOnRide => {
-                    if(motorcycleOnRide == motorcycle.id) {
-                        motorcycleIsOnRide = true
-                    }
-                })
+    //             let motorcycleIsOnRide = false
+    //             motorcyclesOnRide.forEach(motorcycleOnRide => {
+    //                 if(motorcycleOnRide == motorcycle.id) {
+    //                     motorcycleIsOnRide = true
+    //                 }
+    //             })
 
-                if(motorcycleIsOnRide) {
-                    cantRemoveElement = document.createElement('h3')
-                    cantRemoveElement.innerText = "This Bike can't be removed!"
-                    cantRemoveElement.classList.add("warn-a")
-                    motorcycleElement.appendChild(cantRemoveElement)
-                }
-                else {
-                    motorcycleDelete = document.createElement('button')
-                    motorcycleDelete.setAttribute("onclick",`removeMotorcycle(${motorcycle.id})`)
-                    motorcycleDelete.innerText = "Remove Motorcycle"
-                    motorcycleDelete.classList.add("warn-a")
-                    motorcycleElement.appendChild(motorcycleDelete)
-                }
+    //             if(motorcycleIsOnRide) {
+    //                 cantRemoveElement = document.createElement('h3')
+    //                 cantRemoveElement.innerText = "This Bike can't be removed!"
+    //                 cantRemoveElement.classList.add("warn-a")
+    //                 motorcycleElement.appendChild(cantRemoveElement)
+    //             }
+    //             else {
+    //                 motorcycleDelete = document.createElement('button')
+    //                 motorcycleDelete.setAttribute("onclick",`removeMotorcycle(${motorcycle.id})`)
+    //                 motorcycleDelete.innerText = "Remove Motorcycle"
+    //                 motorcycleDelete.classList.add("warn-a")
+    //                 motorcycleElement.appendChild(motorcycleDelete)
+    //             }
 
-                motorcycleImageElement = document.createElement('img')
-                imageAction = document.createElement('a')
-                motorcycleElement.appendChild(motorcycleImageElement)
+    //             motorcycleImageElement = document.createElement('img')
+    //             imageAction = document.createElement('a')
+    //             motorcycleElement.appendChild(motorcycleImageElement)
 
-                if(motorcycle.image_path == null) {
-                    motorcycleImageElement.src = "https://images.unsplash.com/photo-1541612885762-0396fa9ac943?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=250&q=80"
-                    motorcycleImageElement.classList.add("add-image")
-                    imageAction.innerText = "Add Image"
-                    imageAction.href = ""
-                }
-                else {
-                    motorcycleImageElement.src = motorcycle.image_path
-                    motorcycleImageElement.innerHTML = ""
-                    imageAction.innerText = "Add Image"
-                    imageAction.href = ""
-                }
+    //             if(motorcycle.image_path == null) {
+    //                 motorcycleImageElement.src = "https://images.unsplash.com/photo-1541612885762-0396fa9ac943?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=250&q=80"
+    //                 motorcycleImageElement.classList.add("add-image")
+    //                 imageAction.innerText = "Add Image"
+    //                 imageAction.href = ""
+    //             }
+    //             else {
+    //                 motorcycleImageElement.src = motorcycle.image_path
+    //                 motorcycleImageElement.innerHTML = ""
+    //                 imageAction.innerText = "Add Image"
+    //                 imageAction.href = ""
+    //             }
 
-                motorcycleElement.appendChild(imageAction)
-            });
-        })
+    //             motorcycleElement.appendChild(imageAction)
+    //         });
+    //     })
 
     fetch(`${BASEURL}/rides`)
         .then(response => response.json())
@@ -197,7 +169,7 @@ if(CurrentRiderId > 0) {
             listItem.classList.add("non-user-ride")
 
             ride.ride_attendances.forEach(ride_attendance => {
-                if(ride_attendance.rider_id == CurrentRiderId) {
+                if(ride_attendance.rider_id == userId) {
                     isUserRide = true
                     rideAttendanceID = ride_attendance.id
                     listItem.classList.remove("non-user-ride")               
@@ -234,10 +206,4 @@ if(CurrentRiderId > 0) {
             }
         })
     }
-}
-else {
-    LoginFormElement.style.display = 'block'
-    LogoutElement.style.display = 'none'
-    RidesSection.style.display = 'none'
-    MotorcyclesSection.style.display = 'none'
 }
