@@ -3,11 +3,14 @@ const username = localStorage.getItem('username')
 const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com/`
 
 
-// function logout () {
-//     localStorage.setItem('user_id', 0)
-//     localStorage.setItem('username', 0)
-//     location.reload()
-// }
+function logout () {
+    localStorage.removeItem('token')
+    localStorage.removeItem('username')
+    location.reload()
+}
+
+welcomeMessage = document.querySelector('#welcome-message')
+welcomeMessage.innerText = `Hi ${username}! Let's Ride!`
 
 // function leaveRide(ride_attendance_id) {
 //     fetch(`${BASEURL}/ride_attendances/${ride_attendance_id}`, {method: "DELETE"})
@@ -62,147 +65,54 @@ const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com/`
 
 
 
-// const LoginFormElement = document.getElementById('login-form')
 // const LogoutElement = document.getElementById('logout-button')
-// const RidesSection = document.getElementById('rides-section')
-// const MotorcyclesSection = document.getElementById('motorcycles-section')
+
 
 if(!token) {
     window.location.href = 'login.html'
     const displayWindow = document.getElementById('content-container')
     displayWindow.style.display = 'none'
 } else {
-    const WelcomeHeadingElement = document.getElementById('welcome')
-    const PastRidesElement = document.getElementById('past-rides')
-    const UpcomingRidesElement = document.getElementById('upcoming-rides')
-    const MotorcycleListElement = document.getElementById('motorcycle-container')
-    const RiderIdInputElement = document.getElementById('rider-id')
 
-    // LogoutElement.style.display = 'block'
-    // RidesSection.style.display = 'block'
-    // MotorcyclesSection.style.display = 'block'
+    const pastRidesElement = document.getElementById('past-rides')
+    const upcomingRidesElement = document.getElementById('upcoming-rides')
+
+
+    // <ul id="upcoming-rides">
+    // <li class="ride user-ride selected-ride">   
+    //     <div class="date">
+    //         Oct<br>
+    //         22
+    //     </div>
+    //     <a class="ride-listing" href="ride.html?id=${ride.id}">Cruisers & Casinos</h4></a>
+    // </li>
 
     let today = Date.parse(new Date())
-    let rideDate = new Date()
-    // let riderMotorcyleCount = 0
-
-    // RiderIdInputElement.value = userId
-
-    // fetch(`${BASEURL}/riders/${userId}`)
-    //     .then(response => response.json())
-    //     .then(rider => {
-    //         const welcomeMsg = `Welcome, ${username}!`
-    //         WelcomeHeadingElement.innerText = welcomeMsg
-
-    //         const motorcyclesOnRide = []
-    //         const ride_attendances = rider.ride_attendances
-            
-    //         ride_attendances.forEach (ride_attendance => {
-    //             motorcyclesOnRide.push(ride_attendance.motorcycle_id)
-    //         })
-
-    //         const motorcycles = rider.motorcycle
-    //         riderMotorcyleCount = motorcycles.length
-    //         motorcycles.map(motorcycle => {
-    //             motorcycleElement = document.createElement('div')
-    //             motorcycleElement.classList.add("motorcycle")
-    //             motorcycleElement.innerHTML = `<h3>${motorcycle.year} ${motorcycle.make}</h3></h4>${motorcycle.model}</h4><br>`
-    //             MotorcycleListElement.appendChild(motorcycleElement)
-
-    //             let motorcycleIsOnRide = false
-    //             motorcyclesOnRide.forEach(motorcycleOnRide => {
-    //                 if(motorcycleOnRide == motorcycle.id) {
-    //                     motorcycleIsOnRide = true
-    //                 }
-    //             })
-
-    //             if(motorcycleIsOnRide) {
-    //                 cantRemoveElement = document.createElement('h3')
-    //                 cantRemoveElement.innerText = "This Bike can't be removed!"
-    //                 cantRemoveElement.classList.add("warn-a")
-    //                 motorcycleElement.appendChild(cantRemoveElement)
-    //             }
-    //             else {
-    //                 motorcycleDelete = document.createElement('button')
-    //                 motorcycleDelete.setAttribute("onclick",`removeMotorcycle(${motorcycle.id})`)
-    //                 motorcycleDelete.innerText = "Remove Motorcycle"
-    //                 motorcycleDelete.classList.add("warn-a")
-    //                 motorcycleElement.appendChild(motorcycleDelete)
-    //             }
-
-    //             motorcycleImageElement = document.createElement('img')
-    //             imageAction = document.createElement('a')
-    //             motorcycleElement.appendChild(motorcycleImageElement)
-
-    //             if(motorcycle.image_path == null) {
-    //                 motorcycleImageElement.src = "https://images.unsplash.com/photo-1541612885762-0396fa9ac943?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=250&q=80"
-    //                 motorcycleImageElement.classList.add("add-image")
-    //                 imageAction.innerText = "Add Image"
-    //                 imageAction.href = ""
-    //             }
-    //             else {
-    //                 motorcycleImageElement.src = motorcycle.image_path
-    //                 motorcycleImageElement.innerHTML = ""
-    //                 imageAction.innerText = "Add Image"
-    //                 imageAction.href = ""
-    //             }
-
-    //             motorcycleElement.appendChild(imageAction)
-    //         });
-    //     })
-
+//    let rideDate = new Date()
     fetch(`${BASEURL}/rides`)
         .then(response => response.json())
         .then(rides => displayRides(rides))
 
     function displayRides(rides) {
         rides.map(ride => {
-            let isUserRide = false
-            let rideAttendanceID = 0
             listItem = document.createElement('li')
             listItem.dataset.id = ride.id
-            listItem.innerHTML = (`<a href="ride.html?id=${ride.id}"><h3>${displayDate(ride.date_time)}</h3><h4>${ride.route.name}</h4></a>`)
-            rideDate = Date.parse(ride.date_time)
+            listItem.innerHTML = (`
+                <div class="date">
+                    ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
+                </div>    
+                <a href="ride.html?id=${ride.id}"><h3>${ride.title}</h3></a>
+            `)
+            const rideDate = Date.parse(ride.date)
 
             listItem.classList.add("ride")
-            listItem.classList.remove("user-ride")
-            listItem.classList.add("non-user-ride")
-
-            ride.ride_attendances.forEach(ride_attendance => {
-                if(ride_attendance.rider_id == userId) {
-                    isUserRide = true
-                    rideAttendanceID = ride_attendance.id
-                    listItem.classList.remove("non-user-ride")               
-                    listItem.classList.add("user-ride")
-                }
-            })
+            listItem.classList.add("user-ride")
+            listItem.classList.remove("non-user-ride")
             
             if(rideDate >= today) {
-                UpcomingRidesElement.append(listItem)
-                if(isUserRide == false) {
-                    if(riderMotorcyleCount > 0) {
-                        rideJoinElement = document.createElement('button')
-                        rideJoinElement.innerText = "Join Ride"
-                        rideJoinElement.setAttribute("onclick",`joinRide(this.parentElement)`)
-                        listItem.appendChild(rideJoinElement)
-                    }
-                    else {
-                        cantJoinElement = document.createElement('h3')
-                        cantJoinElement.innerText = "You need a bike to join a ride!"
-                        cantJoinElement.classList.add("warn-a")
-                        listItem.appendChild(cantJoinElement)
-                    }
-                }
-                else {
-                    rideLeaveElement = document.createElement('button')
-                    rideLeaveElement.innerText = "I Can't Come"
-                    rideLeaveElement.setAttribute("onclick",`leaveRide(${rideAttendanceID})`)
-                    rideLeaveElement.classList.add("warn-a")
-                    listItem.appendChild(rideLeaveElement)
-                }
-            }
-            else {
-                PastRidesElement.append(listItem)
+                upcomingRidesElement.append(listItem)
+            } else {
+                pastRidesElement.append(listItem)
             }
         })
     }

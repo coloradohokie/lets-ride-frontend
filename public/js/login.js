@@ -24,9 +24,9 @@ function loginUser(event) {
     })
         .then(response => response.json())
         .then(response => {
-            console.log(response)
             if (response.token) {
                 localStorage.setItem('token', response.token)
+                localStorage.setItem('username', response.username)
                 window.location.href = './index.html'
             } else {
                 const failureMessage = 'Sign In Failed'
