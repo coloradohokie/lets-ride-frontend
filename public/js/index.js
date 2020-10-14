@@ -9,111 +9,102 @@ function logout () {
     location.reload()
 }
 
-welcomeMessage = document.querySelector('#welcome-message')
-welcomeMessage.innerText = `Hi ${username}! Let's Ride!`
+const logoutElement = document.getElementById('logout-button')
 
-// function leaveRide(ride_attendance_id) {
-//     fetch(`${BASEURL}/ride_attendances/${ride_attendance_id}`, {method: "DELETE"})
-//     .then(response => {
-//         response.json()
-//         window.location.href = 'index.html'
-//         window.location.reload(true);
-//     })
-// }
+function displayWelcomeMessage() {
+    const welcomeMessage = document.querySelector('#welcome-message')
+    welcomeMessage.innerText = `Hi ${username}! Let's Ride!`
+}
 
-// function join (rider_id, ride_id, moto_id) {
-//     let fetchURL = `${BASEURL}/ride_attendances/?rider_id=${rider_id}&ride_id=${ride_id}&motorcycle_id=${moto_id}`
+async function displayRides() {
+    let rides = await fetchRides()
+    rides.map(ride => {
+        const pastRidesElement = document.getElementById('past-rides')
+        const upcomingRidesElement = document.getElementById('upcoming-rides')
+        let today = Date.parse(new Date())
+    
+        listItem = document.createElement('li')
+        listItem.dataset.id = ride.id
+        listItem.innerHTML = (`
+            <div class="date">
+                ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
+            </div>    
+            <a href="ride.html?id=${ride.id}"><h3>${ride.title}</h3></a>
+        `)
+        const rideDate = Date.parse(ride.date)
 
-//     fetch(fetchURL, {method: "POST"})
-//     .then(response => {
-//         response.json()
-//         window.location.href = 'index.html'
-//         window.location.reload(true);
-//     })
-// }
+        listItem.classList.add("ride")
+        listItem.classList.add("user-ride")
+        listItem.classList.remove("non-user-ride")
+        
+        rideDate >= today ? upcomingRidesElement.append(listItem) : pastRidesElement.append(listItem)
+    })
+}
 
-// function joinRide(ride_element) {
-//     fetch(`${BASEURL}/riders/${userId}`)
-//         .then(response => response.json())
-//         .then(rider => {
-//             const MotorcycleCount = rider.motorcycle.length
-//             const motorcycles = rider.motorcycle
+async function fetchRides() {
+    const response = await fetch(`${BASEURL}/rides`)
+    const rides = await response.json()
+    return rides
+}
 
-//             if (MotorcycleCount == 0) {
-//                 join(userId, ride_element.dataset.id, "nil")
-//             }
-//             else if (MotorcycleCount == 1) {
-//                 join(userId, ride_element.dataset.id, rider.motorcycle[0].id)                
-//             }
-//             else {
-//                 selectMotorcyclePrompt = document.createElement('h4')
-//                 selectMotorcyclePrompt.innerText = "Select Bike:"
+async function fetchRideDetails(rideId = 1) {
+    const response = await fetch(`${BASEURL}/rides/${rideId}`)
+    const rideDetails = await response.json()
+    return rideDetails
+}
 
-//                 selectMotorcycle = document.createElement('select')
-//                 selectMotorcycle.setAttribute("onchange",`join(${userId}, ${ride_element.dataset.id}, this.value)`)
-//                 motorcycles.forEach(motorcycle => {
-//                     motoOptionElement = document.createElement('option')
-//                     motoOptionElement.value = motorcycle.id
-//                     motoOptionElement.innerText = `${motorcycle.year} ${motorcycle.make} ${motorcycle.model}`
-//                     selectMotorcycle.appendChild(motoOptionElement)
-//                 })
-//                 ride_element.appendChild(selectMotorcyclePrompt)
-//                 ride_element.appendChild(selectMotorcycle)
-//             }
-//         })
-// }
+async function displayRideDetails() {
+    const rideDetails = await fetchRideDetails()
+    console.log(rideDetails)
+    const selectedRideElement = document.querySelector('.selected-ride-section-titlebar')
+    selectedRideElement.innerHTML = (`
+        <div>
+            <h1>${rideDetails.title}</h1>
+            <p>${moment(rideDetails.date).format("MMM Do, YYYY")} ${rideDetails.start_time} - ${rideDetails.end_time}</p>
+            <p>Organizer: ${rideDetails.user_id}</p>
+        </div>
+        <div>
+            <button>Join</button>
+            <p>Add Photos | Edit Route</p>
+        </div>
+    `)
+    const selectedRideDescriptionElement = document.querySelector('#selected-ride-description')
+    selectedRideDescriptionElement.innerHTML = (`
+        <p>${rideDetails.description}</p>
+    `)
 
+    const selectedRouteDescriptionElement = document.querySelector('#selected-route-description')
+    selectedRouteDescriptionElement.innerHTML = (`
+        <h2>Route</h2>
+        <p>Start: ${rideDetails.route.start_location}</p>
+        <p>End: ${rideDetails.route.end_location}</p>
+        <p>Route Description: ${rideDetails.route.description}</p>
+        <p>${rideDetails.route.map_path}</p>   
+    `)
+    
+    const whosGoingElement = document.querySelector('.whos-going')
+    const whosGoingTitleElement = document.querySelector('#whos-going-title')
+    whosGoingTitleElement.innerText = (`${rideDetails.ride_attendances.length} Riders Going`)
 
-
-// const LogoutElement = document.getElementById('logout-button')
-
+    rideDetails.ride_attendances.forEach(rider => {
+        let listItem = document.createElement('li')
+        listItem.dataset.id = rider.user_id
+        listItem.innerHTML = (`
+            <li>
+                <img src = './assets/smile.png' />
+                ${rider.user_id}
+            </li>
+        `)
+        whosGoingElement.append(listItem)
+    })
+}
 
 if(!token) {
     window.location.href = 'login.html'
     const displayWindow = document.getElementById('content-container')
     displayWindow.style.display = 'none'
 } else {
-
-    const pastRidesElement = document.getElementById('past-rides')
-    const upcomingRidesElement = document.getElementById('upcoming-rides')
-
-
-    // <ul id="upcoming-rides">
-    // <li class="ride user-ride selected-ride">   
-    //     <div class="date">
-    //         Oct<br>
-    //         22
-    //     </div>
-    //     <a class="ride-listing" href="ride.html?id=${ride.id}">Cruisers & Casinos</h4></a>
-    // </li>
-
-    let today = Date.parse(new Date())
-//    let rideDate = new Date()
-    fetch(`${BASEURL}/rides`)
-        .then(response => response.json())
-        .then(rides => displayRides(rides))
-
-    function displayRides(rides) {
-        rides.map(ride => {
-            listItem = document.createElement('li')
-            listItem.dataset.id = ride.id
-            listItem.innerHTML = (`
-                <div class="date">
-                    ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
-                </div>    
-                <a href="ride.html?id=${ride.id}"><h3>${ride.title}</h3></a>
-            `)
-            const rideDate = Date.parse(ride.date)
-
-            listItem.classList.add("ride")
-            listItem.classList.add("user-ride")
-            listItem.classList.remove("non-user-ride")
-            
-            if(rideDate >= today) {
-                upcomingRidesElement.append(listItem)
-            } else {
-                pastRidesElement.append(listItem)
-            }
-        })
-    }
+    displayWelcomeMessage()
+    displayRides()
+    displayRideDetails()
 }
