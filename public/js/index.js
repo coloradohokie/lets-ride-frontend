@@ -56,12 +56,13 @@ async function fetchRideDetails(rideId = 1) {
 async function displayRideDetails() {
     const rideDetails = await fetchRideDetails()
     console.log(rideDetails)
+    const organizer = rideDetails.users.find(user => user.id === rideDetails.user_id)
     const selectedRideElement = document.querySelector('.selected-ride-section-titlebar')
     selectedRideElement.innerHTML = (`
         <div>
             <h1>${rideDetails.title}</h1>
             <p>${moment(rideDetails.date).format("MMM Do, YYYY")} ${rideDetails.start_time} - ${rideDetails.end_time}</p>
-            <p>Organizer: ${rideDetails.user_id}</p>
+            <p>Organizer: ${organizer.username}</p>
         </div>
         <div>
             <button>Join</button>
