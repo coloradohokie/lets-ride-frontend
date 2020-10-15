@@ -22,12 +22,13 @@ async function displayRides() {
         let today = Date.parse(new Date())
     
         listItem = document.createElement('li')
+        listItem.addEventListener('click', () => displayRideDetails(ride.id))
         listItem.dataset.id = ride.id
         listItem.innerHTML = (`
             <div class="date">
                 ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
             </div>    
-            <a href="ride.html?id=${ride.id}"><h3>${ride.title}</h3></a>
+            <h3>${ride.title}</h3>
         `)
         const rideDate = Date.parse(ride.date)
 
@@ -51,6 +52,7 @@ async function fetchRides() {
 }
 
 async function fetchRideDetails(rideId = 1) {
+    console.log(rideId)
     const response = await fetch(`${BASEURL}/rides/${rideId}`, {
         method: 'GET',
         headers: { 
@@ -58,11 +60,12 @@ async function fetchRideDetails(rideId = 1) {
             'Authorization' : `Bearer ${token}`}
     })
     const rideDetails = await response.json()
+    console.log(rideDetails)
     return rideDetails
 }
 
-async function displayRideDetails() {
-    const rideDetails = await fetchRideDetails()
+async function displayRideDetails(rideId = 1 ) {
+    const rideDetails = await fetchRideDetails(rideId)
     console.log(rideDetails)
     const selectedRideElement = document.querySelector('.selected-ride-section-titlebar')
     selectedRideElement.innerHTML = (`
@@ -93,8 +96,8 @@ async function displayRideDetails() {
     const whosGoingElement = document.querySelector('.whos-going')
     const whosGoingTitleElement = document.querySelector('#whos-going-title')
     whosGoingTitleElement.innerText = (`${rideDetails.riders.length} Riders Going`)
-
-    rideDetails.riders.forEach(rider => {
+    whosGoingElement.innerHTML = ('')
+    rideDetails.riders.map(rider => {
         let listItem = document.createElement('li')
         listItem.dataset.id = rider.id
         listItem.innerHTML = (`
