@@ -97,6 +97,7 @@ button {
     width: 40px;
     border: 1px solid steelblue;
     background-color: gray;
+    cursor: pointer;
 }
 
 textarea {
@@ -302,6 +303,4 @@ img {
 .non-user-ride {
     background-color: lightgray;
 }
-
-
 
