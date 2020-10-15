@@ -54,22 +54,21 @@ async function fetchRideDetails(rideId = 1) {
 async function displayRideDetails() {
     const rideDetails = await fetchRideDetails()
     console.log(rideDetails)
-    const organizer = rideDetails.users.find(user => user.id === rideDetails.user_id)
     const selectedRideElement = document.querySelector('.selected-ride-section-titlebar')
     selectedRideElement.innerHTML = (`
         <div>
-            <h1>${rideDetails.title}</h1>
-            <p>${moment(rideDetails.date).format("MMM Do, YYYY")} ${rideDetails.start_time} - ${rideDetails.end_time}</p>
-            <p>Organizer: ${organizer.username}</p>
+            <h1>${rideDetails.ride.title}</h1>
+            <p>${moment(rideDetails.ride.date).format("MMM Do, YYYY")} ${rideDetails.ride.start_time} - ${rideDetails.ride.end_time}</p>
+            <p>Organizer: ${rideDetails.organizer.username}</p>
+            <p>Add Photos | Edit Route</p>
         </div>
         <div>
-            <button>Join</button>
-            <p>Add Photos | Edit Route</p>
+            <button class="join-ride-toggle-button">Join</button>
         </div>
     `)
     const selectedRideDescriptionElement = document.querySelector('#selected-ride-description')
     selectedRideDescriptionElement.innerHTML = (`
-        <p>${rideDetails.description}</p>
+        <p>${rideDetails.ride.description}</p>
     `)
 
     const selectedRouteDescriptionElement = document.querySelector('#selected-route-description')
@@ -83,9 +82,9 @@ async function displayRideDetails() {
     
     const whosGoingElement = document.querySelector('.whos-going')
     const whosGoingTitleElement = document.querySelector('#whos-going-title')
-    whosGoingTitleElement.innerText = (`${rideDetails.ride_attendances.length} Riders Going`)
+    whosGoingTitleElement.innerText = (`${rideDetails.riders.length} Riders Going`)
 
-    rideDetails.users.forEach(rider => {
+    rideDetails.riders.forEach(rider => {
         let listItem = document.createElement('li')
         listItem.dataset.id = rider.id
         listItem.innerHTML = (`
