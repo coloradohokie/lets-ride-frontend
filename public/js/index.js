@@ -9,8 +9,6 @@ function logout () {
     location.reload()
 }
 
-const logoutElement = document.getElementById('logout-button')
-
 function displayWelcomeMessage() {
     const welcomeMessage = document.querySelector('#welcome-message')
     welcomeMessage.innerText = `Hi ${username}! Let's Ride!`
