@@ -40,13 +40,23 @@ async function displayRides() {
 }
 
 async function fetchRides() {
-    const response = await fetch(`${BASEURL}/rides`)
+    const response = await fetch(`${BASEURL}/rides`, {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${token}`}
+    })
     const rides = await response.json()
     return rides
 }
 
 async function fetchRideDetails(rideId = 1) {
-    const response = await fetch(`${BASEURL}/rides/${rideId}`)
+    const response = await fetch(`${BASEURL}/rides/${rideId}`, {
+        method: 'GET',
+        headers: { 
+            'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${token}`}
+    })
     const rideDetails = await response.json()
     return rideDetails
 }
