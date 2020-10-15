@@ -87,13 +87,13 @@ async function displayRideDetails() {
     const whosGoingTitleElement = document.querySelector('#whos-going-title')
     whosGoingTitleElement.innerText = (`${rideDetails.ride_attendances.length} Riders Going`)
 
-    rideDetails.ride_attendances.forEach(rider => {
+    rideDetails.users.forEach(rider => {
         let listItem = document.createElement('li')
-        listItem.dataset.id = rider.user_id
+        listItem.dataset.id = rider.id
         listItem.innerHTML = (`
             <li>
                 <img src = './assets/smile.png' />
-                ${rider.user_id}
+                ${rider.username}
             </li>
         `)
         whosGoingElement.append(listItem)
