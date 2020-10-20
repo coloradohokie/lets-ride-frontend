@@ -296,6 +296,19 @@ img {
     margin: 2rem;
 }
 
+.ride-list-card {
+    color: white;
+}
+
+.ride-list-card:hover {
+    cursor: pointer
+}
+
+.selected-ride-list-card {
+    color: green;
+    width: 100%
+}
+
 .user-ride {
     background-color: #7395AE;
 }

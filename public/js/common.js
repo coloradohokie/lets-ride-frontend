@@ -11,3 +11,5 @@ function hideElement (elementID) {
     const targetElement = document.getElementById(elementID)
     targetElement.style.display = "none"
 }
+
+

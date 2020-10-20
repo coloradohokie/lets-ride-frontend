@@ -9,6 +9,7 @@ function logout () {
     location.reload()
 }
 
+
 function displayWelcomeMessage() {
     const welcomeMessage = document.querySelector('#welcome-message')
     welcomeMessage.innerText = `Hi ${username}! Let's Ride!`
@@ -22,7 +23,11 @@ async function displayRides() {
         let today = Date.parse(new Date())
     
         listItem = document.createElement('li')
-        listItem.addEventListener('click', () => displayRideDetails(ride.id))
+        listItem.classList.add("ride-list-card")
+        listItem.addEventListener('click', () => {
+            // listItem.classList.add("selected-ride-list-card")
+            displayRideDetails(ride.id)
+        })
         listItem.dataset.id = ride.id
         listItem.innerHTML = (`
             <div class="date">
