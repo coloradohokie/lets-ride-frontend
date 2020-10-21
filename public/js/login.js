@@ -27,6 +27,7 @@ function loginUser(event) {
             if (response.token) {
                 localStorage.setItem('token', response.token)
                 localStorage.setItem('username', response.username)
+                localStorage.setItem('userId', response.userId)
                 window.location.href = './index.html'
             } else {
                 const failureMessage = 'Sign In Failed'
