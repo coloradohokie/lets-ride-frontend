@@ -49,6 +49,10 @@ footer {
     
 }
 
+#content-container {
+    min-height: calc(100vh - 8rem)
+}
+
 nav {
     display: flex;
     justify-content: space-between;

@@ -9,7 +9,6 @@ const headers = {
 }
 
 
-
 const selectedRideSection = document.querySelector('#selected-ride-section')
 const pastRidesElement = document.getElementById('past-rides')
 const upcomingRidesElement = document.getElementById('upcoming-rides')
@@ -68,7 +67,7 @@ async function fetchRides() {
     displayRides()
 }
 
-async function displayRideDetails(rideId) {
+async function displayRideDetails(rideId=0) {
     console.log(rideId)
     if (rideId === 0) {
         const text = `
@@ -157,7 +156,6 @@ function userOnRide(id) {
     return rideDetails.riders.find(rider => rider.id == id) ? true : false
 }
 
-
 if(!token) {
     window.location.href = 'login.html'
     const displayWindow = document.getElementById('content-container')
@@ -165,5 +163,5 @@ if(!token) {
 } else {
     displayWelcomeMessage()
     fetchRides()
-    displayRideDetails(0)
+    displayRideDetails()
 }
