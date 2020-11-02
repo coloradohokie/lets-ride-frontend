@@ -1,10 +1,13 @@
 routeSelector = document.getElementById('route')
 const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com/`
 
-
-fetch(`${BASEURL}/routes`)
-    .then(response => response.json())
-    .then(routes => getRoutes(routes))
+try {
+    fetch(`${BASEURL}/routes`)
+        .then(response => response.json())
+        .then(routes => getRoutes(routes))
+} catch (error) {
+    alert('Error getting routes')
+}
 
 function getRoutes(routes) {
     routes.map( route => {

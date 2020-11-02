@@ -17,22 +17,28 @@ function loginUser(event) {
     const email = loginFormData.get('email')
     const password = loginFormData.get('password')
 
-    fetch(loginURL, {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json'},
-        body: JSON.stringify({email, password})
-    })
-        .then(response => response.json())
-        .then(response => {
-            if (response.token) {
-                localStorage.setItem('token', response.token)
-                localStorage.setItem('username', response.username)
-                localStorage.setItem('userId', response.userId)
-                window.location.href = './index.html'
-            } else {
-                const failureMessage = 'Sign In Failed'
-                const loginMessage = document.querySelector('#login-msg')
-                loginMessage.innerText = failureMessage
-            }
+    try {
+        fetch(loginURL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({email, password})
         })
+            .then(response => response.json())
+            .then(response => {
+                if (response.token) {
+                    localStorage.setItem('token', response.token)
+                    localStorage.setItem('username', response.username)
+                    localStorage.setItem('userId', response.userId)
+                    window.location.href = './index.html'
+                } else {
+                    const failureMessage = 'Sign In Failed'
+                    const loginMessage = document.querySelector('#login-msg')
+                    loginMessage.innerText = failureMessage
+                }
+            })
+    } catch (error) {
+        console.log(error)
+        alert('Error loggging in')
+    }
+
 }

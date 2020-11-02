@@ -59,12 +59,17 @@ async function displayRides() {
 }
 
 async function fetchRides() {
-    const response = await fetch(`${BASEURL}/rides`, {
-        method: 'GET',
-        headers
-    })
-    rides = await response.json()
-    displayRides()
+    try {
+        const response = await fetch(`${BASEURL}/rides`, {
+            method: 'GET',
+            headers
+        })
+        rides = await response.json()
+        displayRides()
+    } catch (error) {
+        console.log(error)
+        alert('Error getting rides')
+    }
 }
 
 async function displayRideDetails(rideId=0) {
@@ -76,54 +81,60 @@ async function displayRideDetails(rideId=0) {
         selectedRideElement.innerHTML = text
     } else {
         console.log(rideId)
-        const response = await fetch(`${BASEURL}/rides/${rideId}`, {
-            method: 'GET',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${token}`}
-        })
-        rideDetails = await response.json()
-        console.log(rideDetails)
-        console.log(userOnRide(userId))
-        selectedRideElement.innerHTML = (`
-            <div>
-                <h1>${rideDetails.ride.title}</h1>
-                <p>${moment(rideDetails.ride.date).format("MMM Do, YYYY")} ${rideDetails.ride.start_time} - ${rideDetails.ride.end_time}</p>
-                <p>Organizer: ${rideDetails.organizer.username}</p>
-            </div>
-        `)
-        selectedRideDescriptionElement.innerHTML = (`
-            <p>${rideDetails.ride.description}</p>
-        `)
-    
-        selectedRouteDescriptionElement.innerHTML = (`
-            <h2>Route</h2>
-            <p>Start: ${rideDetails.route.start_location}</p>
-            <p>End: ${rideDetails.route.end_location}</p>
-            <p>Route Description: ${rideDetails.route.description}</p>
-            <p>${rideDetails.route.map_path}</p>   
-        `)
-        
-        
-        whosGoingTitleElement.innerText = (`${rideDetails.riders.length} Riders Going`)
-        whosGoingElement.innerHTML = ('')
-        rideDetails.riders.map(rider => {
-            let listItem = document.createElement('li')
-            listItem.dataset.id = rider.id
-            listItem.innerHTML = (`
-                <li>
-                    <img src = './assets/user.png' />
-                    ${rider.username}
-                </li>
+        try {
+            
+            const response = await fetch(`${BASEURL}/rides/${rideId}`, {
+                method: 'GET',
+                headers: { 
+                    'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${token}`}
+            })
+            rideDetails = await response.json()
+            console.log(rideDetails)
+            console.log(userOnRide(userId))
+            selectedRideElement.innerHTML = (`
+                <div>
+                    <h1>${rideDetails.ride.title}</h1>
+                    <p>${moment(rideDetails.ride.date).format("MMM Do, YYYY")} ${rideDetails.ride.start_time} - ${rideDetails.ride.end_time}</p>
+                    <p>Organizer: ${rideDetails.organizer.username}</p>
+                </div>
             `)
-            whosGoingElement.append(listItem)
-        })
-
-        let joinButton = document.createElement('button')
-        joinButton.classList.add('join-ride-toggle-button')
-        joinButton.setAttribute("onclick",`toggleRideAttendance(${rideId})`)
-        selectedRideElement.appendChild(joinButton)
-        joinButton.innerText = userOnRide(userId) ? "Leave Ride" : "Join Ride"
+            selectedRideDescriptionElement.innerHTML = (`
+                <p>${rideDetails.ride.description}</p>
+            `)
+        
+            selectedRouteDescriptionElement.innerHTML = (`
+                <h2>Route</h2>
+                <p>Start: ${rideDetails.route.start_location}</p>
+                <p>End: ${rideDetails.route.end_location}</p>
+                <p>Route Description: ${rideDetails.route.description}</p>
+                <p>${rideDetails.route.map_path}</p>   
+            `)
+            
+            
+            whosGoingTitleElement.innerText = (`${rideDetails.riders.length} Riders Going`)
+            whosGoingElement.innerHTML = ('')
+            rideDetails.riders.map(rider => {
+                let listItem = document.createElement('li')
+                listItem.dataset.id = rider.id
+                listItem.innerHTML = (`
+                    <li>
+                        <img src = './assets/user.png' />
+                        ${rider.username}
+                    </li>
+                `)
+                whosGoingElement.append(listItem)
+            })
+    
+            let joinButton = document.createElement('button')
+            joinButton.classList.add('join-ride-toggle-button')
+            joinButton.setAttribute("onclick",`toggleRideAttendance(${rideId})`)
+            selectedRideElement.appendChild(joinButton)
+            joinButton.innerText = userOnRide(userId) ? "Leave Ride" : "Join Ride"
+        } catch (error) {
+            console.log(error)
+            alert('Error fetching ride details')
+        }
     }
 }
 
@@ -141,13 +152,18 @@ function toggleRideAttendance(rideId) {
             .then(response => response.json)
             .then(response => console.log(response))
     } else {
-        fetch(`${BASEURL}/ride_attendances/`, {
-            method: 'POST',
-            headers,
-            body: JSON.stringify({ride_id: rideId, user_id: userId})
-        })
-            .then(response => response.json())
-            .then(response => console.log(response))
+        try {
+            fetch(`${BASEURL}/ride_attendances/`, {
+                method: 'POST',
+                headers,
+                body: JSON.stringify({ride_id: rideId, user_id: userId})
+            })
+                .then(response => response.json())
+                .then(response => console.log(response))
+        } catch (error) {
+            console.log(error)
+            alert('Unable to get riders')
+        }
     }
 }
 

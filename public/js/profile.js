@@ -7,12 +7,17 @@ const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com`
 
 
 function removeMotorcycle (motorcycle_id) {
-    fetch(`${BASEURL}/motorcycles/${motorcycle_id}` ,{method: "DELETE"})
-        .then(response => {
-            response.json()
-            window.location.href = 'http://localhost:3001/index.html#motorcycles-section'
-            window.location.reload(true);
-        })
+    try {
+        fetch(`${BASEURL}/motorcycles/${motorcycle_id}` ,{method: "DELETE"})
+            .then(response => {
+                response.json()
+                window.location.href = 'http://localhost:3001/index.html#motorcycles-section'
+                window.location.reload(true);
+            })
+    } catch (error) {
+        console.log(error)
+        alert('Error deleting motorcycle')
+    }
 }
 
 
@@ -101,20 +106,25 @@ function displayGarage(motorcycles) {
     })
 }
 
-fetch(`${BASEURL}/users/${userId}`, {
-    method: 'GET',
-    headers: {
-        'Content-Type': 'application/json',
-        'Authorization': `Bearer ${token}`
-    }
-})
-    .then (response => response.json())
-    .then(userInfo => {
-        console.log(userInfo)
-        displayHeader()
-        displayUser(userInfo)
-        displayGarage(userInfo.motorcycles)
+try {
+    fetch(`${BASEURL}/users/${userId}`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`
+        }
     })
+        .then (response => response.json())
+        .then(userInfo => {
+            console.log(userInfo)
+            displayHeader()
+            displayUser(userInfo)
+            displayGarage(userInfo.motorcycles)
+        })
+} catch (error) {
+    console.log(error)
+    alert('Error loading profile: database unavailable')
+}
 
 
 

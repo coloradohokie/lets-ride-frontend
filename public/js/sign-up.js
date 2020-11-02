@@ -20,26 +20,33 @@ function signUpUser(event) {
         },
         body: JSON.stringify({username, email, password, city, state})
     })
-        .then(response => response.json())
         .then(response => {
-            console.log(response)
-            if (response.username) {
-                fetch(`${BASEURL}/login`,{
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json'
-                    },
-                    body: JSON.stringify({email, password})
-                })
-                .then(response => response.json())
-                .then(response => { console.log(response)
-                    
-                })
-                window.location.href = './index.html'
+            if (response.ok) {
+                return response.json()
             } else {
-                const failureMessage = 'Something went wrong'
-                const messageHeader = document.querySelector('.sign-up-msg')
-                messageHeader.innerText = failureMessage
+                displayFailureMessage()
             }
         })
+        .then(response => {
+            console.log(response)
+            fetch(`${BASEURL}/login`,{
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({email, password})
+            })
+            .then(response => response.json())
+            .then(response => { console.log(response)
+                
+            })
+            window.location.href = './index.html'
+
+        })
+}
+
+function displayFailureMessage() {
+    const failureMessage = 'Something went wrong'
+    const messageHeader = document.querySelector('.sign-up-msg')
+    messageHeader.innerText = failureMessage
 }
