@@ -13,36 +13,45 @@ function signUpUser(event) {
     const city = formData.get('city')
     const state = formData.get('state')
 
-    fetch(`${BASEURL}/users`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({username, email, password, city, state})
-    })
-        .then(response => {
-            if (response.ok) {
-                return response.json()
-            } else {
-                displayFailureMessage()
-            }
+    try {
+        fetch(`${BASEURL}/users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({username, email, password, city, state})
         })
-        .then(response => {
-            console.log(response)
-            fetch(`${BASEURL}/login`,{
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({email, password})
+            .then(response => {
+                if (response.ok) {
+                    return response.json()
+                } else {
+                    displayFailureMessage()
+                }
             })
-            .then(response => response.json())
-            .then(response => { console.log(response)
-                
+            .then(response => {
+                console.log(response)
+                try {
+                    fetch(`${BASEURL}/login`,{
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({email, password})
+                    })
+                    .then(response => response.json())
+                    .then(response => { console.log(response)
+                        
+                    })
+                    window.location.href = './index.html'
+                } catch (error) {
+                    console.log(error)
+                    alert('error logging in')
+                }
             })
-            window.location.href = './index.html'
-
-        })
+    } catch (error) {
+        console.log(error)
+        alert('Error signing up')
+    }
 }
 
 function displayFailureMessage() {
