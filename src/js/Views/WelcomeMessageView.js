@@ -9,14 +9,10 @@ class WelcomeMessageView extends View {
         window.addEventListener('load', handler)
     }
 
-    // addHandlerLogOut(handler) {
-    //     this._logOutButton.addEventListener('click', handler)
-    // }
-
     _generateMarkup() {
         return `
             <div>
-                <h1>Welcome, ${this._data.username}! Let's Ride!</h1>
+                <h1>Welcome, ${this._data}! Let's Ride!</h1>
                 1990 Kawasaki Vulcan 750
             </div>
         `

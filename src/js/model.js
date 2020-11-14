@@ -1,12 +1,6 @@
 import {BASE_URL} from './config'
 
 export const state = {
-    user: {
-        // token: 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.byazftuF_KIoSs08Lxs3zMu3ueUSC3YiQUTqye3GPUM',
-        token: '',
-        username: 'Michael',
-        id: 1
-    },
     ridesList: [],
     ride: {
 
@@ -90,10 +84,10 @@ export async function validateLogin(loginData) {
         
         response = await response.json()
         if (response.token) {
-            console.log('success', response.token)
             localStorage.setItem('token', response.token)
             localStorage.setItem('username', response.username)
             localStorage.setItem('userId', response.userId)
+            location.reload()
         } else {
             console.log('login failed')
         }
@@ -103,8 +97,7 @@ export async function validateLogin(loginData) {
     }
 }
 
-export function logOut() {
-    console.log('logout')
+export function logout() {
     localStorage.clear()
     location.reload()
 }

@@ -4,16 +4,8 @@ import SearchResultsView from './Views/SearchResultsView'
 import NavBarView from './Views/WelcomeMessageView'
 import LoginView from './Views/LoginView'
 import WelcomeMessageView from './Views/WelcomeMessageView'
+import LogoutButtonView from './Views/LogoutButtonView'
 
-// const token = localStorage.getItem('token')
-// const username = localStorage.getItem('username')
-// const userId = localStorage.getItem('userId')
-
-function logout () {
-    localStorage.removeItem('token')
-    localStorage.removeItem('username')
-    location.reload()
-}
 
 const controlRide = async function() {
     try {
@@ -39,23 +31,23 @@ const controlSearchResults = async function() {
 }
 
 const controlNavBar = function() {
-    console.log(model.state.user)
-    NavBarView.render(model.state.user)
+    WelcomeMessageView.render(localStorage.getItem('username'))
 }
 
 const controlLogin = async function(loginData) {
     try {
         LoginView.renderSpinner()
         await model.validateLogin(loginData)
-        console.log('hit')
     } catch (err) {
         console.log(err)
     }
 }
 
-// const controlLogout = function() {
-//     model.logout()
-// }
+const controlLogout = function() {
+    model.logout()
+}
+
+
 
 
 const init = function() {
@@ -64,7 +56,7 @@ const init = function() {
         LoginView.addHandlerLoginSubmit(controlLogin)
     } else {
         WelcomeMessageView.addHandlerRender(controlNavBar)
-        // NavBarView.addHandlerLogOut(controlLogout)
+        LogoutButtonView.addHandlerLogout(controlLogout)
         SearchResultsView.addHandlerRender(controlSearchResults)
         RideView.addHandlerRender(controlRide)
         
