@@ -2,7 +2,8 @@ import {BASE_URL} from './config'
 
 export const state = {
     user: {
-        token: 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.byazftuF_KIoSs08Lxs3zMu3ueUSC3YiQUTqye3GPUM',
+        // token: 'eyJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoxfQ.byazftuF_KIoSs08Lxs3zMu3ueUSC3YiQUTqye3GPUM',
+        token: '',
         username: 'Michael',
         id: 1
     },
@@ -18,7 +19,7 @@ export async function loadSearchResults() {
             method: 'GET',
             headers: {
                 'Content-Type': 'applicaton/json',
-                'Authorization': `Bearer ${state.user.token}`
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
         const rides = await response.json()
@@ -36,7 +37,7 @@ export async function loadRide(id) {
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${state.user.token}`
+                'Authorization' : `Bearer ${localStorage.getItem('token')}`
             }
         })
         const rideDetails = await response.json()
@@ -74,4 +75,36 @@ export async function loadRide(id) {
         alert('Error fetching ride details')
     }
 
+}
+
+export async function validateLogin(loginData) {
+    const {email, password} = loginData
+    const loginUrl = `${BASE_URL}login`
+    console.log(loginUrl, email, password)
+    try {
+        let response = await fetch(loginUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json'},
+            body: JSON.stringify({email, password})
+        })
+        
+        response = await response.json()
+        if (response.token) {
+            console.log('success', response.token)
+            localStorage.setItem('token', response.token)
+            localStorage.setItem('username', response.username)
+            localStorage.setItem('userId', response.userId)
+        } else {
+            console.log('login failed')
+        }
+    } catch (error) {
+        console.log(error)
+        alert('Error loggging in')
+    }
+}
+
+export function logOut() {
+    console.log('logout')
+    localStorage.clear()
+    location.reload()
 }

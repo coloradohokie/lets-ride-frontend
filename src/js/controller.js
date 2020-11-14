@@ -1,7 +1,9 @@
 import RideView from './Views/RideView'
 import * as model from './model'
 import SearchResultsView from './Views/SearchResultsView'
-import NavBarView from './Views/NavBarView'
+import NavBarView from './Views/WelcomeMessageView'
+import LoginView from './Views/LoginView'
+import WelcomeMessageView from './Views/WelcomeMessageView'
 
 // const token = localStorage.getItem('token')
 // const username = localStorage.getItem('username')
@@ -41,23 +43,32 @@ const controlNavBar = function() {
     NavBarView.render(model.state.user)
 }
 
+const controlLogin = async function(loginData) {
+    try {
+        LoginView.renderSpinner()
+        await model.validateLogin(loginData)
+        console.log('hit')
+    } catch (err) {
+        console.log(err)
+    }
+}
 
-
-
-// if(!token) {
-//     window.location.href = 'login.html'
-//     const displayWindow = document.querySelector('.rides')
-//     displayWindow.style.display = 'none'
-// } else {
-//     displayWelcomeMessage()
-//     fetchRides()
-//     displayRideDetails()
+// const controlLogout = function() {
+//     model.logout()
 // }
 
+
 const init = function() {
-    NavBarView.addHandlerRender(controlNavBar)
-    SearchResultsView.addHandlerRender(controlSearchResults)
-    RideView.addHandlerRender(controlRide)
+    if(!localStorage.getItem('token')) {
+        LoginView.showLogin()
+        LoginView.addHandlerLoginSubmit(controlLogin)
+    } else {
+        WelcomeMessageView.addHandlerRender(controlNavBar)
+        // NavBarView.addHandlerLogOut(controlLogout)
+        SearchResultsView.addHandlerRender(controlSearchResults)
+        RideView.addHandlerRender(controlRide)
+        
+    }
 }
 
 init()
