@@ -25,7 +25,7 @@ function displayHeader () {
     const nav = `
         <nav>
             <div>
-                <h1 id="welcome-message">Welcome, Friend-o! Let's Ride!</h1>
+                <h1 class=".welcome-message">Welcome, Friend-o! Let's Ride!</h1>
                 1990 Kawasaki Vulcan 750
             </div>
             <a href="index.html">Rides</a>

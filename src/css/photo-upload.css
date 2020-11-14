@@ -1,4 +1,4 @@
-#content-container {
+.content-container {
     /* display: flex; */
     background-color: lightgray;
     width: 90%;

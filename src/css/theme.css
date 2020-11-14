@@ -49,7 +49,7 @@ footer {
     
 }
 
-#content-container {
+.rides {
     min-height: calc(100vh - 8rem)
 }
 
@@ -176,7 +176,7 @@ img {
     opacity: 40%;
 }
 
-#content-container {
+.rides {
     display: flex;
     justify-content: flex-start;
     margin: 1rem;

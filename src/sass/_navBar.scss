@@ -1,0 +1,13 @@
+nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    height: 100%;
+}
+
+.logout-button {
+    width: 4rem;
+    height: 100%;
+    background-color: #7395AE;
+    color: white;
+}

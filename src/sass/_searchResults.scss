@@ -1,0 +1,64 @@
+.ride-list {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 1rem;
+    border-radius: 3px;
+    color: #9C9C9C;
+    background-color: #557A95;
+    /* padding: 1.5rem; */
+    box-shadow: 5px 5px 5px #7395AE;
+}
+
+
+.ride-list-card {
+    list-style-type: none;
+    display: flex;
+    flex-direction: row;
+    margin: 1rem;
+    background-color: #7395AE;
+    
+    :hover {
+        cursor: pointer
+    }
+
+    .date {
+        width: 3rem;
+        background-color: #9C9C9C;
+        color: #557A95;
+        padding: 0.8rem 0.5rem;
+        text-align: center;
+        border-radius: 4px 0 0 4px;
+    }
+
+    .active { //not currently used
+        color: green;
+        width: 100%
+    }
+    
+    h3 {
+        color: white;
+    }
+
+
+}
+
+
+
+.user-ride {
+    background-color: #7395AE;
+}
+
+.non-user-ride {
+    background-color: lightgray;
+}
+
+
+.ride-listing {
+    display: flex;
+    align-items: center;
+    padding: 0.1rem;
+    margin-left: 0.5rem;
+    font-size: 1.2rem;
+    align-items: center;
+}

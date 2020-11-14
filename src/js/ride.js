@@ -3,7 +3,7 @@ const id = params.get('id')
 const BASEURL = `https://lets-ride-motorcycle-app.herokuapp.com/`
 
 header =document.querySelector('header')
-contentContainer=document.getElementById('content-container')
+contentContainer=document.querySelector('.rides')
 
 fetch(`${BASEURL}/rides/${id}`)
 .then(response => response.json())

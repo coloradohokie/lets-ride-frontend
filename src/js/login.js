@@ -32,7 +32,7 @@ function loginUser(event) {
                     window.location.href = './index.html'
                 } else {
                     const failureMessage = 'Sign In Failed'
-                    const loginMessage = document.querySelector('#login-msg')
+                    const loginMessage = document.querySelector('.login-msg')
                     loginMessage.innerText = failureMessage
                 }
             })
