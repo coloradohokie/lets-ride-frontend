@@ -1,13 +1,14 @@
-function displayDate(date) {
+import moment from 'moment'
+export function displayDate(date) {
     return moment(date).format('MMMM Do, YYYY')
 }
 
-function showElement (elementID) {
+export function showElement (elementID) {
     const targetElement = document.getElementById(elementID)
     targetElement.style.display = "block"
 }
 
-function hideElement (elementID) {
+export function hideElement (elementID) {
     const targetElement = document.getElementById(elementID)
     targetElement.style.display = "none"
 }

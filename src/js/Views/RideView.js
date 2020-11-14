@@ -1,6 +1,5 @@
 import View from './View'
-
-import moment from 'moment'
+import {displayDate} from '../helpers'
 
 class RideView extends View {
 
@@ -20,7 +19,7 @@ class RideView extends View {
             <div class = "ride--header">
                 <div>
                     <h1>${ride.title}</h1>
-                    <p>${ride.date} ${ride.startTime} - ${ride.endTime}</p>
+                    <p>${displayDate(ride.date)} ${ride.startTime} - ${ride.endTime}</p>
                     <p>Organizer: ${organizer.username}</p>
                 </div>
                 <div>
