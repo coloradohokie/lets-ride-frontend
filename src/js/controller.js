@@ -5,6 +5,7 @@ import NavBarView from './Views/WelcomeMessageView'
 import LoginView from './Views/LoginView'
 import WelcomeMessageView from './Views/WelcomeMessageView'
 import LogoutButtonView from './Views/LogoutButtonView'
+import ProfileView from './Views/ProfileView'
 
 
 const controlRide = async function() {
@@ -47,6 +48,12 @@ const controlLogout = function() {
     model.logout()
 }
 
+const controlProfileView = function() {
+    console.log('controlprofileview')
+    const section = document.querySelector('.profile')
+    section.classList.remove('hidden')
+    ProfileView.render(model.state)
+}
 
 
 
@@ -59,6 +66,7 @@ const init = function() {
         LogoutButtonView.addHandlerLogout(controlLogout)
         SearchResultsView.addHandlerRender(controlSearchResults)
         RideView.addHandlerRender(controlRide)
+        ProfileView.addHandlerRender(controlProfileView)
         
     }
 }
