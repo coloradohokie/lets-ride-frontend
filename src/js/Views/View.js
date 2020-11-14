@@ -6,7 +6,28 @@ export default class View {
         this._parentElement.insertAdjacentHTML('afterbegin', markup)
     }
 
-    _clear(element = _parentElement) {
+    _clear(element = this._parentElement) {
         element.innerHTML= ''
+    }
+
+    renderSpinner() {
+        const markup = `
+            <div class="lds-spinner">
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+                <div></div>
+            </div>
+        `
+        this._clear()
+        this._parentElement.insertAdjacentHTML('afterbegin', markup)
     }
 }

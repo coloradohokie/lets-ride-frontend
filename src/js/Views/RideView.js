@@ -1,16 +1,18 @@
+import View from './View'
+
 import moment from 'moment'
 
-class RideView {
+class RideView extends View {
 
     _parentElement = document.querySelector('.selected-ride-section');
     _data;
 
-    render(data) {
-        this._data = data
-        this._parentElement.innerHTML = ''
-        const markup = this._generateMarkup()
-        this._parentElement.insertAdjacentHTML('afterbegin', markup)
-    }
+    // render(data) {
+    //     this._data = data
+    //     this._parentElement.innerHTML = ''
+    //     const markup = this._generateMarkup()
+    //     this._parentElement.insertAdjacentHTML('afterbegin', markup)
+    // }
 
     _generateMarkup() {
         const {organizer, ride, riders, route} = this._data

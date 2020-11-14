@@ -1,3 +1,7 @@
+$color-primary: #557A95;
+$color-secondary: #5D5C61;
+
+
 * {
     box-sizing: border-box;
 }
@@ -154,3 +158,26 @@ img {
 .hidden {
     display: none
 }
+
+
+.spinner {
+    margin: 5rem auto;
+    text-align: center;
+  
+    svg {
+      height: 6rem;
+      width: 6rem;
+      fill: $color-primary;
+      animation: rotate 2s infinite linear;
+    }
+  }
+  
+  @keyframes rotate {
+    0% {
+      transform: rotate(0);
+    }
+  
+    100% {
+      transform: rotate(360deg);
+    }
+  }

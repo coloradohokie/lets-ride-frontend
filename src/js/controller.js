@@ -17,6 +17,7 @@ const controlRide = async function() {
     try {
         let rideId = window.location.hash.slice(1)
         if (!rideId) rideId = 1
+        RideView.renderSpinner()
         await model.loadRide(rideId)
         RideView.render(model.state.ride)
 
@@ -27,6 +28,7 @@ const controlRide = async function() {
 
 const controlSearchResults = async function() {
     try {
+        SearchResultsView.renderSpinner()
         await model.loadSearchResults()
         SearchResultsView.render(model.state.ridesList)
     } catch (err) {
