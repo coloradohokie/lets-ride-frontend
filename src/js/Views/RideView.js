@@ -1,5 +1,6 @@
 import View from './View'
 import {displayDate} from '../helpers'
+import profileImage from 'url:../../assets/user.png'
 
 class RideView extends View {
 
@@ -48,7 +49,7 @@ class RideView extends View {
             .map(rider => {
                 return `
                     <li>
-                        <img src = './assets/user.png' />
+                        <img src = "${profileImage}" />
                         ${rider.username}
                     </li>
                 `
