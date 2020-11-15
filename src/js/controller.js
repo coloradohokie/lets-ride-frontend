@@ -1,7 +1,7 @@
 import RideView from './Views/RideView'
 import * as model from './model'
 import SearchResultsView from './Views/SearchResultsView'
-import NavBarView from './Views/WelcomeMessageView'
+import NavBarView from './Views/NavBarView'
 import LoginView from './Views/LoginView'
 import WelcomeMessageView from './Views/WelcomeMessageView'
 import LogoutButtonView from './Views/LogoutButtonView'
@@ -50,9 +50,18 @@ const controlLogout = function() {
 
 const controlProfileView = function() {
     console.log('controlprofileview')
-    const section = document.querySelector('.profile')
-    section.classList.remove('hidden')
+    const profilePage = document.querySelector('.profile')
+    profilePage.classList.remove('hidden')
+    const ridesPage = document.querySelector('.rides')
+    ridesPage.classList.add('hidden')
     ProfileView.render(model.state)
+}
+
+const controlRidesView = function() {
+    const profilePage = document.querySelector('.profile')
+    profilePage.classList.add('hidden')
+    const ridesPage = document.querySelector('.rides')
+    ridesPage.classList.remove('hidden')
 }
 
 
@@ -66,7 +75,8 @@ const init = function() {
         LogoutButtonView.addHandlerLogout(controlLogout)
         SearchResultsView.addHandlerRender(controlSearchResults)
         RideView.addHandlerRender(controlRide)
-        ProfileView.addHandlerRender(controlProfileView)
+        NavBarView.addHandlerTogglePage()
+
         
     }
 }

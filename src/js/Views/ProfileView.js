@@ -5,7 +5,7 @@ class ProfileView extends View {
     _parentElement = document.querySelector('.profile')
     _navButton = document.querySelector('.link__profile')
 
-    addHandlerRender(handler) {
+    addHandlerSwitchTo(handler) {
         this._navButton.addEventListener('click', handler)
     }
 
