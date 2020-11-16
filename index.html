@@ -18,14 +18,14 @@
         </div>
         <nav class="nav">
             <button class="nav-link" data-page="rides">Rides</button>
-            <button class="nav-link">Organize Group Ride</button>
+            <button class="nav-link organize-ride-button" data-page="organize-ride">Organize Group Ride</button>
             <button class="nav-link" data-page="profile">My Profile</button>
         </nav>
             <button class="logout-button">Logout</button>
     </header>
 
     <div class="overlay hidden"></div>
-    <div class="login all-forms hidden">
+    <div class="login modal-window all-forms hidden">
         <h1>Please Sign In</h1>
         <form class="login-form">
             <label for="email">Email Address</label>
@@ -153,7 +153,7 @@
     </div>
 
     <div class="organize-ride hidden">
-        <!-- <h1>Organize a Ride</h1>
+        <h1>Organize a Ride</h1>
 
         <form method="POST" action="https://lets-ride-motorcycle-app.herokuapp.com/rides" class="all-forms">
             <label for="description">Description</label>
@@ -164,11 +164,11 @@
     
             <label for="route">Route</label>
             <select id="route" name="route"></select>
-            <a href="create-route.html">Create New Route</a>
+            <!-- <a href="create-route.html">Create New Route</a> -->
     
             <input type="submit" value="Create Ride">
         
-        </form> -->
+        </form>
     </div>
 
     <div class="create-route hidden">

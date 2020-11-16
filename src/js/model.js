@@ -3,8 +3,8 @@ import {BASE_URL} from './config'
 export const state = {
     ridesList: [],
     ride: {
-
-    }
+    },
+    routes: []
 }
 
 export async function loadSearchResults() {
@@ -100,4 +100,72 @@ export async function validateLogin(loginData) {
 export function logout() {
     localStorage.clear()
     location.reload()
+}
+
+export async function loadRoutes() {
+    try {
+        let response = await fetch(`${BASE_URL}routes`, {
+            method: 'GET',
+            headers: { 
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        console.log(response)
+        if(!response.ok) throw new Error ('bad response')
+        response = await response.json()
+        console.log(response)
+        state.routes = response
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export async function uploadRide(data) {
+    const newRide = {
+        title: data.title,
+        description: data.description,
+        date: data.date,
+        start_time: data.start,
+        end_time: data.end,
+        user_id: +localStorage.getItem('userId'),
+        route_id: +data.route
+    }
+
+    let response = await fetch(`${BASE_URL}rides`, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization' : `Bearer ${localStorage.getItem('token')}`
+        },
+        body: JSON.stringify(newRide)
+    })
+    console.log(response)
+    const ride = await response.json()
+    console.log('ride', ride)
+    data.id = ride.id
+    state.ride = data
+
+    state.ride = {
+        title,
+        description,
+        date,
+        startTime: ride.start_time,
+        endTime: ride.end_time,
+        organizer: {userId: ride.user_id, username: localStorage.getItem('username')}, //get this info from the api
+        route: {id: ride.route_id}  //need rest of info from api
+    }
+
+
+               /*
+            ride = Ride.create(
+                title: params[:title],
+                description: params[:description],
+                date: params[:date],
+                start_time: params[:start_time],
+                end_time: params[:end_time],
+                user_id: params[:user_id],
+                route_id: params[:route_id]
+           */
+           
 }

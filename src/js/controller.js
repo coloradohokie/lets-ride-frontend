@@ -6,6 +6,7 @@ import LoginView from './Views/LoginView'
 import WelcomeMessageView from './Views/WelcomeMessageView'
 import LogoutButtonView from './Views/LogoutButtonView'
 import ProfileView from './Views/ProfileView'
+import OrganizeRide from './Views/OrganizeRide'
 
 
 const controlRide = async function() {
@@ -48,20 +49,25 @@ const controlLogout = function() {
     model.logout()
 }
 
-const controlProfileView = function() {
-    console.log('controlprofileview')
-    const profilePage = document.querySelector('.profile')
-    profilePage.classList.remove('hidden')
-    const ridesPage = document.querySelector('.rides')
-    ridesPage.classList.add('hidden')
-    ProfileView.render(model.state)
+const controlOrganizeRide = async function() {
+    try {
+        //load the routes
+        const routes = await model.loadRoutes()
+        //load the organize ride form
+        OrganizeRide.render(model.state.routes)
+        //save data to database
+        OrganizeRide.addHandlerSubmitForm(model.uploadRide)
+    
+        //navigate to new ride page
+        window.history.pushState(null, '', `#${model.state.ride.id}`)
+
+    } catch (err) {
+        console.log(err)
+    }
 }
 
-const controlRidesView = function() {
-    const profilePage = document.querySelector('.profile')
-    profilePage.classList.add('hidden')
-    const ridesPage = document.querySelector('.rides')
-    ridesPage.classList.remove('hidden')
+const controlUploadRide = function() {
+    console.log('hey!')
 }
 
 
@@ -76,6 +82,10 @@ const init = function() {
         SearchResultsView.addHandlerRender(controlSearchResults)
         RideView.addHandlerRender(controlRide)
         NavBarView.addHandlerTogglePage()
+
+        OrganizeRide.addHandlerRender(controlOrganizeRide)
+        
+
 
         
     }
