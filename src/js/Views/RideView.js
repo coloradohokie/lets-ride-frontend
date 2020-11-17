@@ -8,7 +8,6 @@ class RideView extends View {
     _data;
 
     _generateMarkup() {
-        console.log(this._data)
         const {organizer, ride, riders, route} = this._data
         return `
             <div class = "ride--header">
@@ -28,7 +27,8 @@ class RideView extends View {
             <p>Start: ${route.startLocation}</p>
             <p>End: ${route.endLocation}</p>
             <p>Route Description: ${route.description}</p>
-            <p>${route.mapUrl}</p> 
+            ${route.mapUrl ? `<p>${route.mapUrl}</p>` : ''}
+             
 
             <h2 class="whos-going-title">${riders.length} Riders Going</h2>
             <ul class="whos-going">
