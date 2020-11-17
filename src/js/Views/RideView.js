@@ -7,14 +7,8 @@ class RideView extends View {
     _parentElement = document.querySelector('.selected-ride-section');
     _data;
 
-    // render(data) {
-    //     this._data = data
-    //     this._parentElement.innerHTML = ''
-    //     const markup = this._generateMarkup()
-    //     this._parentElement.insertAdjacentHTML('afterbegin', markup)
-    // }
-
     _generateMarkup() {
+        console.log(this._data)
         const {organizer, ride, riders, route} = this._data
         return `
             <div class = "ride--header">

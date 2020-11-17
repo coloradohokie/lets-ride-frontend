@@ -9,7 +9,7 @@ export const state = {
 
 export async function loadSearchResults() {
     try {
-        const response = await fetch(`${BASE_URL}/rides`, {
+        const response = await fetch(`${BASE_URL}rides`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'applicaton/json',
@@ -27,7 +27,7 @@ export async function loadSearchResults() {
 
 export async function loadRide(id) {
     try {
-        const response = await fetch(`${BASE_URL}/rides/${id}`, {
+        const response = await fetch(`${BASE_URL}rides/${id}`, {
             method: 'GET',
             headers: { 
                 'Content-Type': 'application/json',
@@ -111,61 +111,75 @@ export async function loadRoutes() {
                 'Authorization' : `Bearer ${localStorage.getItem('token')}`
             }
         })
-        console.log(response)
         if(!response.ok) throw new Error ('bad response')
         response = await response.json()
-        console.log(response)
-        state.routes = response
+        this.state.routes = response
     } catch (err) {
         console.log(err)
     }
 }
 
 export async function uploadRide(data) {
-    const newRide = {
-        title: data.title,
-        description: data.description,
-        date: data.date,
-        start_time: data.start,
-        end_time: data.end,
-        user_id: +localStorage.getItem('userId'),
-        route_id: +data.route
+    try {
+        const newRide = {
+            title: data.title,
+            description: data.description,
+            date: data.date,
+            start_time: data.start,
+            end_time: data.end,
+            user_id: +localStorage.getItem('userId'),
+            route_id: +data.route
+        }
+    
+        let response = await fetch(`${BASE_URL}rides`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(newRide)
+        })
+        if (!response.ok) throw new Error ('response not ok')
+        response = await response.json()
+        const {ride, organizer, route} = response
+    
+        state.ride = {
+            ride: {
+                id: ride.id,
+                title: ride.title,
+                description: ride.description,
+                date: ride.date,
+                startTime: ride.start_time,
+                endTime: ride.end_time,
+                createdAt: ride.created_at,
+                updatedAt: ride.updated_at
+            },
+            organizer,
+            route: {
+                id: route.id,
+                name: route.name,
+                description: route.description,
+                startLocation: route.startLocation,
+                endLocation: route.end_location,
+                mapUrl: route.map_path,
+                createdAt: route.created_at,
+                updatedAt: route.updated_at                
+            },
+            riders:[]
+        }
+
+        state.ridesList.push({
+            id: ride.id,
+            title: ride.title,
+            date: ride.date,
+            user_id: organizer.id 
+        })
+
+        return ride.id
+
+
+    } catch (err) {
+        console.log(err)
     }
 
-    let response = await fetch(`${BASE_URL}rides`, {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json',
-            'Authorization' : `Bearer ${localStorage.getItem('token')}`
-        },
-        body: JSON.stringify(newRide)
-    })
-    console.log(response)
-    const ride = await response.json()
-    console.log('ride', ride)
-    data.id = ride.id
-    state.ride = data
-
-    state.ride = {
-        title,
-        description,
-        date,
-        startTime: ride.start_time,
-        endTime: ride.end_time,
-        organizer: {userId: ride.user_id, username: localStorage.getItem('username')}, //get this info from the api
-        route: {id: ride.route_id}  //need rest of info from api
-    }
-
-
-               /*
-            ride = Ride.create(
-                title: params[:title],
-                description: params[:description],
-                date: params[:date],
-                start_time: params[:start_time],
-                end_time: params[:end_time],
-                user_id: params[:user_id],
-                route_id: params[:route_id]
-           */
-           
 }

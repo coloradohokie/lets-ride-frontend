@@ -18,7 +18,7 @@
         </div>
         <nav class="nav">
             <button class="nav-link" data-page="rides">Rides</button>
-            <button class="nav-link organize-ride-button" data-page="organize-ride">Organize Group Ride</button>
+            <button class="nav-link" data-page="organize-ride">Organize Group Ride</button>
             <button class="nav-link" data-page="profile">My Profile</button>
         </nav>
             <button class="logout-button">Logout</button>
@@ -155,18 +155,29 @@
     <div class="organize-ride hidden">
         <h1>Organize a Ride</h1>
 
-        <form method="POST" action="https://lets-ride-motorcycle-app.herokuapp.com/rides" class="all-forms">
+        <form method="POST" class="all-forms upload-ride">
+            <label for="title">Title</label>
+            <input type="text" id="title" name="title" placeholder="Title" />
             <label for="description">Description</label>
             <textarea id="description" name="description" placeholder="Description"></textarea>
     
             <label id="date" for="date">Date:</label>
-            <input type="datetime-local" name="date" id="date" placeholder="date">
-    
+            <input type="date" name="date" id="date" placeholder="date">
+
+            <label id="start-time" for="start">Start Time:</label>
+            <input type="time" name="start" />
+
+            <label id="end-time" for="end">End Time:</label>
+            <input type="time" name="end" />
+
             <label for="route">Route</label>
             <select id="route" name="route"></select>
+            
             <!-- <a href="create-route.html">Create New Route</a> -->
     
             <input type="submit" value="Create Ride">
+        
+        </form>
         
         </form>
     </div>

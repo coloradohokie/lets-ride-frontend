@@ -52,22 +52,44 @@ const controlLogout = function() {
 const controlOrganizeRide = async function() {
     try {
         //load the routes
-        const routes = await model.loadRoutes()
+        await model.loadRoutes()
         //load the organize ride form
-        OrganizeRide.render(model.state.routes)
+        // OrganizeRide.render(model.state.routes)
+
+        const selectElement = document.querySelector('#route')
+        model.state.routes.map(route => {
+                let option = document.createElement('option')
+                option.setAttribute('value', route.id)
+                option.innerText = route.name
+                selectElement.appendChild(option)
+            })
+        
+
         //save data to database
-        OrganizeRide.addHandlerSubmitForm(model.uploadRide)
+        
     
-        //navigate to new ride page
-        window.history.pushState(null, '', `#${model.state.ride.id}`)
+
 
     } catch (err) {
         console.log(err)
     }
 }
 
-const controlUploadRide = function() {
-    console.log('hey!')
+const controlUploadRide = async function(data) {
+    try {
+        await model.uploadRide(data)
+    
+        //navigate to new ride page
+        SearchResultsView.render(model.state.ridesList)
+        RideView.render(model.state.ride)
+        window.history.pushState(null, '', `#${model.state.ride.ride.id}`)
+        NavBarView.navigateToPage('rides')
+
+    } catch (err) {
+        console.log(err)
+    }
+
+
 }
 
 
@@ -82,9 +104,8 @@ const init = function() {
         SearchResultsView.addHandlerRender(controlSearchResults)
         RideView.addHandlerRender(controlRide)
         NavBarView.addHandlerTogglePage()
-
         OrganizeRide.addHandlerRender(controlOrganizeRide)
-        
+        OrganizeRide.addHandlerSubmitForm(controlUploadRide)
 
 
         
