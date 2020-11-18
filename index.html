@@ -27,9 +27,11 @@
     <div class="overlay hidden"></div>
 
 
-    <!-------LOGIN-------->
+    <!-------LOGIN/SIGNUP-------->
     <div class="login modal-window all-forms hidden">
-        <h1>Please Sign In</h1>
+        <h1 class="login-page-title">Please Sign In</h1>
+
+        <!-------LOGIN FORM-------->
         <form class="login-form">
             <label for="email">Email Address</label>
             <input type="text" id="email" name="email" placeholder="Email Address"></select>
@@ -37,33 +39,30 @@
             <input type="password" id="password" name="password" placeholder="Password"></select>
             <input type="submit" value="login" />
         </form>
-        <h3 id="login-msg">Don't have an account? <button class="sign-up-button">Sign Up!</button></h3>
-    </div>
-
-    <!-------SIGN UP-------->
-    <div class="signup-form all-forms signup hidden">
-        <!-- <h1>Create Account</h1>
-        <form class="sign-up-form">
-
+        
+        <!-------SIGN UP FORM-------->
+        <form class="sign-up-form hidden">
+            
             <label for="email">Email Address</label>
-            <input type="text" id="email" name="email" placeholder="Email Address"></select>
-
+            <input type="text" id="s-email" name="email" placeholder="Email Address"></select>
+            
             <label for="username">User Name</label>
-            <input type="text" id="username" name="username" placeholder="User Name"></select>
-
+            <input type="text" id="s-username" name="username" placeholder="User Name"></select>
+            
             <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Password"></select>
-
+            <input type="password" id="s-password" name="password" placeholder="Password"></select>
+            
             <label for="city">City</label>
-            <input type="text" id="city" name="city" placeholder="City"></select>
-
+            <input type="text" id="s-city" name="city" placeholder="City"></select>
+            
             <label for="State">State</label>
-            <input type="text" id="state" name="state" placeholder="State"></select>
-
-
+            <input type="text" id="s-state" name="state" placeholder="State"></select>
+            
+            
             <input type="submit" value="Sign Up!" />
         </form>
-        <h3 class="sign-up-msg"><a href="login.html">Already have an account? Click here to sign in!</a></h3> -->
+        <h3 class="login-msg">Don't have an account? </h3>
+        <button class="toggle-screen-button">Sign Up!</button>
     </div>
 
 
@@ -176,7 +175,7 @@
 
     
     <!-------NOT CURRENTLY USED--------> 
-       
+
     <div class="update-ride hidden">
         <!-- <form  method="POST" class="all-forms">           
             <label for="description">Description</label>

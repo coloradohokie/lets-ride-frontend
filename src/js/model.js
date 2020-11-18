@@ -181,5 +181,32 @@ export async function uploadRide(data) {
     } catch (err) {
         console.log(err)
     }
+}
+
+export const validateSignUp = async function(signUpData) {
+    try {
+        console.log(signUpData)
+        const {email, username, password, city, state} = signUpData
+        const response = await fetch(`${BASE_URL}users`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                email,
+                username,
+                password,
+                city,
+                state
+            })
+        })
+        console.log('response', response)
+        if (!response.ok) throw new Error('Failed to create user')
+        const result = await response.json()
+        console.log(result)
+
+    } catch (err) {
+        console.log(err)
+    }
 
 }

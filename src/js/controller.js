@@ -88,16 +88,25 @@ const controlUploadRide = async function(data) {
     } catch (err) {
         console.log(err)
     }
-
-
 }
 
+const controlSignUp = async function(signUpData) {
+    try {
+        LoginView.renderSpinner()
+        await model.validateSignUp(signUpData)
+        location.reload()
+    } catch (err) {
+        console.log(err)
+    }
+}
 
 
 const init = function() {
     if(!localStorage.getItem('token')) {
         LoginView.showLogin()
-        LoginView.addHandlerLoginSubmit(controlLogin)
+        LoginView.addHandlerFormSubmit(controlLogin)
+        LoginView.addHandlerToggleScreen()
+        LoginView.addHandlerFormSubmit(controlSignUp)
     } else {
         WelcomeMessageView.addHandlerRender(controlNavBar)
         LogoutButtonView.addHandlerLogout(controlLogout)
