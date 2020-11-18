@@ -10,7 +10,7 @@
     <title>Let's Ride!</title>
 </head>
 <body>
-
+    <!-------HEADER-------->
     <header class="header">
         <div class = "welcome-message">
             <h1>Welcome, Friend! Let's Ride!</h1>
@@ -23,8 +23,11 @@
         </nav>
             <button class="logout-button">Logout</button>
     </header>
-
+    <!-------OVERLAY-------->
     <div class="overlay hidden"></div>
+
+
+    <!-------LOGIN-------->
     <div class="login modal-window all-forms hidden">
         <h1>Please Sign In</h1>
         <form class="login-form">
@@ -37,7 +40,7 @@
         <h3 id="login-msg">Don't have an account? <button class="sign-up-button">Sign Up!</button></h3>
     </div>
 
-
+    <!-------SIGN UP-------->
     <div class="signup-form all-forms signup hidden">
         <!-- <h1>Create Account</h1>
         <form class="sign-up-form">
@@ -64,7 +67,7 @@
     </div>
 
 
-
+    <!-------RIDES PAGE-------->
     <div class="page rides">
         <section class ="search-results">
                 <!-- <div class="ride-container">
@@ -91,6 +94,12 @@
         </section>
     </div>
 
+
+
+
+
+
+    <!-------PROFILE PAGE-------->
     <div class="page profile hidden">
         <h2>My Profile</h2>
         <div class="profile-container">
@@ -124,34 +133,12 @@
     </div>
 
 
-    <div class="update-ride hidden">
-        <!-- <form  method="POST" class="all-forms">           
-            <label for="description">Description</label>
-            <textarea id="description" name="description" placeholder="Description"></textarea>
-            
-            <label id="date" for="date">Date:</label>
-            <input type="datetime-local" name="date" id="date" placeholder="date">
-            
-            <label for="route">Route</label>
-            <select id="route" name="route"></select>
-            <a href="create-route.html">Create New Route</a>
-            
-            <input type="submit" value="Update Ride">
-            <input type="hidden" name="_method" value="put" /> 
-        </form> -->
-    </div>
 
-    <div class="upload-photos hidden">
-        <!-- <h1>Upload Photos</h1>
-        <form method="POST" action="https://lets-ride-motorcycle-app.herokuapp.com/photos" class="all-forms">
-            <label for="picture">Photo:</label>
-            <input type="text" name="image_path" placeholder="Paste Link to Photo Here!">
-            <input type="text" name="location" placeholder="Location">
-            <input type="text" name="description" placeholder="Description (not hooked up)">
-            <input type="submit" value="Link Photo">
-        </form> -->
-    </div>
 
+
+
+
+    <!-------ORGANIZE RIDE PAGE-------->
     <div class="organize-ride hidden">
         <h1>Organize a Ride</h1>
 
@@ -180,6 +167,42 @@
         </form>
         
         </form>
+    </div>
+
+
+
+    
+
+
+    
+    <!-------NOT CURRENTLY USED--------> 
+       
+    <div class="update-ride hidden">
+        <!-- <form  method="POST" class="all-forms">           
+            <label for="description">Description</label>
+            <textarea id="description" name="description" placeholder="Description"></textarea>
+            
+            <label id="date" for="date">Date:</label>
+            <input type="datetime-local" name="date" id="date" placeholder="date">
+            
+            <label for="route">Route</label>
+            <select id="route" name="route"></select>
+            <a href="create-route.html">Create New Route</a>
+            
+            <input type="submit" value="Update Ride">
+            <input type="hidden" name="_method" value="put" /> 
+        </form> -->
+    </div>
+
+    <div class="upload-photos hidden">
+        <!-- <h1>Upload Photos</h1>
+        <form method="POST" action="https://lets-ride-motorcycle-app.herokuapp.com/photos" class="all-forms">
+            <label for="picture">Photo:</label>
+            <input type="text" name="image_path" placeholder="Paste Link to Photo Here!">
+            <input type="text" name="location" placeholder="Location">
+            <input type="text" name="description" placeholder="Description (not hooked up)">
+            <input type="submit" value="Link Photo">
+        </form> -->
     </div>
 
     <div class="create-route hidden">
