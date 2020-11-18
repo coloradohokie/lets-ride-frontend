@@ -17,6 +17,7 @@
     flex-direction: row;
     margin: 1rem;
     background-color: #7395AE;
+    width: 90%;
     
     :hover {
         cursor: pointer
@@ -31,16 +32,21 @@
         border-radius: 4px 0 0 4px;
     }
 
-    .active { //not currently used
-        color: green;
-        width: 100%
+
+    h3 {
+        color: rgb(31, 48, 59);
     }
+
+
+}
+
+.active { 
+    box-shadow: 0px 0px 10px #9C9C9C;
+    border: 1px solid #9C9C9C;
     
     h3 {
-        color: white;
+        color: rgb(224, 233, 253)
     }
-
-
 }
 
 

@@ -11,7 +11,7 @@ import OrganizeRide from './Views/OrganizeRide'
 
 const controlRide = async function() {
     try {
-        let rideId = window.location.hash.slice(1)
+        let rideId = +window.location.hash.slice(1)
         if (!rideId) rideId = 1
         RideView.renderSpinner()
         await model.loadRide(rideId)
@@ -24,9 +24,10 @@ const controlRide = async function() {
 
 const controlSearchResults = async function() {
     try {
+        let rideId = +window.location.hash.slice(1)
         SearchResultsView.renderSpinner()
         await model.loadSearchResults()
-        SearchResultsView.render(model.state.ridesList)
+        SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: rideId})
     } catch (err) {
         console.log('controlSearchResults', err)
     }
@@ -37,6 +38,7 @@ const controlNavBar = function() {
 }
 
 const controlLogin = async function(loginData) {
+    console.log('Log In')
     try {
         LoginView.renderSpinner()
         await model.validateLogin(loginData)
@@ -91,6 +93,7 @@ const controlUploadRide = async function(data) {
 }
 
 const controlSignUp = async function(signUpData) {
+    console.log('Signup!')
     try {
         LoginView.renderSpinner()
         await model.validateSignUp(signUpData)
@@ -110,8 +113,9 @@ const init = function() {
     } else {
         WelcomeMessageView.addHandlerRender(controlNavBar)
         LogoutButtonView.addHandlerLogout(controlLogout)
-        SearchResultsView.addHandlerRender(controlSearchResults)
         RideView.addHandlerRender(controlRide)
+        SearchResultsView.addHandlerRender(controlSearchResults)
+        SearchResultsView.addHandlerSelectedRide()
         NavBarView.addHandlerTogglePage()
         OrganizeRide.addHandlerRender(controlOrganizeRide)
         OrganizeRide.addHandlerSubmitForm(controlUploadRide)

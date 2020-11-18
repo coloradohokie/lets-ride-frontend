@@ -9,6 +9,17 @@ class SearchResultsView extends View {
         window.addEventListener('load', handler)
     }
 
+    addHandlerSelectedRide() {
+        const _this = this
+        this._parentElement.addEventListener('click', function(e) {
+            const previousSelectedCard = _this._parentElement.querySelector('.active')
+            const newSelectedCard = e.target.closest('.ride-list-card')
+            if(!newSelectedCard) return
+            previousSelectedCard.classList.remove('active')
+            newSelectedCard.classList.add('active')
+        })
+    }
+
     _generateMarkup() {
         return `
             <div class="ride-container">
@@ -30,10 +41,11 @@ class SearchResultsView extends View {
     }
 
     _upComingRidesMarkup() {
-        return this._data.map(ride => {
+        const {ridesList, currentRideId} = this._data
+        return ridesList.map(ride => {
             return `
                 <a href="#${ride.id}">
-                    <li class="ride-list-card" data-id="${ride.id}">
+                    <li class="ride-list-card ${ride.id === currentRideId ? 'active': ''}" data-id="${ride.id}">
                         <div class="date">
                             ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
                         </div>

@@ -3,6 +3,10 @@ import {BASE_URL} from './config'
 export const state = {
     ridesList: [],
     ride: {
+        ride: {},
+        route: {},
+        organizer: {},
+        riders: []
     },
     routes: []
 }
@@ -17,7 +21,6 @@ export async function loadSearchResults() {
             }
         })
         const rides = await response.json()
-        console.log('ridesList', rides)
         this.state.ridesList = rides
     } catch (error) {
         console.log(error)
@@ -61,7 +64,7 @@ export async function loadRide(id) {
                 updatedAt: rideDetails.route.updated_at
             }
         }
-        console.log('STATE', this.state)
+        // console.log('STATE', this.state)
 
 
     } catch (error) {
