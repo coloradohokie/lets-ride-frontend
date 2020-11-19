@@ -26,23 +26,27 @@ class SearchResultsView extends View {
                 <div class="ride-list">
                     <h2>Upcoming Rides</h2>
                     <ul class="upcoming-rides">
-                        ${this._upComingRidesMarkup()}
+                        ${this._upComingRidesMarkup('upcoming')}
                     </ul>
                     <br>
                 </div>
                 <div class="ride-list">
                     <h2>Past Rides</h2>
                     <ul class="past-rides">
-                        ${this._upComingRidesMarkup()}
+                        ${this._upComingRidesMarkup('past')}
                     </ul>       
                 </div>
             </div>
         `
     }
 
-    _upComingRidesMarkup() {
+    _upComingRidesMarkup(timeline) {
+        const today = Date.now() //parsed
         const {ridesList, currentRideId} = this._data
         return ridesList
+            .filter(ride => timeline === 'upcoming' ?
+                Date.parse(ride.date) >= today :
+                Date.parse(ride.date) < today)
             .map(ride => {
                 return `
                     <a href="#${ride.id}">
