@@ -13,9 +13,8 @@ import {userOnRide} from './helpers'
 const controlRide = async function() {
     try {
         let rideId = +window.location.hash.slice(1)
-        if (!rideId) rideId = 1
         RideView.renderSpinner()
-        await model.loadRide(rideId)
+        if (rideId) await model.loadRide(rideId)
         RideView.render(model.state.ride)
 
     } catch (err) {
@@ -106,6 +105,18 @@ const controlToggleRideAttendance = async function() {
     }
 }
 
+const controlCancelRide = async function() {
+    try {
+        RideView.renderSpinner()
+        await model.cancelRide(model.state.ride.ride.id)
+        window.location.hash = ''
+        RideView.render(model.state.ride)
+        SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: null})
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 
 const init = function() {
     if(!localStorage.getItem('token')) {
@@ -118,6 +129,7 @@ const init = function() {
         LogoutButtonView.addHandlerLogout(controlLogout)
         RideView.addHandlerRender(controlRide)
         RideView.addHandlerToggleRideAttendance(controlToggleRideAttendance)
+        RideView.addHandlerCancelRide(controlCancelRide)
         SearchResultsView.addHandlerRender(controlSearchResults)
         SearchResultsView.addHandlerSelectedRide()
         NavBarView.addHandlerTogglePage()

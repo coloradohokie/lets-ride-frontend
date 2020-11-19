@@ -256,3 +256,21 @@ export const toggleRideAttendance = async function(userOnRide, userId) {
         console.log(err)
     }
 }
+
+export const cancelRide = async function(rideId) {
+    try {
+        const response = await fetch(`${BASE_URL}rides/${rideId}`, {
+            method: 'DELETE',
+            headers: {
+                'Authorization' : `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        if (!response.ok) throw new Error ('Something went wrong with deleting from server')
+        state.ride = {}
+        const index = state.ridesList.findIndex(ride => ride.id === rideId)
+        state.ridesList.splice(index, 1)
+
+    } catch (err) {
+        console.log(err)
+    }
+} 

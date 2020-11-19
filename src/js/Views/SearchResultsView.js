@@ -15,7 +15,7 @@ class SearchResultsView extends View {
             const previousSelectedCard = _this._parentElement.querySelector('.active')
             const newSelectedCard = e.target.closest('.ride-list-card')
             if(!newSelectedCard) return
-            previousSelectedCard.classList.remove('active')
+            if(previousSelectedCard) previousSelectedCard.classList.remove('active')
             newSelectedCard.classList.add('active')
         })
     }
