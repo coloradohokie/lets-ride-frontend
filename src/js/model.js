@@ -21,7 +21,7 @@ export async function loadSearchResults() {
             }
         })
         const rides = await response.json()
-        this.state.ridesList = rides
+        this.state.ridesList = rides.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     } catch (error) {
         console.log(error)
         alert('Error getting rides')
@@ -172,11 +172,12 @@ export async function uploadRide(data) {
         }
 
         state.ridesList.push({
-            id: ride.id,
-            title: ride.title,
-            date: ride.date,
-            user_id: organizer.id 
-        })
+                id: ride.id,
+                title: ride.title,
+                date: ride.date,
+                user_id: organizer.id 
+            })
+        state.ridesList.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
 
         return ride.id
 

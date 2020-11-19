@@ -42,18 +42,20 @@ class SearchResultsView extends View {
 
     _upComingRidesMarkup() {
         const {ridesList, currentRideId} = this._data
-        return ridesList.map(ride => {
-            return `
-                <a href="#${ride.id}">
-                    <li class="ride-list-card ${ride.id === currentRideId ? 'active': ''}" data-id="${ride.id}">
-                        <div class="date">
-                            ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
-                        </div>
-                        <h3>${ride.title}</h3>
-                    </li>
-                </a>
-            `
-        }).join('')
+        return ridesList
+            .map(ride => {
+                return `
+                    <a href="#${ride.id}">
+                        <li class="ride-list-card ${ride.id === currentRideId ? 'active': ''}" data-id="${ride.id}">
+                            <div class="date">
+                                ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
+                            </div>
+                            <h3>${ride.title}</h3>
+                        </li>
+                    </a>
+                `
+            })
+            .join('')
     }
 
 

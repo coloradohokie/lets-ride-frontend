@@ -56,9 +56,8 @@ const controlOrganizeRide = async function() {
     try {
         //load the routes
         await model.loadRoutes()
-        //load the organize ride form
-        // OrganizeRide.render(model.state.routes)
 
+        //load the organize ride form
         const selectElement = document.querySelector('#route')
         model.state.routes.map(route => {
                 let option = document.createElement('option')
@@ -66,13 +65,6 @@ const controlOrganizeRide = async function() {
                 option.innerText = route.name
                 selectElement.appendChild(option)
             })
-        
-
-        //save data to database
-        
-    
-
-
     } catch (err) {
         console.log(err)
     }
@@ -83,7 +75,7 @@ const controlUploadRide = async function(data) {
         await model.uploadRide(data)
     
         //navigate to new ride page
-        SearchResultsView.render(model.state.ridesList)
+        SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: model.state.ride.ride.id})
         RideView.render(model.state.ride)
         window.history.pushState(null, '', `#${model.state.ride.ride.id}`)
         NavBarView.navigateToPage('rides')
