@@ -15,7 +15,7 @@ const controlRide = async function() {
         let rideId = +window.location.hash.slice(1)
         RideView.renderSpinner()
         if (rideId) await model.loadRide(rideId)
-        RideView.render(model.state.ride)
+        RideView.render({ride: model.state.ride, mode: 'view'})
 
     } catch (err) {
         console.log('controlRide', err)
@@ -75,7 +75,7 @@ const controlUploadRide = async function(data) {
     
         //navigate to new ride page
         SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: model.state.ride.ride.id})
-        RideView.render(model.state.ride)
+        RideView.render({ride: model.state.ride, mode: 'view'})
         window.history.pushState(null, '', `#${model.state.ride.ride.id}`)
         NavBarView.navigateToPage('rides')
 
@@ -99,7 +99,7 @@ const controlToggleRideAttendance = async function() {
     try {
         const userId = +localStorage.getItem('userId')
         await model.toggleRideAttendance(userOnRide(userId, model.state.ride.riders), userId)
-        RideView.render(model.state.ride)
+        RideView.render({ride: model.state.ride, mode: 'view'})
     } catch (err) {
         console.log(err)
     }
@@ -110,11 +110,48 @@ const controlCancelRide = async function() {
         RideView.renderSpinner()
         await model.cancelRide(model.state.ride.ride.id)
         window.location.hash = ''
-        RideView.render(model.state.ride)
+        RideView.render({ride: model.state.ride, mode: 'view'})
         SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: null})
     } catch (err) {
         console.log(err)
     }
+}
+
+const controlUpdateRide = async function() {
+    try {
+        //0. Load routes:
+        await model.loadRoutes()
+
+        //1. Render update page
+        RideView.render({ride: model.state.ride, routes: model.state.routes, mode: 'edit'})
+
+        //2. Listen for form submit
+        RideView.addHandlerSubmitUpdatedRideInformation(async () => {
+            const updatedRideInformation = {
+                title: document.getElementById('u-title').value,
+                date: document.getElementById('u-date').value,
+                startTime: document.getElementById('u-start').value,
+                endTime: document.getElementById('u-end').value,
+                description: document.getElementById('u-description').value,
+            }
+
+            //send to server & update State
+            try {
+                await model.updateRide(updatedRideInformation)
+
+            } catch (err) {
+                console.log(err)
+            }
+
+            //re render the page
+            RideView.render({ride: model.state.ride, mode: 'view'})
+        })
+        RideView.addHandlerCancelUpdatedRideInformation(
+            () => RideView.render({ride: model.state.ride, mode: 'view'})
+        )
+    } catch (err) {
+        console.log(err)
+    }    
 }
 
 
@@ -130,6 +167,7 @@ const init = function() {
         RideView.addHandlerRender(controlRide)
         RideView.addHandlerToggleRideAttendance(controlToggleRideAttendance)
         RideView.addHandlerCancelRide(controlCancelRide)
+        RideView.addHandlerUpdateRide(controlUpdateRide)
         SearchResultsView.addHandlerRender(controlSearchResults)
         SearchResultsView.addHandlerSelectedRide()
         NavBarView.addHandlerTogglePage()

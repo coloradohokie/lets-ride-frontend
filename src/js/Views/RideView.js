@@ -15,31 +15,72 @@ class RideView extends View {
             ` : ''
     }
 
+    _generateRoutes() {
+        return this._data.routes
+            .map(route => route.id === this._data.ride.route.id ?  
+                `<option selected value=${route.id}>${route.name}</option>` :
+                `<option value=${route.id}>${route.name}</option>`)
+            .join('')
+    }
+
     _generateMarkup() {
-        const {organizer, ride, riders, route} = this._data
+        const {organizer, ride, riders, route} = this._data.ride
+        const editMode = this._data.mode === 'edit'
+        if (editMode) console.log("editMode = true")
         if(!ride || !ride.id) return '<h2>Select a ride from the list!</h2>'
         return `
             <div class = "ride--header">
                 <div>
-                    <h1>${ride.title}</h1>
-                    <p>${displayDate(ride.date)} ${ride.startTime} - ${ride.endTime}</p>
+                    <h1>
+                        ${editMode ? 
+                            `<input id="u-title" name="title" type="text" value="${ride.title}" />` :
+                             ride.title}
+                    </h1>
+                    <p>
+                        ${editMode ? 
+                            `
+                            <input id="u-date" name="date" type="date" value=${ride.date} /> 
+                            <input id="u-start" name="start-time" type="time" value=${ride.startTime} /> - 
+                            <input id="u-end" name="end-time" type="time" value=${ride.endTime} />
+                            ` : ` 
+                            ${displayDate(ride.date)} ${ride.startTime} - ${ride.endTime}
+                            `
+                        }
+                    </p>
                     <p>Organizer: ${organizer.username}</p>
                 </div>
                 <div>
+                ${editMode ? 
+                    `
+                    <button class="update-ride-submit-button">Update</button>
+                    <button class="update-ride-cancel-button">Cancel</button> 
+                    ` : `
                     ${this._generateAdminButtons(organizer.id, +localStorage.getItem('userId'))}
                     <button class="join-ride-toggle-button"> 
                         ${userOnRide(+localStorage.getItem('userId'), riders) ? 'Leave Ride' : 'Join Ride'}
                     </button>
+                    `
+                }
                 </div>
             </div>
 
-            <p>${ride.description}</p>
+            <p> ${editMode ? 
+                    `<textarea id="u-description" name="description">${ride.description}</textarea>`
+                    : ride.description
+                }
+            </p>
 
             <h2>Route</h2>
-            <p>Start: ${route.startLocation}</p>
-            <p>End: ${route.endLocation}</p>
-            <p>Route Description: ${route.description}</p>
-            ${route.mapUrl ? `<p>${route.mapUrl}</p>` : ''}
+            ${editMode ? 
+                `
+                <select id="u-route" name="route">${this._generateRoutes()}</select>
+                ` : `
+                <p>Start: ${route.startLocation}</p>
+                <p>End: ${route.endLocation}</p>
+                <p>Route Description: ${route.description}</p>
+                ${route.mapUrl ? `<p>${route.mapUrl}</p>` : ''}
+                `
+            }
              
 
             <h2 class="whos-going-title">${riders.length} Riders Going</h2>
@@ -50,7 +91,7 @@ class RideView extends View {
     }
 
     _generateRidersMarkup() {
-        return this._data.riders
+        return this._data.ride.riders
             .map(rider => {
                 return `
                     <li>
@@ -79,6 +120,30 @@ class RideView extends View {
         this._parentElement.addEventListener('click', function(e) {
             const cancelButton = e.target.closest('.cancel-ride-button')
             if(!cancelButton) return
+            handler()
+        })
+    }
+
+    addHandlerUpdateRide(handler) {
+        this._parentElement.addEventListener('click', function(e) {
+            const updateButton = e.target.closest('.update-ride-button')
+            if(!updateButton) return
+            handler()
+        })
+    }
+
+    addHandlerSubmitUpdatedRideInformation(handler) {
+        this._parentElement.addEventListener('click', function(e) {
+            const submissionButton = e.target.closest('.update-ride-submit-button')
+            if (!submissionButton) return
+            handler()
+        })
+    }
+
+    addHandlerCancelUpdatedRideInformation(handler) {
+        this._parentElement.addEventListener('click', function(e) {
+            const cancelButton = e.target.closest('.update-ride-cancel-button')
+            if (!cancelButton) return
             handler()
         })
     }

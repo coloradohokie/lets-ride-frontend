@@ -274,3 +274,59 @@ export const cancelRide = async function(rideId) {
         console.log(err)
     }
 } 
+
+export const updateRide = async function(updatedRideInformation) {
+    try {
+        const newRide = {
+            title: updatedRideInformation.title,
+            description: updatedRideInformation.description,
+            date: updatedRideInformation.date,
+            start_time: updatedRideInformation.startTime,
+            end_time: updatedRideInformation.endTime,
+            user_id: +localStorage.getItem('userId'),
+            route_id: state.ride.route.id
+        }
+        //update server information
+        const response = await fetch(`${BASE_URL}rides/${state.ride.ride.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(newRide)
+        })
+        if (!response.ok) throw new Error ('Something went wrong with the update')
+        const result = await response.json()
+
+        //update state.ride
+        const {ride, route} = result
+        state.ride.ride = {
+            id: ride.id,
+            title: ride.title,
+            description: ride.description,
+            date: ride.date,
+            startTime: ride.start_time,
+            endTime: ride.end_time,
+            createdAt: ride.created_at,
+            updatedAt: ride.updated_at
+        }
+        state.ride.route = {
+            id: route.id,
+            name: route.name,
+            description: route.description,
+            startLocation: route.start_location,
+            endLocation: route.end_location,
+            mapUrl: route.map_path,
+            createdAt: route.created_at,
+            updatedAt: route.updated_at                
+        }
+
+        //update search results
+        const index = state.ridesList.findIndex(searchResult => searchResult.id === ride.id)
+        state.ridesList[index].title = ride.title
+        state.ridesList[index].date = ride.date
+
+    } catch (err) {
+        console.log(err)
+    }
+}
