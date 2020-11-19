@@ -7,6 +7,7 @@ import WelcomeMessageView from './Views/WelcomeMessageView'
 import LogoutButtonView from './Views/LogoutButtonView'
 import ProfileView from './Views/ProfileView'
 import OrganizeRide from './Views/OrganizeRide'
+import {userOnRide} from './helpers'
 
 
 const controlRide = async function() {
@@ -103,6 +104,16 @@ const controlSignUp = async function(signUpData) {
     }
 }
 
+const controlToggleRideAttendance = async function() {
+    try {
+        const userId = +localStorage.getItem('userId')
+        await model.toggleRideAttendance(userOnRide(userId, model.state.ride.riders), userId)
+        RideView.render(model.state.ride)
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 
 const init = function() {
     if(!localStorage.getItem('token')) {
@@ -114,6 +125,7 @@ const init = function() {
         WelcomeMessageView.addHandlerRender(controlNavBar)
         LogoutButtonView.addHandlerLogout(controlLogout)
         RideView.addHandlerRender(controlRide)
+        RideView.addHandlerToggleRideAttendance(controlToggleRideAttendance)
         SearchResultsView.addHandlerRender(controlSearchResults)
         SearchResultsView.addHandlerSelectedRide()
         NavBarView.addHandlerTogglePage()

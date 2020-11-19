@@ -13,6 +13,10 @@ export function hideElement (elementID) {
     targetElement.style.display = "none"
 }
 
+export function userOnRide(userId, ridersArray) {
+    return ridersArray.find(rider => rider.id === userId)
+}
+
 
 
 

@@ -211,5 +211,47 @@ export const validateSignUp = async function(signUpData) {
     } catch (err) {
         console.log(err)
     }
+}
 
+export const toggleRideAttendance = async function(userOnRide, userId) {
+    try {
+        if (userOnRide) {
+            let rideAttendanceUser = state.ride.riders.find(rider => rider.id === parseInt(userId))
+            console.log(rideAttendanceUser)
+            let riderAttendanceId = rideAttendanceUser.ride_att_id
+            const response = await fetch(`${BASE_URL}/ride_attendances/${riderAttendanceId}`, {
+                method: 'DELETE',
+                headers: {
+                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+                }
+            })
+            if (!response.ok) throw new Error ('Something went wrong with deleting from server')
+            const uid = +localStorage.getItem('userId')
+            state.ride.riders = state.ride.riders.filter(rider => uid !== rider.id)
+            console.log('riders', state.ride.riders)
+
+            
+        } else {
+            const addResponse = await fetch(`${BASE_URL}/ride_attendances/`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
+                },
+                body: JSON.stringify({
+                    ride_id: state.ride.ride.id,
+                    user_id: +localStorage.getItem('userId')
+                })
+            })
+            const addResult = await addResponse.json()
+            state.ride.riders.push({
+                userId: +localStorage.getItem('userId'),
+                username: localStorage.getItem('username'),
+                ride_att_id: addResult.id
+            })
+        }
+
+    } catch (err) {
+        console.log(err)
+    }
 }
