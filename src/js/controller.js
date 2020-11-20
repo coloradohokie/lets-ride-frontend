@@ -154,6 +154,25 @@ const controlUpdateRide = async function() {
     }    
 }
 
+const controlProfileView = async function(profileId = model.state.user.id) {
+    try {
+        await model.loadUserInfo(profileId)
+        const profileOwner = (profileId === model.state.user.id)
+        ProfileView.render({user: model.state.selectedMemberProfile, mode: 'view', profileOwner})
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+const controlEditProfile = async function() {
+    try {
+        ProfileView.render({user: model.state.selectedMemberProfile, mode: 'edit'})
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 
 const init = function() {
     if(!localStorage.getItem('token')) {
@@ -162,6 +181,7 @@ const init = function() {
         LoginView.addHandlerToggleScreen()
         LoginView.addHandlerFormSubmit(controlSignUp)
     } else {
+        model.addUserToState()
         WelcomeMessageView.addHandlerRender(controlNavBar)
         LogoutButtonView.addHandlerLogout(controlLogout)
         RideView.addHandlerRender(controlRide)
@@ -173,6 +193,8 @@ const init = function() {
         NavBarView.addHandlerTogglePage()
         OrganizeRide.addHandlerRender(controlOrganizeRide)
         OrganizeRide.addHandlerSubmitForm(controlUploadRide)
+        ProfileView.addHandlerRender(controlProfileView)
+        ProfileView.addHandlerEditProfile(controlEditProfile)
 
 
         

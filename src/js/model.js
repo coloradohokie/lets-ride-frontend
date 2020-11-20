@@ -1,6 +1,7 @@
 import {BASE_URL} from './config'
 
 export const state = {
+    user: {},
     ridesList: [],
     ride: {
         ride: {},
@@ -8,7 +9,8 @@ export const state = {
         organizer: {},
         riders: []
     },
-    routes: []
+    routes: [],
+    selectedMemberProfile: {}
 }
 
 export async function loadSearchResults() {
@@ -64,7 +66,7 @@ export async function loadRide(id) {
                 updatedAt: rideDetails.route.updated_at
             }
         }
-        // console.log('STATE', this.state)
+        console.log('STATE', this.state)
 
 
     } catch (error) {
@@ -97,6 +99,13 @@ export async function validateLogin(loginData) {
     } catch (error) {
         console.log(error)
         alert('Error loggging in')
+    }
+}
+
+export function addUserToState() {
+    state.user = {
+        id: +localStorage.getItem('userId'),
+        username: localStorage.getItem('username')
     }
 }
 
@@ -326,6 +335,31 @@ export const updateRide = async function(updatedRideInformation) {
         state.ridesList[index].title = ride.title
         state.ridesList[index].date = ride.date
 
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export const loadUserInfo = async function(id) {
+    try {
+        const response = await fetch(`${BASE_URL}users/${id}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            }
+        })
+        if (!response.ok) throw new Error('Could not get user info')
+        const result = await response.json()
+        state.selectedMemberProfile = {
+            id: result.id,
+            username: result.username,
+            email: result.email,
+            city: result.city,
+            state: result.state,
+            motorcycles: result.motorcycles,
+            rideAttendances: result.ride_attendances
+        }
     } catch (err) {
         console.log(err)
     }

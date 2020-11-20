@@ -9,9 +9,9 @@ class OrganizeRide extends View {
     addHandlerRender(handler) {
         this._navBar.addEventListener('click', function(e) {
             const button = e.target.closest('.nav-link')
-            if(button.dataset.page === 'organize-ride') {
-                handler()
-            } else return
+            if(!button) return
+            if(!button.dataset.page === 'profile') return
+            handler()
         })
     }
 

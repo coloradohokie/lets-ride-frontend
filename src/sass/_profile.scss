@@ -1,54 +1,110 @@
-.profile-container {
-    background-color: #9c9c9c;
-    display: flex;
-    width: 90%;
-    margin: 1rem;
-
-    div {
-        padding: 1rem;
+.profile {
+    h2 {
+        padding-bottom: 0;
+        margin-bottom: 0;
     }
 
-    .profile-picture {
-        background-color: #7395AE;
-    }
-
-    img {
-        width: 100px;
-        max-height: 100px;
-    }
-    
-    ul {
-        display: flex;
-        flex-direction: flex-start;
-    }
-    li {
+    .profile-container {
         background-color: #9c9c9c;
-        margin: 1rem;
-        padding: 2rem;
         display: flex;
-        flex-direction: column;
-        align-items: center;
+        width: 90%;
+        margin: 1rem;
+    
+        div {
+            padding: 1rem;
+        }
+    
+        .profile-picture {
+            background-color: #7395AE;
+            width: 200px;
+            max-height: 200px;
+        }
+    
+        tr {
+            height: 2rem;
+        }
+    
+        td {
+            padding-right: 1rem;
+        }
+    }
+
+    .motorcycle-list {
+        list-style-type: none;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding: 0 1.5rem 1.5rem 1.5rem;
+        border-radius: 0.25rem;
+        margin-bottom: 0.25rem;
+    
+        .motorcycle-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 15rem;
+            height: 12rem;
+            padding: 2rem;
+            background-color: whitesmoke;
+            box-shadow: 5px 5px 5px lightgray;
+            margin: 1rem;
+            text-align: center;
+            margin-left: 0;
+        
+            img {
+                max-width: 150px;
+                margin-bottom: 1rem;
+            }
+        }
+    }
+
+    .ride-attendance-list {
+        list-style-type: none;
+        display: flex;
+        justify-content: flex-start;
+        flex-wrap: wrap;
+        padding: 0 1.5rem 1.5rem 1.5rem;
+        border-radius: 0.25rem;
+        margin-bottom: 0.25rem;
+    
+        .ride-attendance-card {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: 15rem;
+            height: 12rem;
+            padding: 2rem;
+            background-color: whitesmoke;
+            box-shadow: 5px 5px 5px lightgray;
+            margin: 1rem;
+            text-align: center;
+            margin-left: 0;
+        
+            img {
+                max-width: 150px;
+                margin-bottom: 1rem;
+                margin-left: auto;
+                margin-right: auto
+            }
+        }
     }
 }
 
-.motorcycle-container {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
-    width: 60%;
-    opacity: 95%;
-}
 
-.motorcycle {
-    padding: 1.5rem;
-    border-radius: 0.25rem;
-    margin-bottom: 0.25rem;
-    background-color: whitesmoke;
-    padding: 1.5rem;
-    box-shadow: 5px 5px 5px lightgray;
-    width: 40%;
-    margin: 2rem;
-}
+//the following class is for the addMotorcycle form
+// .motorcycle-container {
+//     display: flex;
+//     flex-wrap: wrap;
+//     justify-content: space-evenly;
+//     width: 60%;
+//     opacity: 95%;
+// }
+
+
+
+
+
+
 
 
 
