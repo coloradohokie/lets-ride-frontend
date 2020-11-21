@@ -350,16 +350,18 @@ export const loadUserInfo = async function(id) {
             }
         })
         if (!response.ok) throw new Error('Could not get user info')
-        const result = await response.json()
+        const {user, motorcycles, ride_attendances} = await response.json()
+        console.log(user, motorcycles, ride_attendances)
         state.selectedMemberProfile = {
-            id: result.id,
-            username: result.username,
-            email: result.email,
-            city: result.city,
-            state: result.state,
-            motorcycles: result.motorcycles,
-            rideAttendances: result.ride_attendances
+            id: user.id,
+            username: user.username,
+            email: user.email,
+            city: user.city,
+            state: user.state,
+            motorcycles,
+            rideAttendances: ride_attendances
         }
+        console.log(state.selectedMemberProfile)
     } catch (err) {
         console.log(err)
     }

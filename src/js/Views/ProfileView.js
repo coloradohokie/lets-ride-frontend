@@ -3,6 +3,7 @@ import imgPlus from 'url:../../assets/plus.png'
 import profileImage from 'url:../../assets/user.png'
 import motoImage from 'url:../../assets/moto.png'
 import rideImage from 'url:../../assets/moto-ride.jpg'
+import {displayDate} from '../helpers'
 
 class ProfileView extends View {
     _parentElement = document.querySelector('.profile')
@@ -38,15 +39,23 @@ class ProfileView extends View {
         .join('')
     }
 
-    _generateRideAttendancesMarkup() {
-        return this._data.user.rideAttendances.map(attendedRide => {
+    _generateRideAttendancesMarkup(section) {
+        return this._data.user.rideAttendances
+        .filter(attendedRide => 
+            section === 'upcoming' ? 
+                Date.parse(attendedRide.date) >= Date.now(): 
+                Date.parse(attendedRide.date) < Date.now())
+        .sort((a, b) => Date.parse(b.date) - Date.parse(a.date))
+        .map(attendedRide => {
             return `
                 <li class="ride-attendance-card">
+                    <p>${displayDate(attendedRide.date)}</p>
                     <img src="${rideImage}" />
-                    ${attendedRide.ride_id}
+                    <p>${attendedRide.title}</p>
                 </li>
             `
-        }).join('')
+        })
+        .join('')
     }
 
     _generateMarkup() {
@@ -115,14 +124,15 @@ class ProfileView extends View {
             --->
         </ul>
 
-        <h2>My Rides</h2>
+        <h2>Upcoming Rides</h2>
         <ul class="ride-attendance-list">
-            ${this._generateRideAttendancesMarkup()}
+            ${this._generateRideAttendancesMarkup('upcoming')}
         </ul>
 
-
-
-
+        <h2>Past Rides</h2>
+        <ul class="ride-attendance-list">
+            ${this._generateRideAttendancesMarkup('past')}
+        </ul>
         `
 
     }
