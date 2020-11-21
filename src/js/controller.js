@@ -7,7 +7,7 @@ import WelcomeMessageView from './Views/WelcomeMessageView'
 import LogoutButtonView from './Views/LogoutButtonView'
 import ProfileView from './Views/ProfileView'
 import OrganizeRide from './Views/OrganizeRide'
-import {userOnRide} from './helpers'
+import {userOnRide, setActivePage} from './helpers'
 
 
 const controlRide = async function() {
@@ -165,6 +165,19 @@ const controlProfileView = async function(profileId = model.state.user.id) {
     }
 }
 
+const controlViewUserProfile = async function(profileId = model.state.user.id) {
+    console.log(profileId)
+    try {
+        await model.loadUserInfo(profileId)
+        const profileOwner = (profileId === model.state.user.id)
+        NavBarView.navigateToPage('profile')
+        ProfileView.render({user: model.state.selectedMemberProfile, mode: 'view', profileOwner})
+
+    } catch (err) {
+        console.log(err)
+    }
+}
+
 const controlEditProfile = async function() {
     try {
         ProfileView.render({user: model.state.selectedMemberProfile, mode: 'edit'})
@@ -211,6 +224,7 @@ const init = function() {
         RideView.addHandlerToggleRideAttendance(controlToggleRideAttendance)
         RideView.addHandlerCancelRide(controlCancelRide)
         RideView.addHandlerUpdateRide(controlUpdateRide)
+        RideView.addHandlerViewUserProfile(controlViewUserProfile)
         SearchResultsView.addHandlerRender(controlSearchResults)
         SearchResultsView.addHandlerSelectedRide()
         NavBarView.addHandlerTogglePage()

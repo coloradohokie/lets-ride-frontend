@@ -94,7 +94,7 @@ class RideView extends View {
         return this._data.ride.riders
             .map(rider => {
                 return `
-                    <li>
+                    <li class="user-badge" data-id=${rider.id}>
                         <img src = "${profileImage}" />
                         ${rider.username}
                     </li>
@@ -147,6 +147,15 @@ class RideView extends View {
             handler()
         })
     }
+
+    addHandlerViewUserProfile(handler) {
+        this._parentElement.addEventListener('click', function(e) {
+            const userBadge = e.target.closest('.user-badge')
+            if (!userBadge) return
+            handler(+userBadge.dataset.id)
+        })
+    }
+
 }
 
 export default new RideView()

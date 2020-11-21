@@ -10,7 +10,8 @@ export const state = {
         riders: []
     },
     routes: [],
-    selectedMemberProfile: {}
+    selectedMemberProfile: {},
+    activePage: 'rides'
 }
 
 export async function loadSearchResults() {
@@ -388,4 +389,9 @@ export const updateUserInfo = async function(id, updatedInfo) {
     } catch (error) {
         console.error(error)
     }
+}
+
+export const setActivePage = function(newPage) {
+    state.activePage = newPage
+
 }
