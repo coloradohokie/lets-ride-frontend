@@ -366,3 +366,26 @@ export const loadUserInfo = async function(id) {
         console.log(err)
     }
 }
+
+export const updateUserInfo = async function(id, updatedInfo) {
+    try {
+        const response = await fetch(`${BASE_URL}users/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(updatedInfo)
+        })
+        if (!response.ok) throw new Error ('Failed to update user')
+        //update state
+        state.selectedMemberProfile.username = updatedInfo.username
+        state.selectedMemberProfile.email = updatedInfo.email
+        state.selectedMemberProfile.city = updatedInfo.city
+        state.selectedMemberProfile.state = updatedInfo.state
+        localStorage.setItem('username', updatedInfo.username)
+        addUserToState()
+    } catch (error) {
+        console.error(error)
+    }
+}

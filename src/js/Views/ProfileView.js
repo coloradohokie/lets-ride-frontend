@@ -26,6 +26,22 @@ class ProfileView extends View {
         })
     }
 
+    addHandlerCancelUpdatedProfile(handler) {
+        this._parentElement.addEventListener('click', function(e) {
+            const cancelButton = e.target.closest('.cancel-updated-profile')
+            if(!cancelButton) return
+            handler()
+        })
+    }
+
+    addHandlerSubmitUpdatedProfile(handler) {
+        this._parentElement.addEventListener('click', function(e) {
+            const submitButton = e.target.closest('.submit-updated-profile')
+            if(!submitButton) return
+            handler()
+        })
+    }
+
     _generateMotorcycleMarkup() {
         return this._data.user.motorcycles
         .map(bike => {
@@ -88,6 +104,12 @@ class ProfileView extends View {
                         <td class="field-label">State:</td>
                         <td class="field-value"><input id="p-state" name="p-state" value="${state}" /></td>
                     </tr>
+                    <tr>
+                        <td class="button-row" colspan="2">
+                            <button class="submit-updated-profile">Update</button>
+                            <button class="cancel-updated-profile">Cancel</button>
+                        </td>
+                    </tr>
                                 
                 `:`
                     <tr>
@@ -106,9 +128,14 @@ class ProfileView extends View {
                         <td class="field-label">State:</td>
                         <td class="field-value">${state}</td>
                     </tr>
+                    <tr>
+                        <td class="button-row" colspan="2">
+                            ${profileOwner ? `<button class="edit-profile-button">Edit Profile</button>` : ''} 
+                        </td>
+                </tr>
                 `}
                 </table>
-                ${profileOwner ? `<button class="edit-profile-button">Edit Profile</button>` : ''}
+                
                 
             </div>
         </div>

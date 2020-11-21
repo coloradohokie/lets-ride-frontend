@@ -173,6 +173,29 @@ const controlEditProfile = async function() {
     }
 }
 
+const controlCancelUpdatedProfile = function() {
+    const profileOwner = true
+    ProfileView.render({user: model.state.selectedMemberProfile, mode: 'view', profileOwner})
+}
+
+const controlSubmitUpdatedProfile = async function() {
+    try {
+        const updatedProfileInformation = {
+            username: document.getElementById('p-username').value,
+            email: document.getElementById('p-email').value,
+            city: document.getElementById('p-city').value,
+            state: document.getElementById('p-state').value,
+        }
+        console.log('updated profile', updatedProfileInformation)
+        await model.updateUserInfo(model.state.user.id, updatedProfileInformation)
+        const profileOwner = true
+        ProfileView.render({user: model.state.selectedMemberProfile, mode: 'view', profileOwner})
+    } catch (error) {
+        console.error(error)
+    }
+
+}
+
 
 const init = function() {
     if(!localStorage.getItem('token')) {
@@ -195,9 +218,8 @@ const init = function() {
         OrganizeRide.addHandlerSubmitForm(controlUploadRide)
         ProfileView.addHandlerRender(controlProfileView)
         ProfileView.addHandlerEditProfile(controlEditProfile)
-
-
-        
+        ProfileView.addHandlerCancelUpdatedProfile(controlCancelUpdatedProfile)
+        ProfileView.addHandlerSubmitUpdatedProfile(controlSubmitUpdatedProfile)
     }
 }
 
