@@ -209,6 +209,24 @@ const controlSubmitUpdatedProfile = async function() {
 
 }
 
+// const controlDisplayChangeHandler = function() {
+
+// }
+
+const controlChangeAvatar = async function(uploadInfo) {
+    try {
+        await model.updateAvatar(model.state.user.id, uploadInfo)
+        const profileOwner = true
+        ProfileView.render({
+            user: model.state.selectedMemberProfile, 
+            mode: 'view', 
+            profileOwner
+        })
+    } catch (error) {
+        console.log(error)
+    }
+}
+
 
 const init = function() {
     if(!localStorage.getItem('token')) {
@@ -228,12 +246,16 @@ const init = function() {
         SearchResultsView.addHandlerRender(controlSearchResults)
         SearchResultsView.addHandlerSelectedRide()
         NavBarView.addHandlerTogglePage()
+
         OrganizeRide.addHandlerRender(controlOrganizeRide)
         OrganizeRide.addHandlerSubmitForm(controlUploadRide)
+
         ProfileView.addHandlerRender(controlProfileView)
         ProfileView.addHandlerEditProfile(controlEditProfile)
         ProfileView.addHandlerCancelUpdatedProfile(controlCancelUpdatedProfile)
         ProfileView.addHandlerSubmitUpdatedProfile(controlSubmitUpdatedProfile)
+        ProfileView.addHandlerDisplayChangeAvatar()
+        ProfileView.addHandlerChangeAvatar(controlChangeAvatar)
     }
 }
 

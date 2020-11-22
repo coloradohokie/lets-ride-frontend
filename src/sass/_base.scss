@@ -49,10 +49,16 @@ textarea, input, select {
 
 button {
     font-size: 14px;
-    width: 40px;
+    min-width: 7rem;
+    min-height: 2rem;
     border: 1px solid steelblue;
     background-color: gray;
     cursor: pointer;
+    border-radius: 4px;
+
+    &:hover {
+        box-shadow: 0 4px 6px 2px lightgray;
+    }
 }
 
 textarea {

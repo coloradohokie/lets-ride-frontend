@@ -93,9 +93,10 @@ class RideView extends View {
     _generateRidersMarkup() {
         return this._data.ride.riders
             .map(rider => {
+                console.log('RIDER', rider)
                 return `
                     <li class="user-badge" data-id=${rider.id}>
-                        <img src = "${profileImage}" />
+                        <img src = "${this._displayAvatar(rider.avatar_url)}" />
                         ${rider.username}
                     </li>
                 `

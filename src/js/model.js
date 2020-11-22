@@ -1,4 +1,4 @@
-import {BASE_URL} from './config'
+import {BASE_URL, MEDIA_URL} from './config'
 
 export const state = {
     user: {},
@@ -351,7 +351,10 @@ export const loadUserInfo = async function(id) {
             }
         })
         if (!response.ok) throw new Error('Could not get user info')
-        const {user, motorcycles, ride_attendances} = await response.json()
+        const result = await response.json()
+        console.log(result)
+        const {user, motorcycles, ride_attendances} = result
+
         console.log(user, motorcycles, ride_attendances)
         state.selectedMemberProfile = {
             id: user.id,
@@ -360,7 +363,8 @@ export const loadUserInfo = async function(id) {
             city: user.city,
             state: user.state,
             motorcycles,
-            rideAttendances: ride_attendances
+            rideAttendances: ride_attendances,
+            avatarUrl: user.avatar_url
         }
         console.log(state.selectedMemberProfile)
     } catch (err) {
@@ -378,7 +382,10 @@ export const updateUserInfo = async function(id, updatedInfo) {
             },
             body: JSON.stringify(updatedInfo)
         })
+        console.log('RES', response)
         if (!response.ok) throw new Error ('Failed to update user')
+        const result = await response.json()
+        console.log('RESULT:', result)
         //update state
         state.selectedMemberProfile.username = updatedInfo.username
         state.selectedMemberProfile.email = updatedInfo.email
@@ -386,6 +393,30 @@ export const updateUserInfo = async function(id, updatedInfo) {
         state.selectedMemberProfile.state = updatedInfo.state
         localStorage.setItem('username', updatedInfo.username)
         addUserToState()
+    } catch (error) {
+        console.error(error)
+    }
+}
+
+export const updateAvatar = async function(id, uploadInfo) {
+    try {
+        const response = await fetch (`${MEDIA_URL}`, {
+            method: 'POST',
+            body: uploadInfo
+        })
+        const result = await response.json()
+        this.state.user.avatarUrl = result.url
+        this.state.selectedMemberProfile.avatarUrl = result.url
+        const newAvatarUrl = {avatar_url : result.url}
+        const serverResponse = await fetch(`${BASE_URL}users/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(newAvatarUrl)
+        })
+        const serverResult = await serverResponse.json()
     } catch (error) {
         console.error(error)
     }

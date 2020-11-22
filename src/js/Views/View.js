@@ -1,3 +1,5 @@
+import profileImage from 'url:../../assets/user.png'
+
 export default class View {
     render(data) {
         this._data = data
@@ -8,6 +10,10 @@ export default class View {
 
     _clear(element = this._parentElement) {
         element.innerHTML= ''
+    }
+
+    _displayAvatar(avatarUrl) {
+        return avatarUrl ? avatarUrl : profileImage
     }
 
     renderSpinner() {

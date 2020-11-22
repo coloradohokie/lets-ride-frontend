@@ -1,9 +1,9 @@
 import View from './View'
 import imgPlus from 'url:../../assets/plus.png'
-import profileImage from 'url:../../assets/user.png'
 import motoImage from 'url:../../assets/moto.png'
 import rideImage from 'url:../../assets/moto-ride.jpg'
 import {displayDate} from '../helpers'
+import { state } from '../model'
 
 class ProfileView extends View {
     _parentElement = document.querySelector('.profile')
@@ -42,6 +42,34 @@ class ProfileView extends View {
         })
     }
 
+    addHandlerDisplayChangeAvatar() {
+        this._parentElement.addEventListener('click', function(e) {
+            const button = e.target.closest('.change-avatar-button')
+            if(!button) return
+            const form = document.querySelector('.change-avatar-form')
+            form.classList.toggle('hidden')
+        })
+    }
+
+
+    addHandlerChangeAvatar(handler) {
+        this._parentElement.addEventListener('click', function(e) {
+            const form = e.target.closest('.change-avatar-form')
+            if(!form) return
+            form.addEventListener('submit', function(e) {
+                e.preventDefault()
+                const data = new FormData(this)
+                console.log(this)
+                console.log (data)
+                handler(data)
+            })
+            form.addEventListener('reset', function(e) {
+                e.preventDefault()
+                form.classList.add('hidden')
+            })
+        })
+    }
+
     _generateMotorcycleMarkup() {
         return this._data.user.motorcycles
         .map(bike => {
@@ -75,34 +103,47 @@ class ProfileView extends View {
     }
 
     _generateMarkup() {
-        console.log(this._data)
-        const {username, city, state, email} = this._data.user
+        const {username, city, state, email, avatarUrl} = this._data.user
         const editMode = this._data.mode === 'edit'
         const {profileOwner} = this._data
         return `
         <h2>${profileOwner ? 'My Profile' : username}</h2>
         <div class="profile-container">
             <div>
-                <img class="profile-picture" src="${profileImage}" alt="Profile Picture" />
+                <img class="profile-picture" src="${this._displayAvatar(avatarUrl)}" alt="Profile Picture" />
+                <p><a class="change-avatar-button">Change</a>
+                <form class="change-avatar-form hidden">
+                    <input id="p-avatar" name="file" type="file" accept="image/png, image/jpeg" />
+                    <input class="action-button" type="submit" value="Change Avatar" />
+                    <input class="action-button" type="reset" value="Cancel" />
+                </form>
             </div>
             <div>
                 <table>
                 ${editMode ? `
                     <tr>
                         <td class="field-label">User name:</td>
-                        <td class="field-value"><input id="p-username" name="p-username" value="${username}" /></td>
+                        <td class="field-value">
+                            <input id="p-username" name="p-username" type="text" value="${username}" />
+                        </td>
                     </tr>
                     <tr>
                         <td class="field-label">Email: </td>
-                        <td class="field-value"><input id="p-email" name="p-email" value="${email}" /></td>
+                        <td class="field-value">
+                            <input id="p-email" name="p-email" type="text" value="${email}" />
+                        </td>
                     </tr>
                     <tr>
                         <td class="field-label">City: </td>
-                        <td class="field-value"><input id="p-city" name="p-city" value="${city}" /></td>
+                        <td class="field-value">
+                            <input id="p-city" name="p-city" type="text" value="${city}" />
+                        </td>
                     </tr>
                     <tr>
                         <td class="field-label">State:</td>
-                        <td class="field-value"><input id="p-state" name="p-state" value="${state}" /></td>
+                        <td class="field-value">
+                            <input id="p-state" name="p-state" type="text" value="${state}" />
+                        </td>
                     </tr>
                     <tr>
                         <td class="button-row" colspan="2">
