@@ -56,6 +56,41 @@
     opacity: 0;
 }
 
+.btn--inline {
+  color: $color-primary;
+  font-size: 1rem;
+  font-weight: 600;
+  border: none;
+  background-color: $color-light-gray;
+  padding: 0.5rem 0.5rem;
+  border-radius: 12px;
+  cursor: pointer;
+
+  display: flex;
+  align-items: center;
+  transition: all 0.2s;
+
+  svg {
+    height: 1.5rem;
+    width: 1.5rem;
+    fill: currentColor;
+    margin: 0 0.2rem;
+  }
+
+  span {
+    margin: 0 0.4rem;
+  }
+
+  &:hover {
+    color: $color-grad-2;
+    background-color: $color-light-gray;
+  }
+
+  &:focus {
+    outline: none;
+  }
+}
+
 .message,
 .error {
   max-width: 40rem;
