@@ -136,7 +136,7 @@ export async function uploadRide(data) {
             date: data.date,
             start_time: data.start,
             end_time: data.end,
-            user_id: +localStorage.getItem('userId'),
+            user_id: state.user.id,
             route_id: +data.route
         }
     
