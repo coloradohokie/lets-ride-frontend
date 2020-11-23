@@ -219,7 +219,7 @@ export const toggleRideAttendance = async function() {
         if (userOnRide(userId, state.ride.riders)) {
             let rideAttendanceUser = state.ride.riders.find(rider => rider.id === parseInt(userId))
             let riderAttendanceId = rideAttendanceUser.ride_att_id
-            const response = await fetch(`${BASE_URL}/ride_attendances/${riderAttendanceId}`, {
+            const response = await fetch(`${BASE_URL}ride_attendances/${riderAttendanceId}`, {
                 method: 'DELETE',
                 headers: {
                     'Authorization' : `Bearer ${localStorage.getItem('token')}`

@@ -14,7 +14,7 @@ const controlRide = async function() {
         let rideId = +window.location.hash.slice(1)
         RideView.renderSpinner()
         if (rideId) await model.loadRide(rideId)
-        RideView.render({ride: model.state.ride, mode: 'view'})
+        RideView.render({ride: model.state.ride, userId: model.state.user.id, mode: 'view'})
 
     } catch (error) {
         console.error(error)

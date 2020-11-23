@@ -28,6 +28,7 @@ class RideView extends View {
     _generateMarkup() {
         const {organizer, ride, riders, route} = this._data.ride
         const editMode = this._data.mode === 'edit'
+        const {userId} = this._data
         if (editMode) console.log("editMode = true")
         if(!ride || !ride.id) return '<h2>Select a ride from the list!</h2>'
         return `
@@ -57,9 +58,9 @@ class RideView extends View {
                     <button class="update-ride-submit-button">Update</button>
                     <button class="update-ride-cancel-button">Cancel</button> 
                     ` : `
-                    ${this._generateAdminButtons(organizer.id, +localStorage.getItem('userId'))}
+                    ${this._generateAdminButtons(organizer.id, userId)}
                     <button class="join-ride-toggle-button"> 
-                        ${userOnRide(+localStorage.getItem('userId'), riders) ? 'Leave Ride' : 'Join Ride'}
+                        ${userOnRide(userId, riders) ? 'Leave Ride' : 'Join Ride'}
                     </button>
                     `
                 }
