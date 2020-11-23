@@ -1,4 +1,5 @@
 import {BASE_URL, MEDIA_URL} from './config'
+import {userOnRide} from './helpers'
 
 export const state = {
     user: {},
@@ -78,7 +79,6 @@ export async function loadRide(id) {
 export async function validateLogin(loginData) {
     const {email, password} = loginData
     const loginUrl = `${BASE_URL}login`
-    console.log(loginUrl, email, password)
     try {
         let response = await fetch(loginUrl, {
             method: 'POST',
@@ -213,9 +213,10 @@ export const validateSignUp = async function(signUpData) {
     }
 }
 
-export const toggleRideAttendance = async function(userOnRide, userId) {
+export const toggleRideAttendance = async function() {
+    const userId = state.user.id
     try {
-        if (userOnRide) {
+        if (userOnRide(userId, state.ride.riders)) {
             let rideAttendanceUser = state.ride.riders.find(rider => rider.id === parseInt(userId))
             let riderAttendanceId = rideAttendanceUser.ride_att_id
             const response = await fetch(`${BASE_URL}/ride_attendances/${riderAttendanceId}`, {
@@ -225,10 +226,9 @@ export const toggleRideAttendance = async function(userOnRide, userId) {
                 }
             })
             if (!response.ok) throw new Error ('Something went wrong with deleting you from the ride. Refresh the page and try again.')
-            const uid = +localStorage.getItem('userId')
-            state.ride.riders = state.ride.riders.filter(rider => uid !== rider.id)
+            state.ride.riders = state.ride.riders.filter(rider => userId !== rider.id)
         } else {
-            const addResponse = await fetch(`${BASE_URL}/ride_attendances/`, {
+            const addResponse = await fetch(`${BASE_URL}ride_attendances/`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -236,18 +236,17 @@ export const toggleRideAttendance = async function(userOnRide, userId) {
                 },
                 body: JSON.stringify({
                     ride_id: state.ride.ride.id,
-                    user_id: +localStorage.getItem('userId')
+                    user_id: userId
                 })
             })
             if(!addResponse.ok) throw new Error('Something went wrong with adding you to the ride. Refresh the page and try again.')
             const addResult = await addResponse.json()
             state.ride.riders.push({
-                userId: +localStorage.getItem('userId'),
-                username: localStorage.getItem('username'),
-                avatar_url: localStorage.getItem('avatar_url'),
+                userId: userId,
+                username: state.user.username,
+                avatar_url: state.user.avatar_url,
                 ride_att_id: addResult.id
             })
-            console.log(state.ride.riders)
         }
     } catch (error) {
         throw new Error (error)
@@ -280,7 +279,7 @@ export const updateRide = async function(updatedRideInformation) {
             date: updatedRideInformation.date,
             start_time: updatedRideInformation.startTime,
             end_time: updatedRideInformation.endTime,
-            user_id: +localStorage.getItem('userId'),
+            user_id: state.user.id,
             route_id: state.ride.route.id
         }
         //update server information

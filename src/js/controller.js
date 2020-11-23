@@ -7,7 +7,6 @@ import WelcomeMessageView from './Views/WelcomeMessageView'
 import LogoutButtonView from './Views/LogoutButtonView'
 import ProfileView from './Views/ProfileView'
 import OrganizeRide from './Views/OrganizeRide'
-import {userOnRide, setActivePage} from './helpers'
 
 
 const controlRide = async function() {
@@ -103,9 +102,8 @@ const controlSignUp = async function(signUpData) {
 
 const controlToggleRideAttendance = async function() {
     try {
-        const userId = +localStorage.getItem('userId')
         RideView.renderSpinner()
-        await model.toggleRideAttendance(userOnRide(userId, model.state.ride.riders), userId)
+        await model.toggleRideAttendance()
         RideView.render({ride: model.state.ride, mode: 'view'})
     } catch (error) {
         console.error(error)
