@@ -13,7 +13,6 @@ class WelcomeMessageView extends View {
         return `
             <div>
                 <h1>Welcome, ${this._data}! Let's Ride!</h1>
-                1990 Kawasaki Vulcan 750
             </div>
         `
     }

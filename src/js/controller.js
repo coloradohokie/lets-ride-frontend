@@ -17,8 +17,9 @@ const controlRide = async function() {
         if (rideId) await model.loadRide(rideId)
         RideView.render({ride: model.state.ride, mode: 'view'})
 
-    } catch (err) {
-        console.log('controlRide', err)
+    } catch (error) {
+        console.error(error)
+        RideView.renderError()
     }
 }
 
@@ -28,8 +29,9 @@ const controlSearchResults = async function() {
         SearchResultsView.renderSpinner()
         await model.loadSearchResults()
         SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: rideId})
-    } catch (err) {
-        console.log('controlSearchResults', err)
+    } catch (error) {
+        console.error(error)
+        SearchResultsView.renderError()
     }
 }
 
@@ -42,8 +44,9 @@ const controlLogin = async function(loginData) {
     try {
         LoginView.renderSpinner()
         await model.validateLogin(loginData)
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        console.error(error)
+        LoginView.renderError()
     }
 }
 
@@ -64,13 +67,15 @@ const controlOrganizeRide = async function() {
                 option.innerText = route.name
                 selectElement.appendChild(option)
             })
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        console.error(error)
+        OrganizeRide.renderError()
     }
 }
 
 const controlUploadRide = async function(data) {
     try {
+        OrganizeRide.renderSpinner()
         await model.uploadRide(data)
     
         //navigate to new ride page
@@ -79,29 +84,32 @@ const controlUploadRide = async function(data) {
         window.history.pushState(null, '', `#${model.state.ride.ride.id}`)
         NavBarView.navigateToPage('rides')
 
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        console.error(error)
+        OrganizeRide('There was a problem uploading the ride to the server. Please try again.')
     }
 }
 
 const controlSignUp = async function(signUpData) {
-    console.log('Signup!')
     try {
         LoginView.renderSpinner()
         await model.validateSignUp(signUpData)
         location.reload()
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        console.error(error)
+        LoginView.renderError('There was a problem processing your information. Please try again.')
     }
 }
 
 const controlToggleRideAttendance = async function() {
     try {
         const userId = +localStorage.getItem('userId')
+        RideView.renderSpinner()
         await model.toggleRideAttendance(userOnRide(userId, model.state.ride.riders), userId)
         RideView.render({ride: model.state.ride, mode: 'view'})
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        console.error(error)
+        RideView.renderError(error)
     }
 }
 
@@ -113,13 +121,15 @@ const controlCancelRide = async function() {
         RideView.render({ride: model.state.ride, mode: 'view'})
         SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: null})
     } catch (err) {
-        console.log(err)
+        console.error(error)
+        RideView.renderError('Unable to cancel the ride at this time. Please try again.')
     }
 }
 
 const controlUpdateRide = async function() {
     try {
         //0. Load routes:
+        RideView.renderSpinner()
         await model.loadRoutes()
 
         //1. Render update page
@@ -137,10 +147,12 @@ const controlUpdateRide = async function() {
 
             //send to server & update State
             try {
+                RideView.renderSpinner()
                 await model.updateRide(updatedRideInformation)
 
-            } catch (err) {
-                console.log(err)
+            } catch (error) {
+                console.error(error)
+                RideView.renderError('The system was unable to update the ride. Please check the information and try again.')
             }
 
             //re render the page
@@ -149,41 +161,42 @@ const controlUpdateRide = async function() {
         RideView.addHandlerCancelUpdatedRideInformation(
             () => RideView.render({ride: model.state.ride, mode: 'view'})
         )
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        console.error(error)
+        RideView.renderError('Unable to get the routes at this time. Please try again later.')
     }    
 }
 
 const controlProfileView = async function(profileId = model.state.user.id) {
     try {
+        ProfileView.renderSpinner()
         await model.loadUserInfo(profileId)
         const profileOwner = (profileId === model.state.user.id)
         ProfileView.render({user: model.state.selectedMemberProfile, mode: 'view', profileOwner})
 
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        console.error(error)
+        ProfileView.renderError()
     }
 }
 
 const controlViewUserProfile = async function(profileId = model.state.user.id) {
     console.log(profileId)
     try {
+        ProfileView.renderSpinner()
         await model.loadUserInfo(profileId)
         const profileOwner = (profileId === model.state.user.id)
         NavBarView.navigateToPage('profile')
         ProfileView.render({user: model.state.selectedMemberProfile, mode: 'view', profileOwner})
 
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        console.error(error)
+        ProfileView.renderError()
     }
 }
 
-const controlEditProfile = async function() {
-    try {
-        ProfileView.render({user: model.state.selectedMemberProfile, mode: 'edit'})
-    } catch (err) {
-        console.log(err)
-    }
+const controlEditProfile = function() {
+    ProfileView.render({user: model.state.selectedMemberProfile, mode: 'edit'})
 }
 
 const controlCancelUpdatedProfile = function() {
@@ -199,22 +212,20 @@ const controlSubmitUpdatedProfile = async function() {
             city: document.getElementById('p-city').value,
             state: document.getElementById('p-state').value,
         }
-        console.log('updated profile', updatedProfileInformation)
+        ProfileView.renderSpinner()
         await model.updateUserInfo(model.state.user.id, updatedProfileInformation)
         const profileOwner = true
         ProfileView.render({user: model.state.selectedMemberProfile, mode: 'view', profileOwner})
     } catch (error) {
         console.error(error)
+        ProfileView.renderError('Something went wrong uploading the profile. Refresh the page and try again.')
     }
 
 }
 
-// const controlDisplayChangeHandler = function() {
-
-// }
-
 const controlChangeAvatar = async function(uploadInfo) {
     try {
+        ProfileView.renderSpinner()
         await model.updateAvatar(model.state.user.id, uploadInfo)
         const profileOwner = true
         ProfileView.render({
@@ -223,7 +234,8 @@ const controlChangeAvatar = async function(uploadInfo) {
             profileOwner
         })
     } catch (error) {
-        console.log(error)
+        console.error(error)
+        ProfileView.renderError('There was a problem updating the Avatar.')
     }
 }
 

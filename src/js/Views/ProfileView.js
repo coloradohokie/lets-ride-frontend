@@ -3,10 +3,10 @@ import imgPlus from 'url:../../assets/plus.png'
 import motoImage from 'url:../../assets/moto.png'
 import rideImage from 'url:../../assets/moto-ride.jpg'
 import {displayDate} from '../helpers'
-import { state } from '../model'
 
 class ProfileView extends View {
     _parentElement = document.querySelector('.profile')
+    _errorMessage = 'Unable to load this profile.'
     _navBar = document.querySelector('.nav')
 
     addHandlerRender(handler) {

@@ -3,6 +3,7 @@ import moment from 'moment'
 
 class SearchResultsView extends View {
     _parentElement = document.querySelector('.search-results');
+    _errorMessage = 'Unable to load search results. The server might be down.'
     _data;
 
     addHandlerRender(handler) {
@@ -55,6 +56,7 @@ class SearchResultsView extends View {
                                 ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
                             </div>
                             <h3>${ride.title}</h3>
+                            <i class="fas fa-motorcycle"></i>
                         </li>
                     </a>
                 `

@@ -5,7 +5,9 @@ import profileImage from 'url:../../assets/user.png'
 class RideView extends View {
 
     _parentElement = document.querySelector('.selected-ride-section');
+    _errorMessage = 'Cannot find this ride. Please select another one.'
     _data;
+
 
     _generateAdminButtons(organizerId, userId) {
         return organizerId === userId ?

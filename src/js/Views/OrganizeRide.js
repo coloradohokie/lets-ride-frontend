@@ -4,6 +4,7 @@ class OrganizeRide extends View {
 
     _parentElement = document.querySelector('.organize-ride')
     _navBar = document.querySelector('.nav')
+    _errorMessage = 'Unable to load the Organize Ride form.'
     _data;
 
     addHandlerRender(handler) {

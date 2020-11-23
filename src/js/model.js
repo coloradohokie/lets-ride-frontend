@@ -23,11 +23,11 @@ export async function loadSearchResults() {
                 'Authorization': `Bearer ${localStorage.getItem('token')}`
             }
         })
+        if (!response.ok) throw new Error('invalid response from server')
         const rides = await response.json()
         this.state.ridesList = rides.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     } catch (error) {
-        console.log(error)
-        alert('Error getting rides')
+        throw new Error (error)
     }
 }
 
@@ -40,6 +40,7 @@ export async function loadRide(id) {
                 'Authorization' : `Bearer ${localStorage.getItem('token')}`
             }
         })
+        if (!response.ok) throw new Error ('invalid response from server')
         const rideDetails = await response.json()
         this.state.ride = {
             organizer: rideDetails.organizer,
@@ -62,17 +63,14 @@ export async function loadRide(id) {
                 description: rideDetails.route.description,
                 startLocation: rideDetails.route.start_location,
                 endLocation: rideDetails.route.end_location,
-                mapUrl: rideDetails.route.map_path,
+                mapUrl: rideDetails.route.map_url,
                 createdAt: rideDetails.route.created_at,
                 updatedAt: rideDetails.route.updated_at
             }
         }
         console.log('STATE', this.state)
-
-
     } catch (error) {
-        console.log(error)
-        alert('Error fetching ride details')
+        throw new Error(error)
     }
 
 }
@@ -87,26 +85,24 @@ export async function validateLogin(loginData) {
             headers: { 'Content-Type': 'application/json'},
             body: JSON.stringify({email, password})
         })
-        
-        response = await response.json()
-        if (response.token) {
-            localStorage.setItem('token', response.token)
-            localStorage.setItem('username', response.username)
-            localStorage.setItem('userId', response.userId)
-            location.reload()
-        } else {
-            console.log('login failed')
-        }
+        if (!response.ok) throw new Error ('invalid response from server')
+        const result = await response.json()
+        if (!result.token) throw new Error ('Login failed. Check the email and password and try again.')
+        localStorage.setItem('token', result.token)
+        localStorage.setItem('username', result.username)
+        localStorage.setItem('userId', result.userId)
+        localStorage.setItem('avatar_url', result.avatar_url)
+        location.reload()
     } catch (error) {
-        console.log(error)
-        alert('Error loggging in')
+        throw new Error (error)
     }
 }
 
 export function addUserToState() {
     state.user = {
         id: +localStorage.getItem('userId'),
-        username: localStorage.getItem('username')
+        username: localStorage.getItem('username'),
+        avatar_url: localStorage.getItem('avatar_url')
     }
 }
 
@@ -124,11 +120,11 @@ export async function loadRoutes() {
                 'Authorization' : `Bearer ${localStorage.getItem('token')}`
             }
         })
-        if(!response.ok) throw new Error ('bad response')
+        if(!response.ok) throw new Error ('invalid response from server')
         response = await response.json()
         this.state.routes = response
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        throw new Error (error)
     }
 }
 
@@ -152,7 +148,7 @@ export async function uploadRide(data) {
             },
             body: JSON.stringify(newRide)
         })
-        if (!response.ok) throw new Error ('response not ok')
+        if (!response.ok) throw new Error ('Invalid response from server. Data likely was not uploaded.')
         response = await response.json()
         const {ride, organizer, route} = response
     
@@ -188,18 +184,14 @@ export async function uploadRide(data) {
                 user_id: organizer.id 
             })
         state.ridesList.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
-
         return ride.id
-
-
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        throw new Error (error)
     }
 }
 
 export const validateSignUp = async function(signUpData) {
     try {
-        console.log(signUpData)
         const {email, username, password, city, state} = signUpData
         const response = await fetch(`${BASE_URL}users`, {
             method: 'POST',
@@ -214,13 +206,10 @@ export const validateSignUp = async function(signUpData) {
                 state
             })
         })
-        console.log('response', response)
         if (!response.ok) throw new Error('Failed to create user')
         const result = await response.json()
-        console.log(result)
-
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        throw new Error (error)
     }
 }
 
@@ -228,7 +217,6 @@ export const toggleRideAttendance = async function(userOnRide, userId) {
     try {
         if (userOnRide) {
             let rideAttendanceUser = state.ride.riders.find(rider => rider.id === parseInt(userId))
-            console.log(rideAttendanceUser)
             let riderAttendanceId = rideAttendanceUser.ride_att_id
             const response = await fetch(`${BASE_URL}/ride_attendances/${riderAttendanceId}`, {
                 method: 'DELETE',
@@ -236,12 +224,9 @@ export const toggleRideAttendance = async function(userOnRide, userId) {
                     'Authorization' : `Bearer ${localStorage.getItem('token')}`
                 }
             })
-            if (!response.ok) throw new Error ('Something went wrong with deleting from server')
+            if (!response.ok) throw new Error ('Something went wrong with deleting you from the ride. Refresh the page and try again.')
             const uid = +localStorage.getItem('userId')
             state.ride.riders = state.ride.riders.filter(rider => uid !== rider.id)
-            console.log('riders', state.ride.riders)
-
-            
         } else {
             const addResponse = await fetch(`${BASE_URL}/ride_attendances/`, {
                 method: 'POST',
@@ -254,16 +239,18 @@ export const toggleRideAttendance = async function(userOnRide, userId) {
                     user_id: +localStorage.getItem('userId')
                 })
             })
+            if(!addResponse.ok) throw new Error('Something went wrong with adding you to the ride. Refresh the page and try again.')
             const addResult = await addResponse.json()
             state.ride.riders.push({
                 userId: +localStorage.getItem('userId'),
                 username: localStorage.getItem('username'),
+                avatar_url: localStorage.getItem('avatar_url'),
                 ride_att_id: addResult.id
             })
+            console.log(state.ride.riders)
         }
-
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        throw new Error (error)
     }
 }
 
@@ -280,8 +267,8 @@ export const cancelRide = async function(rideId) {
         const index = state.ridesList.findIndex(ride => ride.id === rideId)
         state.ridesList.splice(index, 1)
 
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        throw new Error (error)
     }
 } 
 
@@ -305,7 +292,7 @@ export const updateRide = async function(updatedRideInformation) {
             },
             body: JSON.stringify(newRide)
         })
-        if (!response.ok) throw new Error ('Something went wrong with the update')
+        if (!response.ok) throw new Error ('Something went wrong with the update. The system did not understand the server response.')
         const result = await response.json()
 
         //update state.ride
@@ -336,8 +323,8 @@ export const updateRide = async function(updatedRideInformation) {
         state.ridesList[index].title = ride.title
         state.ridesList[index].date = ride.date
 
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        throw new Error (error)
     }
 }
 
@@ -352,10 +339,7 @@ export const loadUserInfo = async function(id) {
         })
         if (!response.ok) throw new Error('Could not get user info')
         const result = await response.json()
-        console.log(result)
         const {user, motorcycles, ride_attendances} = result
-
-        console.log(user, motorcycles, ride_attendances)
         state.selectedMemberProfile = {
             id: user.id,
             username: user.username,
@@ -367,8 +351,8 @@ export const loadUserInfo = async function(id) {
             avatarUrl: user.avatar_url
         }
         console.log(state.selectedMemberProfile)
-    } catch (err) {
-        console.log(err)
+    } catch (error) {
+        throw new Error(error)
     }
 }
 
@@ -382,10 +366,8 @@ export const updateUserInfo = async function(id, updatedInfo) {
             },
             body: JSON.stringify(updatedInfo)
         })
-        console.log('RES', response)
         if (!response.ok) throw new Error ('Failed to update user')
         const result = await response.json()
-        console.log('RESULT:', result)
         //update state
         state.selectedMemberProfile.username = updatedInfo.username
         state.selectedMemberProfile.email = updatedInfo.email
@@ -404,6 +386,7 @@ export const updateAvatar = async function(id, uploadInfo) {
             method: 'POST',
             body: uploadInfo
         })
+        if (!response.ok) throw new Error ('Invalid response from server. Something blew up.')
         const result = await response.json()
         this.state.user.avatarUrl = result.url
         this.state.selectedMemberProfile.avatarUrl = result.url
@@ -418,7 +401,7 @@ export const updateAvatar = async function(id, uploadInfo) {
         })
         const serverResult = await serverResponse.json()
     } catch (error) {
-        console.error(error)
+        throw new Error (error)
     }
 }
 
