@@ -1,6 +1,5 @@
 import View from './View'
 import {displayDate, userOnRide} from '../helpers'
-import profileImage from 'url:../../assets/user.png'
 
 class RideView extends View {
 
@@ -29,7 +28,7 @@ class RideView extends View {
         const {organizer, ride, riders, route} = this._data.ride
         const editMode = this._data.mode === 'edit'
         const {userId} = this._data
-        if (editMode) console.log("editMode = true")
+        if (editMode)
         if(!ride || !ride.id) return '<h2>Select a ride from the list!</h2>'
         return `
             <div class = "ride--header">
@@ -96,7 +95,6 @@ class RideView extends View {
     _generateRidersMarkup() {
         return this._data.ride.riders
             .map(rider => {
-                console.log('RIDER', rider)
                 return `
                     <li class="user-badge" data-id=${rider.id}>
                         <img src = "${this._displayAvatar(rider.avatar_url)}" />
