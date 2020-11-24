@@ -4,8 +4,8 @@
   "description": "Welcome to the Motorcycle Riding App\r The purpose of this app is so that users can plan rides together. It has the following features:\r 1. Login\r 2. Adding/Deleting your motorcycles to your garage\r 3. Organizing and updating rides rides\r 4. Joining and Leaving rides\r 5. Publishing links to your photos of the ride\r 6. Viewing photos",
   "main": "index.html",
   "scripts": {
-    "start": "parcel index.html",
-    "build": "parcel build index.html"
+    "start": "parcel ./src/index.html",
+    "build": "parcel build .src/index.html"
   },
   "repository": {
     "type": "git",
