@@ -2,7 +2,7 @@ import View from './View'
 
 class WelcomeMessageView extends View {
 
-    _parentElement = document.querySelector('.welcome-message');
+    _parentElement= document.querySelector('.welcome-message');
     _data;
 
     addHandlerRender(handler) {

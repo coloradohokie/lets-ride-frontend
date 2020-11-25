@@ -1,7 +1,7 @@
 import View from './View'
 
 class LoginView extends View {
-    _parentElement = document.querySelector('.login-form');
+    _parentElement=document.querySelector('.login-form');
     _signUpForm = document.querySelector('.sign-up-form')
     _errorMessage = 'There was a problem logging in'
     _data;

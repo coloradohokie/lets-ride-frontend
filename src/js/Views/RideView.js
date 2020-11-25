@@ -28,7 +28,7 @@ class RideView extends View {
         const {organizer, ride, riders, route} = this._data.ride
         const editMode = this._data.mode === 'edit'
         const {userId} = this._data
-        if (editMode)
+        // if (editMode)
         if(!ride || !ride.id) return '<h2>Select a ride from the list!</h2>'
         return `
             <div class = "ride--header">

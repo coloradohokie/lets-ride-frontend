@@ -5,7 +5,7 @@ class LogoutButtonView extends View {
     _parentElement = document.querySelector('.logout-button');
 
     addHandlerLogout(handler) {
-        this._parentElement.addEventListener('click', handler)
+        document.querySelector('.logout-button').addEventListener('click', handler)
     }
 
 }
