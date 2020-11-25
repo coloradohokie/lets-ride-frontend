@@ -2,7 +2,7 @@ import View from './View'
 import moment from 'moment'
 
 class SearchResultsView extends View {
-    _parentElement = document.querySelector('.search-results');
+    _parentElement = document.querySelector('.search-results-ride-container');
     _errorMessage = 'Unable to load search results. The server might be down.'
     _data;
 
@@ -22,28 +22,22 @@ class SearchResultsView extends View {
     }
 
     _generateMarkup() {
+        const numResults = this._data.ridesList.numResults
         return `
-            <div class="ride-container">
-                <div class="ride-list">
-                    <h2>Upcoming Rides</h2>
-                    <ul class="upcoming-rides">
-                        ${this._upComingRidesMarkup('upcoming')}
-                    </ul>
-                    <br>
-                </div>
-                <div class="ride-list">
-                    <h2>Past Rides</h2>
-                    <ul class="past-rides">
-                        ${this._upComingRidesMarkup('past')}
-                    </ul>       
-                </div>
+            <div class="ride-list">
+                <h2>${numResults ? numResults : 'No ' } Upcoming Rides</h2>
+                <ul class="upcoming-rides">
+                    ${this._upComingRidesMarkup('upcoming')}
+                </ul>
+            <br>
             </div>
         `
     }
 
     _upComingRidesMarkup(timeline) {
-        const today = Date.now() //parsed
-        const {ridesList, currentRideId} = this._data
+        const today = Date.now()
+        const {currentRideId} = this._data
+        const ridesList = this._data.ridesList.list
         return ridesList
             .filter(ride => timeline === 'upcoming' ?
                 Date.parse(ride.date) >= today :
