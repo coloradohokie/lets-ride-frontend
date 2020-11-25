@@ -7,7 +7,6 @@ import WelcomeMessageView from './Views/WelcomeMessageView'
 import LogoutButtonView from './Views/LogoutButtonView'
 import ProfileView from './Views/ProfileView'
 import OrganizeRide from './Views/OrganizeRide'
-import PaginationView from './Views/PaginationView'
 
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
@@ -18,11 +17,7 @@ const controlRide = async function() {
         let rideId = +window.location.hash.slice(1)
         RideView.renderSpinner()
         if (rideId) await model.loadRide(rideId)
-        RideView.render({
-            ride: model.state.ride, 
-            userId: model.state.user.id, 
-            mode: 'view'
-        })
+        RideView.render({ride: model.state.ride, userId: model.state.user.id, mode: 'view'})
 
     } catch (error) {
         console.error(error)
@@ -35,16 +30,7 @@ const controlSearchResults = async function() {
         let rideId = +window.location.hash.slice(1)
         SearchResultsView.renderSpinner()
         await model.loadSearchResults()
-        SearchResultsView.render({
-            ridesList: {
-                list: model.getSearchResultsPage(),
-                page: model.state.ridesList.page,
-                resultsPerPage: model.state.ridesList.resultsPerPage,
-                numResults: model.getNumSearchResults()
-            }, 
-            currentRideId: rideId
-        })
-        PaginationView.render(model.state.ridesList)
+        SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: rideId})
     } catch (error) {
         console.error(error)
         SearchResultsView.renderError()
@@ -95,15 +81,7 @@ const controlUploadRide = async function(data) {
         await model.uploadRide(data)
     
         //navigate to new ride page
-        SearchResultsView.render({
-            ridesList: {
-                list: model.getSearchResultsPage(),
-                page: model.state.ridesList.page,
-                resultsPerPage: model.state.ridesList.resultsPerPage,
-                numResults: model.getNumSearchResults()
-            }, 
-            currentRideId: rideId
-        })
+        SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: model.state.ride.ride.id})
         RideView.render({ride: model.state.ride, mode: 'view'})
         window.history.pushState(null, '', `#${model.state.ride.ride.id}`)
         NavBarView.navigateToPage('rides')
@@ -142,15 +120,7 @@ const controlCancelRide = async function() {
         await model.cancelRide(model.state.ride.ride.id)
         window.location.hash = ''
         RideView.render({ride: model.state.ride, mode: 'view'})
-        SearchResultsView.render({
-            ridesList: {
-                list: model.getSearchResultsPage(),
-                page: model.state.ridesList.page,
-                resultsPerPage: model.state.ridesList.resultsPerPage,
-                numResults: model.getNumSearchResults()
-            }, 
-            currentRideId: null
-        })
+        SearchResultsView.render({ridesList: model.state.ridesList, currentRideId: null})
     } catch (err) {
         console.error(error)
         RideView.renderError('Unable to cancel the ride at this time. Please try again.')
@@ -270,21 +240,6 @@ const controlChangeAvatar = async function(uploadInfo) {
     }
 }
 
-const controlPagination = function(goToPage) {
-    //render search results
-    SearchResultsView.render({
-        ridesList: {
-            list: model.getSearchResultsPage(goToPage),
-            page: model.state.ridesList.page,
-            resultsPerPage: model.state.ridesList.resultsPerPage,
-            numResults: model.getNumSearchResults()
-        }, 
-        currentRideId: model.state.ride.ride.id
-    })
-    
-    //render pagination buttons
-    PaginationView.render(model.state.ridesList)
-}
 
 const init = function() {
     if(!localStorage.getItem('token')) {
@@ -303,7 +258,6 @@ const init = function() {
         RideView.addHandlerViewUserProfile(controlViewUserProfile)
         SearchResultsView.addHandlerRender(controlSearchResults)
         SearchResultsView.addHandlerSelectedRide()
-        PaginationView.addHandlerClick(controlPagination)
         NavBarView.addHandlerTogglePage()
 
         OrganizeRide.addHandlerRender(controlOrganizeRide)

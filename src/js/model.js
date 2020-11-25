@@ -1,13 +1,9 @@
-import {BASE_URL, MEDIA_URL, RESULTS_PER_PAGE} from './config'
+import {BASE_URL, MEDIA_URL} from './config'
 import {userOnRide} from './helpers'
 
 export const state = {
     user: {},
-    ridesList: {
-        list: [],
-        resultsPerPage: RESULTS_PER_PAGE,
-        page: 1
-    },
+    ridesList: [],
     ride: {
         ride: {},
         route: {},
@@ -30,7 +26,7 @@ export async function loadSearchResults() {
         })
         if (!response.ok) throw new Error('invalid response from server')
         const rides = await response.json()
-        this.state.ridesList.list = rides.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
+        this.state.ridesList = rides.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     } catch (error) {
         throw new Error (error)
     }
@@ -73,7 +69,7 @@ export async function loadRide(id) {
                 updatedAt: rideDetails.route.updated_at
             }
         }
-        // console.log('STATE', this.state)
+        console.log('STATE', this.state)
     } catch (error) {
         throw new Error(error)
     }
@@ -181,13 +177,13 @@ export async function uploadRide(data) {
             riders:[]
         }
 
-        state.ridesList.list.push({
+        state.ridesList.push({
                 id: ride.id,
                 title: ride.title,
                 date: ride.date,
                 user_id: organizer.id 
             })
-        state.ridesList.list.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
+        state.ridesList.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
         return ride.id
     } catch (error) {
         throw new Error (error)
@@ -267,8 +263,8 @@ export const cancelRide = async function(rideId) {
         })
         if (!response.ok) throw new Error ('Something went wrong with deleting from server')
         state.ride = {}
-        const index = state.ridesList.list.findIndex(ride => ride.id === rideId)
-        state.ridesList.list.splice(index, 1)
+        const index = state.ridesList.findIndex(ride => ride.id === rideId)
+        state.ridesList.splice(index, 1)
 
     } catch (error) {
         throw new Error (error)
@@ -322,9 +318,9 @@ export const updateRide = async function(updatedRideInformation) {
         }
 
         //update search results
-        const index = state.ridesList.list.findIndex(searchResult => searchResult.id === ride.id)
-        state.ridesList.list[index].title = ride.title
-        state.ridesList.list[index].date = ride.date
+        const index = state.ridesList.findIndex(searchResult => searchResult.id === ride.id)
+        state.ridesList[index].title = ride.title
+        state.ridesList[index].date = ride.date
 
     } catch (error) {
         throw new Error (error)
@@ -408,20 +404,7 @@ export const updateAvatar = async function(id, uploadInfo) {
     }
 }
 
-// export const setActivePage = function(newPage) {
-//     state.activePage = newPage
-
-// }
-
-export const getSearchResultsPage = function(page = state.ridesList.page) {
-    state.ridesList.page = page
-    const start = (page -1) * state.ridesList.resultsPerPage
-    const end = page * state.ridesList.resultsPerPage 
-    const upcomingRides = state.ridesList.list.filter(ride => Date.parse(ride.date) > Date.now())
-    return upcomingRides.slice(start, end)
-}
-
-export const getNumSearchResults = function() {
-    return state.ridesList.list.filter(ride => Date.parse(ride.date) > Date.now()).length
+export const setActivePage = function(newPage) {
+    state.activePage = newPage
 
 }

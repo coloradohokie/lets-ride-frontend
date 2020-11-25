@@ -19,13 +19,13 @@ export function userOnRide(userId, ridersArray) {
     return ridersArray.find(rider => rider.id === userId)
 }
 
-// export function setActivePage(newPage) {
-//     model.setActivePage(newPage)
-//     newPage = '.' + newPage
-//     document.querySelectorAll('.page')
-//         .forEach(page => page.classList.add('hidden'))
-//     document.querySelector(newPage).classList.remove('hidden')
-// }
+export function setActivePage(newPage) {
+    model.setActivePage(newPage)
+    newPage = '.' + newPage
+    document.querySelectorAll('.page')
+        .forEach(page => page.classList.add('hidden'))
+    document.querySelector(newPage).classList.remove('hidden')
+}
 
 
 
