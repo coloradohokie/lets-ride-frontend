@@ -8,9 +8,6 @@ import LogoutButtonView from './Views/LogoutButtonView'
 import ProfileView from './Views/ProfileView'
 import OrganizeRide from './Views/OrganizeRide'
 
-import 'core-js/stable'
-import 'regenerator-runtime/runtime'
-
 
 const controlRide = async function() {
     try {
