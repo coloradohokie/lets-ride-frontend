@@ -1,5 +1,5 @@
-import profileImage from 'url:../../assets/user.png'
-import icons from 'url:../../assets/icons.svg'
+import profileImage from '../../assets/user.png'
+import icons from '../../assets/icons.svg'
 
 export default class View {
     render(data) {

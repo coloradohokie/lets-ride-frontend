@@ -1,5 +1,6 @@
 import {BASE_URL, MEDIA_URL, RESULTS_PER_PAGE} from './config'
 import {userOnRide} from './helpers'
+import regeneratorRuntime from "regenerator-runtime";
 
 export const state = {
     user: {},

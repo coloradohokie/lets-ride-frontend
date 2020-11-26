@@ -1,7 +1,7 @@
 import View from './View'
-import imgPlus from 'url:../../assets/plus.png'
-import motoImage from 'url:../../assets/moto.png'
-import rideImage from 'url:../../assets/moto-ride.jpg'
+import imgPlus from '../../assets/plus.png'
+import motoImage from '../../assets/moto.png'
+import rideImage from '../../assets/moto-ride.jpg'
 import {displayDate} from '../helpers'
 
 class ProfileView extends View {

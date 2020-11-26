@@ -9,6 +9,7 @@ import ProfileView from './Views/ProfileView'
 import OrganizeRide from './Views/OrganizeRide'
 import PaginationView from './Views/PaginationView'
 
+import regeneratorRuntime from "regenerator-runtime";
 
 const controlRide = async function() {
     try {
