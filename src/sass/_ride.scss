@@ -5,10 +5,30 @@
     width: 100%;
 }
 
+.ride-cover-image {
+    width: 100%;
+    height: 15rem;
+    margin-bottom: 1rem;
+
+    img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: 0 80%;
+        display: block;
+    }
+
+}
+
 .ride--header {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    padding-left: 1rem;
+}
+
+.ride--details {
+    padding-left: 1rem;
 }
 
 .selected-ride-section {
@@ -18,8 +38,6 @@
     /* min-width: 2rem; */
     box-sizing: border-box;
     width: 80%;
-    padding-left: 1rem;
-    padding-top: 1rem;
 }
 
 .selected-ride-section-titlebar {
@@ -30,6 +48,8 @@
 }
 
 .whos-going {
+    min-height: 5rem;
+    padding-left: 1rem;
     list-style-type: none;
     display: flex;
     flex-direction: flex-start;

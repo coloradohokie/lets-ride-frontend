@@ -88,17 +88,18 @@ body {
 }
 
 h1 {
+    padding: 1rem 0 0 0;
     font-size: 1.5rem;
     margin-right: 3rem;
-
+    font-weight: bold;
 }
 
 h2 {
     font-size: 1.5rem;
-    padding: 1rem;
+    padding: 1.5rem 0 0 0;
     font-weight: bold;
     margin-top: 0.2rem;
-    margin-left: 0.2rem;
+    margin-left: 0;
     margin-right: 3rem;
     margin-bottom: 0.2rem;
 }

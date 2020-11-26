@@ -1,5 +1,7 @@
 import View from './View'
 import {displayDate, userOnRide} from '../helpers'
+import motoCoverImage from '../../assets/moto-cover.jpg'
+
 
 class RideView extends View {
 
@@ -31,6 +33,9 @@ class RideView extends View {
         // if (editMode)
         if(!ride || !ride.id) return '<h2>Select a ride from the list!</h2>'
         return `
+            <div class="ride-cover-image">
+                <img src="${motoCoverImage}" />
+            </div>
             <div class = "ride--header">
                 <div>
                     <h1>
@@ -66,29 +71,31 @@ class RideView extends View {
                 </div>
             </div>
 
-            <p> ${editMode ? 
-                    `<textarea id="u-description" name="description">${ride.description}</textarea>`
-                    : ride.description
+            <div class="ride--details">
+                <p> ${editMode ? 
+                        `<textarea id="u-description" name="description">${ride.description}</textarea>`
+                        : ride.description
+                    }
+                </p>
+
+                <h2>Route</h2>
+                ${editMode ? 
+                    `
+                    <select id="u-route" name="route">${this._generateRoutes()}</select>
+                    ` : `
+                    <p>Start: ${route.startLocation}</p>
+                    <p>End: ${route.endLocation}</p>
+                    <p>Route Description: ${route.description}</p>
+                    ${route.mapUrl ? route.mapUrl : ''}
+                    `
                 }
-            </p>
+                
 
-            <h2>Route</h2>
-            ${editMode ? 
-                `
-                <select id="u-route" name="route">${this._generateRoutes()}</select>
-                ` : `
-                <p>Start: ${route.startLocation}</p>
-                <p>End: ${route.endLocation}</p>
-                <p>Route Description: ${route.description}</p>
-                ${route.mapUrl ? `<p>${route.mapUrl}</p>` : ''}
-                `
-            }
-             
-
-            <h2 class="whos-going-title">${riders.length} Riders Going</h2>
-            <ul class="whos-going">
-                ${this._generateRidersMarkup()}
-            </ul>
+                <h2 class="whos-going-title">${riders.length} Riders Going</h2>
+                <ul class="whos-going">
+                    ${this._generateRidersMarkup()}
+                </ul>
+            </div>
         `
     }
 

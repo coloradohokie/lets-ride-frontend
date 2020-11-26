@@ -4,6 +4,15 @@
     justify-content: space-between;
 }
 
+.welcome-message {
+    display: flex;
+    align-items: center;
+
+    h1 {
+        padding: 0
+    }
+}
+
 .nav {
     display: flex;
     justify-content: space-between;
@@ -13,9 +22,12 @@
 }
 
 .nav-link {
-    border: none;
-    background-color: transparent;
-    width: 10rem;
+    font-size: 1.2rem;
+    cursor: pointer;
+
+    &:hover {
+        font-weight: bold;
+    }
 }
 
 .logout-button {
