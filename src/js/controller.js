@@ -286,6 +286,7 @@ const controlPagination = function(goToPage) {
 
 const init = function() {
     if(!localStorage.getItem('token')) {
+        NavBarView.hideHeader()
         LoginView.showLogin()
         LoginView.addHandlerFormSubmit(controlLogin)
         LoginView.addHandlerToggleScreen()

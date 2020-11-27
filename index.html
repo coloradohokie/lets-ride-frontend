@@ -30,41 +30,57 @@
 
 
     <!-------LOGIN/SIGNUP-------->
-    <div class="login modal-window all-forms hidden">
-        <h1 class="login-page-title">Please Sign In</h1>
-
-        <!-------LOGIN FORM-------->
-        <form class="login-form">
-            <label for="email">Email Address</label>
-            <input type="text" id="email" name="email" placeholder="Email Address"></select>
-            <label for="password">Password</label>
-            <input type="password" id="password" name="password" placeholder="Password"></select>
-            <input type="submit" value="login" />
-        </form>
+    <div class="login page hidden">
+        <img class="login-banner" src="src/assets/banner.png" alt="Let's Ride" />
         
-        <!-------SIGN UP FORM-------->
-        <form class="sign-up-form hidden">
-            
-            <label for="email">Email Address</label>
-            <input type="text" id="s-email" name="email" placeholder="Email Address"></select>
-            
-            <label for="username">User Name</label>
-            <input type="text" id="s-username" name="username" placeholder="User Name"></select>
-            
-            <label for="password">Password</label>
-            <input type="password" id="s-password" name="password" placeholder="Password"></select>
-            
-            <label for="city">City</label>
-            <input type="text" id="s-city" name="city" placeholder="City"></select>
-            
-            <label for="State">State</label>
-            <input type="text" id="s-state" name="state" placeholder="State"></select>
-            
-            
-            <input type="submit" value="Sign Up!" />
-        </form>
-        <h3 class="login-msg">Don't have an account? </h3>
-        <button class="toggle-screen-button">Sign Up!</button>
+        <div class="entry-form-box">
+            <!-------LOGIN FORM-------->
+            <h2>Log Into Let's Ride!</h2>
+            <div class="info-box">
+                <svg>
+                    <use href="./src/assets/icons.svg#icon-alert-triangle" style="width:10px;"></use>
+                </svg>
+                <p>You must log in to continue</p>
+            </div>
+            <form class="login-form">
+                <label for="email">Email</label>
+                <input type="text" id="email" name="email" placeholder="Email"></select>
+                <label for="password">Password</label>
+                <input type="password" id="password" name="password" placeholder="Password"></select>
+                <input class="submit" type="submit" value="Log In" />
+            </form>
+
+
+        
+            <!-------SIGN UP FORM-------->
+            <form class="sign-up-form hidden">
+                
+                <label for="email">Email Address</label>
+                <input type="text" id="s-email" name="email" placeholder="Email Address"></select>
+                
+                <label for="username">User Name</label>
+                <input type="text" id="s-username" name="username" placeholder="User Name"></select>
+                
+                <label for="password">Password</label>
+                <input type="password" id="s-password" name="password" placeholder="Password"></select>
+                
+                <label for="city">City</label>
+                <input type="text" id="s-city" name="city" placeholder="City"></select>
+                
+                <label for="State">State</label>
+                <input type="text" id="s-state" name="state" placeholder="State"></select>
+                
+                
+                <input type="submit" value="Sign Up!" />
+            </form>
+
+            <span class="form-seperator">
+                or
+            </span>
+
+            <h3 class="login-msg">Don't have an account? </h3>
+            <button class="toggle-screen-button">Create New Account</button>
+        </div>
     </div>
 
 

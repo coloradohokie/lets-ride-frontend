@@ -54,6 +54,8 @@
   .hidden {
     visibility: hidden;
     opacity: 0;
+    width: 0;
+    height: 0;
 }
 
 .btn--inline {
@@ -63,7 +65,7 @@
   font-size: 0.9rem;
   font-weight: 600;
   border: none;
-  background-color: $color-light-gray;
+  background-color: $color-secondary;
   padding: 0.3rem 0.3rem;
   border-radius: 4px;
   cursor: pointer;
@@ -85,7 +87,7 @@
 
   &:hover {
     color: $color-grad-2;
-    background-color: $color-light-gray;
+    background-color: $color-secondary;
   }
 
   &:focus {

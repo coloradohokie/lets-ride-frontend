@@ -1,7 +1,7 @@
 import View from './View'
 
 class LoginView extends View {
-    _parentElement=document.querySelector('.login-form');
+    _parentElement=document.querySelector('.login');
     _signUpForm = document.querySelector('.sign-up-form')
     _errorMessage = 'There was a problem logging in'
     _data;
@@ -11,10 +11,11 @@ class LoginView extends View {
     _toggleScreenButton = document.querySelector('.toggle-screen-button')
     _message = document.querySelector('.login-msg')
     _loginPageTitle = document.querySelector('.login-page-title')
+    _allPages = document.querySelectorAll('.page')
 
     showLogin() {
-        this._overlay.classList.remove('hidden')
-        this._window.classList.remove('hidden')
+        this._allPages.forEach(page => page.classList.add('hidden'))
+        this._parentElement.classList.remove('hidden')
     }
 
     //This function handles both signup and login

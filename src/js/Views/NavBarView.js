@@ -2,12 +2,17 @@
 class NavBarView {
 
     _parentElement = document.querySelector('.nav')
+    _header = document.querySelector('header')
 
     navigateToPage(newPage) {
         newPage = '.' + newPage
         document.querySelectorAll('.page')
             .forEach(page => page.classList.add('hidden'))
         document.querySelector(newPage).classList.remove('hidden')
+    }
+
+    hideHeader() {
+        this._header.classList.add('hidden')
     }
 
     addHandlerTogglePage() {
