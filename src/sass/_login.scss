@@ -45,22 +45,12 @@
         }
     }
 
-    
-    hr {
-        display: block;
-        height: 1px;
-        border: 0;
-        border-top: 1px solid #ccc;
-        margin: 1em 0;
-        padding: 0;
-    }
-
     .form-seperator {
         color: #96999e;
         display: inline-block;
         position: relative;
         font-size: 1rem;
-        margin: 1rem 0;
+        margin: 2rem 0;
 
         &:before {
             margin-right: 0.5rem;

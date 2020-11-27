@@ -288,9 +288,9 @@ const init = function() {
     if(!localStorage.getItem('token')) {
         NavBarView.hideHeader()
         LoginView.showLogin()
-        LoginView.addHandlerFormSubmit(controlLogin)
+        LoginView.addHandlerFormSubmit(controlLogin, 'login')
         LoginView.addHandlerToggleScreen()
-        LoginView.addHandlerFormSubmit(controlSignUp)
+        LoginView.addHandlerFormSubmit(controlSignUp, 'signUp')
     } else {
         model.addUserToState()
         WelcomeMessageView.addHandlerRender(controlNavBar)
