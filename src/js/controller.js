@@ -75,11 +75,11 @@ const controlOrganizeRide = async function() {
         //load the organize ride form
         const selectElement = document.querySelector('#route')
         model.state.routes.map(route => {
-                let option = document.createElement('option')
-                option.setAttribute('value', route.id)
-                option.innerText = route.name
-                selectElement.appendChild(option)
-            })
+            let option = document.createElement('option')
+            option.setAttribute('value', route.id)
+            option.innerText = route.name
+            selectElement.appendChild(option)
+        })
     } catch (error) {
         console.error(error)
         OrganizeRide.renderError()

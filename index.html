@@ -193,15 +193,27 @@
             <div class="route-information">
                 <h2>About the Route</h2>
                 <label for="route">Route</label>
-                <select id="route" name="route"></select>
+                <select id="route" name="route">
+                    <option value="0">Create New Route</option>
+                </select>
                 <div class="route-preview-box">
-
+                    <p>Route Preview Box</p>
                 </div>
-                <input class="submit" type="submit" value="Create Ride">
+                <div class="new-route-details">
+                    <input type="text" id="r-title" name="r-title" placeholder="Route Title" />
+                    <input type="text" id="r-start" name="r-start" placeholder="Start Location" />
+                    <input type="text" id="r-end" name="r-end" placeholder="End Location" />
+                    <textarea id="r-description" name="r-description" placeholder="Route Description"></textarea>
+                    <textarea id="r-link" name="r-link" placeholder="Paste Google Map Link"></textarea>
+                    <input type="text" id="r-difficulty" name="r-difficulty" placeholder="Difficulty" />
+                    <input type="text" id="r-miles" name="r-miles" placeholder="Miles" />
+                    <input type="text" id="r-minutes" name="r-minutes" placeholder="Minutes" />
+                </div>
+                        
+                <div class="organize-ride-submit">
+                    <input class="submit" type="submit" value="Create Ride">
+                </div>
             </div>
-        
-        </form>
-        
         </form>
     </div>
 
