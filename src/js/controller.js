@@ -50,11 +50,11 @@ const controlSearchResults = async function() {
 }
 
 const controlNavBar = function() {
-    WelcomeMessageView.render(localStorage.getItem('username'))
+    console.log(model.state.user)
+    WelcomeMessageView.render(model.state.user)
 }
 
 const controlLogin = async function(loginData) {
-    console.log('Log In')
     try {
         LoginView.renderSpinner()
         await model.validateLogin(loginData)

@@ -12,7 +12,14 @@
         padding: 0
     }
 }
-
+.header-profile-image {
+    margin-right: 0.5rem;
+    
+    img {
+        border: 1px solid $color-secondary;
+        border-radius: 50%;
+    }
+}
 .nav {
     display: flex;
     justify-content: space-between;

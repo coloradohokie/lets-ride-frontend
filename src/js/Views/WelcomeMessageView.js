@@ -10,9 +10,18 @@ class WelcomeMessageView extends View {
     }
 
     _generateMarkup() {
+        console.log(this._data)
+        let {username, avatar_url} = this._data
+        const stringArray = avatar_url.split('image/upload/')
+        console.log(stringArray)
+        const updatedAvatarUrl = stringArray[0] + 'image/upload/' + 'g_face,c_thumb,w_40,h_40/' + stringArray[1]
+        console.log(updatedAvatarUrl)
         return `
+            <div class="header-profile-image">
+                <img src="${updatedAvatarUrl}" />
+            </div>
             <div>
-                <h1>Welcome, ${this._data}! Let's Ride!</h1>
+                <h1>Welcome, ${username}! Let's Ride!</h1>
             </div>
         `
     }
