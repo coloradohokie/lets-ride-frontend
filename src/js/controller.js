@@ -50,7 +50,6 @@ const controlSearchResults = async function() {
 }
 
 const controlNavBar = function() {
-    console.log(model.state.user)
     WelcomeMessageView.render(model.state.user)
 }
 
@@ -100,7 +99,7 @@ const controlUploadRide = async function(data) {
                 resultsPerPage: model.state.ridesList.resultsPerPage,
                 numResults: model.getNumSearchResults()
             }, 
-            currentRideId: rideId
+            currentRideId: model.state.ride.ride.id
         })
         RideView.render({ride: model.state.ride, mode: 'view'})
         window.history.pushState(null, '', `#${model.state.ride.ride.id}`)

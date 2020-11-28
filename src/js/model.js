@@ -30,8 +30,15 @@ export async function loadSearchResults() {
             }
         })
         if (!response.ok) throw new Error('invalid response from server')
-        const rides = await response.json()
-        this.state.ridesList.list = rides.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
+        const result = await response.json()
+        this.state.ridesList.list = result
+            .map(ride => { return {
+                id: ride.id,
+                title: ride.title,
+                date: ride.date,
+                organizerId: ride.user_id
+            }})
+            .sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     } catch (error) {
         throw new Error (error)
     }

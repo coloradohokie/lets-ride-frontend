@@ -1,5 +1,6 @@
 import View from './View'
 import moment from 'moment'
+import icons from '../../assets/icons.svg'
 
 class SearchResultsView extends View {
     _parentElement = document.querySelector('.search-results-ride-container');
@@ -36,6 +37,7 @@ class SearchResultsView extends View {
 
     _upComingRidesMarkup(timeline) {
         const today = Date.now()
+        console.log(this._data)
         const {currentRideId} = this._data
         const ridesList = this._data.ridesList.list
         return ridesList
@@ -50,7 +52,6 @@ class SearchResultsView extends View {
                                 ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
                             </div>
                             <h3>${ride.title}</h3>
-                            <i class="fas fa-motorcycle"></i>
                         </li>
                     </a>
                 `
@@ -58,33 +59,6 @@ class SearchResultsView extends View {
             .join('')
     }
 
-
-    displayRides() {  //deprecated
-        rides.map(ride => {
-            let today = Date.parse(new Date())
-            const rideDate = Date.parse(ride.date)
-        
-            listItem = document.createElement('li')
-            listItem.classList.add("ride-list-card")
-            listItem.addEventListener('click', () => {
-    
-                displayRideDetails(ride.id)
-            })
-            listItem.dataset.id = ride.id
-            listItem.innerHTML = (`
-                <div class="date">
-                    ${moment(ride.date).format("MMM")}<br>${moment(ride.date).format("DD")}
-                </div>    
-                <h3>${ride.title}</h3>
-            `)
-    
-            listItem.classList.add("ride")
-            listItem.classList.add("user-ride")
-            listItem.classList.remove("non-user-ride")
-            
-            rideDate >= today ? upcomingRidesElement.append(listItem) : pastRidesElement.append(listItem)
-        })
-    }
 }
 
 export default new SearchResultsView()
