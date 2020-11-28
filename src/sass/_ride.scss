@@ -88,6 +88,29 @@
 
 }
 
+.no-selected-ride {
+    width: 80%;
+    max-width: 40rem;
+    margin: auto;
+    margin-top: 5rem;
+    // border: 2px solid green;
+    border-radius: 8px;
+    padding: 1rem 2rem;
+    font-size: 1.5rem;
+
+    h2 {
+        font-family: 'Fugaz One', cursive;
+        font-size: 4rem;
+        color: $color-secondary;
+        text-align: center;
+        padding-bottom: 4rem;
+    }
+
+    p {
+        font-size: 2rem;
+    }
+}
+
 .ride-photo {
     border: 2px solid black;
     margin: 10px;

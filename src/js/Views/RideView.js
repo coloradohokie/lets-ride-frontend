@@ -26,12 +26,22 @@ class RideView extends View {
             .join('')
     }
 
+    _noSelectedRideMarkup() {
+        return `
+        <div class="no-selected-ride">
+            <h2>Let's Ride!</h2> 
+            <p>Select a ride from the list to to the left to get started, 
+            or organize your own ride!</p>
+        </div>
+        `
+    }
+
     _generateMarkup() {
         const {organizer, ride, riders, route} = this._data.ride
         const editMode = this._data.mode === 'edit'
         const {userId} = this._data
         // if (editMode)
-        if(!ride || !ride.id) return '<h2>Select a ride from the list!</h2>'
+        if(!ride || !ride.id) return this._noSelectedRideMarkup()
         return `
             <div class="ride-cover-image">
                 <img src="${motoCoverImage}" />

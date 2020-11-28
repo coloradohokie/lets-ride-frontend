@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Fugaz+One&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css?family=Roboto&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="./src/sass/main.scss">
     <script src="https://kit.fontawesome.com/9f2ea6ea1d.js" crossorigin="anonymous"></script>
@@ -169,27 +171,34 @@
     <div class="page organize-ride hidden">
         <h1>Organize a Ride</h1>
 
-        <form method="POST" class="all-forms upload-ride">
-            <label for="title">Title</label>
-            <input type="text" id="title" name="title" placeholder="Title" />
-            <label for="description">Description</label>
-            <textarea id="description" name="description" placeholder="Description"></textarea>
-    
-            <label id="date" for="date">Date:</label>
-            <input type="date" name="date" id="date" placeholder="date">
+        <form method="POST" class="upload-ride">
+            <div class="ride-information">
+                <h2>About the Ride</h2>
+                <label for="title">Title</label>
+                <input type="text" id="title" name="title" placeholder="Title" />
+                <label for="description">Description</label>
+                <textarea id="description" name="description" placeholder="Description"></textarea>
+                
+                <div class="organize__date">
+                    <label id="date" for="date">Date:</label>
+                    <input type="date" name="date" id="date" placeholder="date">
+        
+                    <label id="start-time" for="start">Start Time:</label>
+                    <input type="time" name="start" />
+        
+                    <label id="end-time" for="end">End Time:</label>
+                    <input type="time" name="end" />
+                </div>
+            </div>
+            <div class="route-information">
+                <h2>About the Route</h2>
+                <label for="route">Route</label>
+                <select id="route" name="route"></select>
+                <div class="route-preview-box">
 
-            <label id="start-time" for="start">Start Time:</label>
-            <input type="time" name="start" />
-
-            <label id="end-time" for="end">End Time:</label>
-            <input type="time" name="end" />
-
-            <label for="route">Route</label>
-            <select id="route" name="route"></select>
-            
-            <!-- <a href="create-route.html">Create New Route</a> -->
-    
-            <input type="submit" value="Create Ride">
+                </div>
+                <input class="submit" type="submit" value="Create Ride">
+            </div>
         
         </form>
         
