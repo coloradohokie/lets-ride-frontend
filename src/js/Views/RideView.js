@@ -96,7 +96,7 @@ class RideView extends View {
                     <p>Start: ${route.startLocation}</p>
                     <p>End: ${route.endLocation}</p>
                     <p>Route Description: ${route.description}</p>
-                    ${route.mapUrl ? route.mapUrl : ''}
+                    ${route.mapUrl ? `<div class="ride__route-map">${route.mapUrl}</div>` : ''}
                     `
                 }
                 
