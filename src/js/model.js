@@ -1,5 +1,5 @@
 import {BASE_URL, MEDIA_URL, RESULTS_PER_PAGE} from './config'
-import {userOnRide} from './helpers'
+import {userOnRide, AJAX} from './helpers'
 import regeneratorRuntime from "regenerator-runtime";
 
 export const state = {
@@ -22,15 +22,7 @@ export const state = {
 
 export async function loadSearchResults() {
     try {
-        const response = await fetch(`${BASE_URL}rides`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'applicaton/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        if (!response.ok) throw new Error('invalid response from server')
-        const result = await response.json()
+        const result = await AJAX(`${BASE_URL}rides`)
         this.state.ridesList.list = result
             .map(ride => { return {
                 id: ride.id,
@@ -40,21 +32,13 @@ export async function loadSearchResults() {
             }})
             .sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
     } catch (error) {
-        throw new Error (error)
+        throw error
     }
 }
 
 export async function loadRide(id) {
     try {
-        const response = await fetch(`${BASE_URL}rides/${id}`, {
-            method: 'GET',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        if (!response.ok) throw new Error ('invalid response from server')
-        const rideDetails = await response.json()
+        const rideDetails = await AJAX(`${BASE_URL}rides/${id}`)
         this.state.ride = {
             organizer: rideDetails.organizer,
             ride: {
@@ -83,22 +67,14 @@ export async function loadRide(id) {
         }
         // console.log('STATE', this.state)
     } catch (error) {
-        throw new Error(error)
+        throw error
     }
 
 }
 
 export async function validateLogin(loginData) {
-    const {email, password} = loginData
-    const loginUrl = `${BASE_URL}login`
     try {
-        let response = await fetch(loginUrl, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json'},
-            body: JSON.stringify({email, password})
-        })
-        if (!response.ok) throw new Error ('invalid response from server')
-        const result = await response.json()
+        const result = await AJAX(`${BASE_URL}login`, 'POST', loginData, false)
         if (!result.token) throw new Error ('Login failed. Check the email and password and try again.')
         localStorage.setItem('token', result.token)
         localStorage.setItem('username', result.username)
@@ -106,7 +82,7 @@ export async function validateLogin(loginData) {
         localStorage.setItem('avatar_url', result.avatar_url)
         location.reload()
     } catch (error) {
-        throw new Error (error)
+        throw error
     }
 }
 
@@ -126,18 +102,9 @@ export function logout() {
 
 export async function loadRoutes() {
     try {
-        let response = await fetch(`${BASE_URL}routes`, {
-            method: 'GET',
-            headers: { 
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        if(!response.ok) throw new Error ('invalid response from server')
-        response = await response.json()
-        this.state.routes = response
+        this.state.routes = await AJAX(`${BASE_URL}routes`)
     } catch (error) {
-        throw new Error (error)
+        throw error
     }
 }
 
@@ -155,20 +122,10 @@ export async function uploadRoute(data) {
             created_by: state.user.id
         }
 
-        const response = await fetch(`${BASE_URL}routes`, {
-            method: 'POST',
-            headers: {
-                'Content-Type':'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(newRoute)
-        })
-        if (!response.ok) throw new Error ('No response from Server')
-        const result = response.json()
-        return result
-
+        return await AJAX(`${BASE_URL}routes`, 'POST', newRoute)
+        
     } catch (error) {
-        throw new Error(error)
+        throw error
     }
 }
 
@@ -183,18 +140,9 @@ export async function uploadRide(data) {
             user_id: state.user.id,
             route_id: +data.route
         }
-    
-        let response = await fetch(`${BASE_URL}rides`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization' : `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(newRide)
-        })
-        if (!response.ok) throw new Error ('Invalid response from server. Data likely was not uploaded.')
-        response = await response.json()
-        const {ride, organizer, route} = response
+
+        const result = await AJAX(`${BASE_URL}rides`, 'POST', newRide)
+        const {ride, organizer, route} = result
     
         state.ride = {
             ride: {
@@ -230,30 +178,15 @@ export async function uploadRide(data) {
         state.ridesList.list.sort((a, b) => Date.parse(a.date) - Date.parse(b.date))
         return ride.id
     } catch (error) {
-        throw new Error (error)
+        throw error
     }
 }
 
 export const validateSignUp = async function(signUpData) {
     try {
-        const {email, username, password, city, state} = signUpData
-        const response = await fetch(`${BASE_URL}users`, {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                email,
-                username,
-                password,
-                city,
-                state
-            })
-        })
-        if (!response.ok) throw new Error('Failed to create user')
-        const result = await response.json()
+        await AJAX(`${BASE_URL}users`, 'POST', signUpData, false)
     } catch (error) {
-        throw new Error (error)
+        throw error
     }
 }
 
@@ -263,28 +196,14 @@ export const toggleRideAttendance = async function() {
         if (userOnRide(userId, state.ride.riders)) {
             let rideAttendanceUser = state.ride.riders.find(rider => rider.id === parseInt(userId))
             let riderAttendanceId = rideAttendanceUser.ride_att_id
-            const response = await fetch(`${BASE_URL}ride_attendances/${riderAttendanceId}`, {
-                method: 'DELETE',
-                headers: {
-                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
-                }
-            })
-            if (!response.ok) throw new Error ('Something went wrong with deleting you from the ride. Refresh the page and try again.')
+            await AJAX(`${BASE_URL}ride_attendances/${riderAttendanceId}`, 'DELETE')
             state.ride.riders = state.ride.riders.filter(rider => userId !== rider.id)
         } else {
-            const addResponse = await fetch(`${BASE_URL}ride_attendances/`, {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'Authorization' : `Bearer ${localStorage.getItem('token')}`
-                },
-                body: JSON.stringify({
-                    ride_id: state.ride.ride.id,
-                    user_id: userId
-                })
-            })
-            if(!addResponse.ok) throw new Error('Something went wrong with adding you to the ride. Refresh the page and try again.')
-            const addResult = await addResponse.json()
+            const uploadData = {
+                ride_id: state.ride.ride.id,
+                user_id: userId             
+            }
+            const addResult = await AJAX(`${BASE_URL}ride_attendances/`, 'POST', uploadData)
             state.ride.riders.push({
                 userId: userId,
                 username: state.user.username,
@@ -293,25 +212,19 @@ export const toggleRideAttendance = async function() {
             })
         }
     } catch (error) {
-        throw new Error (error)
+        throw error
     }
 }
 
 export const cancelRide = async function(rideId) {
     try {
-        const response = await fetch(`${BASE_URL}rides/${rideId}`, {
-            method: 'DELETE',
-            headers: {
-                'Authorization' : `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        if (!response.ok) throw new Error ('Something went wrong with deleting from server')
+        const response = await AJAX(`${BASE_URL}rides/${rideId}`, 'DELETE')
         state.ride = {}
         const index = state.ridesList.list.findIndex(ride => ride.id === rideId)
         state.ridesList.list.splice(index, 1)
 
     } catch (error) {
-        throw new Error (error)
+        throw error
     }
 } 
 
@@ -327,16 +240,7 @@ export const updateRide = async function(updatedRideInformation) {
             route_id: state.ride.route.id
         }
         //update server information
-        const response = await fetch(`${BASE_URL}rides/${state.ride.ride.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(newRide)
-        })
-        if (!response.ok) throw new Error ('Something went wrong with the update. The system did not understand the server response.')
-        const result = await response.json()
+        const result = await AJAX(`${BASE_URL}rides/${state.ride.ride.id}`, 'PATCH', newRide)
 
         //update state.ride
         const {ride, route} = result
@@ -367,21 +271,13 @@ export const updateRide = async function(updatedRideInformation) {
         state.ridesList.list[index].date = ride.date
 
     } catch (error) {
-        throw new Error (error)
+        throw error
     }
 }
 
 export const loadUserInfo = async function(id) {
     try {
-        const response = await fetch(`${BASE_URL}users/${id}`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            }
-        })
-        if (!response.ok) throw new Error('Could not get user info')
-        const result = await response.json()
+        const result = await AJAX(`${BASE_URL}users/${id}`)
         const {user, motorcycles, ride_attendances} = result
         state.selectedMemberProfile = {
             id: user.id,
@@ -394,22 +290,14 @@ export const loadUserInfo = async function(id) {
             avatarUrl: user.avatar_url
         }
     } catch (error) {
-        throw new Error(error)
+        throw error
     }
 }
 
 export const updateUserInfo = async function(id, updatedInfo) {
     try {
-        const response = await fetch(`${BASE_URL}users/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(updatedInfo)
-        })
-        if (!response.ok) throw new Error ('Failed to update user')
-        const result = await response.json()
+        await AJAX(`${BASE_URL}users/${id}`, 'PATCH', updatedInfo)
+        
         //update state
         state.selectedMemberProfile.username = updatedInfo.username
         state.selectedMemberProfile.email = updatedInfo.email
@@ -418,7 +306,7 @@ export const updateUserInfo = async function(id, updatedInfo) {
         localStorage.setItem('username', updatedInfo.username)
         addUserToState()
     } catch (error) {
-        console.error(error)
+        throw error
     }
 }
 
@@ -433,17 +321,9 @@ export const updateAvatar = async function(id, uploadInfo) {
         this.state.user.avatarUrl = result.url
         this.state.selectedMemberProfile.avatarUrl = result.url
         const newAvatarUrl = {avatar_url : result.url}
-        const serverResponse = await fetch(`${BASE_URL}users/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${localStorage.getItem('token')}`
-            },
-            body: JSON.stringify(newAvatarUrl)
-        })
-        const serverResult = await serverResponse.json()
+        await AJAX(`${BASE_URL}users/${id}`, 'PATCH', newAvatarUrl)
     } catch (error) {
-        throw new Error (error)
+        throw error
     }
 }
 
