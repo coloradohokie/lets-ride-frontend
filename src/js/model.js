@@ -81,7 +81,7 @@ export async function loadRide(id) {
                 updatedAt: rideDetails.route.updated_at
             }
         }
-        console.log('STATE', this.state)
+        // console.log('STATE', this.state)
     } catch (error) {
         throw new Error(error)
     }
@@ -100,7 +100,6 @@ export async function validateLogin(loginData) {
         if (!response.ok) throw new Error ('invalid response from server')
         const result = await response.json()
         if (!result.token) throw new Error ('Login failed. Check the email and password and try again.')
-        console.log(result)
         localStorage.setItem('token', result.token)
         localStorage.setItem('username', result.username)
         localStorage.setItem('userId', result.userId)
@@ -117,7 +116,7 @@ export function addUserToState() {
         username: localStorage.getItem('username'),
         avatar_url: localStorage.getItem('avatar_url')
     }
-    console.log(state.user)
+    // console.log(state.user)
 }
 
 export function logout() {
@@ -394,7 +393,6 @@ export const loadUserInfo = async function(id) {
             rideAttendances: ride_attendances,
             avatarUrl: user.avatar_url
         }
-        console.log(state.selectedMemberProfile)
     } catch (error) {
         throw new Error(error)
     }

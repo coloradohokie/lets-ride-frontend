@@ -19,12 +19,10 @@ class OrganizeRide extends View {
 
     addHandlerToggleRouteSelection(routes) {
         this._routeSelectorElement.addEventListener('change', function(e) {
-            console.log('EVENT', e.target.value)
             const routePreviewBoxElement = document.querySelector('.route-preview-box')
             const newRouteDetailsElement = document.querySelector('.new-route-details')
             const routeId = +e.target.value
             if (routeId) {
-                console.log(routePreviewBoxElement, newRouteDetailsElement)
                 routePreviewBoxElement.classList.remove('hidden')
                 newRouteDetailsElement.classList.add('hidden')
                 const selectedRoute = routes.routes.find(route => route.id === routeId)
@@ -40,10 +38,8 @@ class OrganizeRide extends View {
         const form = document.querySelector('.upload-ride')
         form.addEventListener('submit', function(e) {
             e.preventDefault()
-            console.log('success')
             const dataArray = [...new FormData(this)]
             const data = Object.fromEntries(dataArray)
-            console.log('data', data)
             handler(data)
         })
     }

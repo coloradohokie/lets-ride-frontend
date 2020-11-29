@@ -218,7 +218,6 @@ const controlProfileView = async function(profileId = model.state.user.id) {
 }
 
 const controlViewUserProfile = async function(profileId = model.state.user.id) {
-    console.log(profileId)
     try {
         ProfileView.renderSpinner()
         await model.loadUserInfo(profileId)

@@ -37,7 +37,6 @@ class SearchResultsView extends View {
 
     _upComingRidesMarkup(timeline) {
         const today = Date.now()
-        console.log(this._data)
         const {currentRideId} = this._data
         const ridesList = this._data.ridesList.list
         return ridesList

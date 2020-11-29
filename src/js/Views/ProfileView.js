@@ -59,8 +59,6 @@ class ProfileView extends View {
             form.addEventListener('submit', function(e) {
                 e.preventDefault()
                 const data = new FormData(this)
-                console.log(this)
-                console.log (data)
                 handler(data)
             })
             form.addEventListener('reset', function(e) {
