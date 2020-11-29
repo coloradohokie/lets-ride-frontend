@@ -89,6 +89,15 @@ const controlOrganizeRide = async function() {
 const controlUploadRide = async function(data) {
     try {
         OrganizeRide.renderSpinner()
+        
+        //if this is a new route, upload it first
+        let response
+        if (!+data.route) {
+            response = await model.uploadRoute(data)
+            data.route = response.id
+        }
+
+        //upload the ride
         await model.uploadRide(data)
     
         //navigate to new ride page

@@ -142,6 +142,37 @@ export async function loadRoutes() {
     }
 }
 
+export async function uploadRoute(data) {
+    try {
+        const newRoute = {
+            route_name: data.rTitle,
+            description: data.rDescription,
+            start_location: data.rStart,
+            end_location: data.rEnd,
+            map_url: data.rLink,
+            difficulty: data.rDifficulty,
+            miles: data.rMiles,
+            minutes: data.rMinutes,
+            created_by: state.user.id
+        }
+
+        const response = await fetch(`${BASE_URL}routes`, {
+            method: 'POST',
+            headers: {
+                'Content-Type':'application/json',
+                'Authorization': `Bearer ${localStorage.getItem('token')}`
+            },
+            body: JSON.stringify(newRoute)
+        })
+        if (!response.ok) throw new Error ('No response from Server')
+        const result = response.json()
+        return result
+
+    } catch (error) {
+        throw new Error(error)
+    }
+}
+
 export async function uploadRide(data) {
     try {
         const newRide = {
