@@ -3,6 +3,7 @@ import View from './View'
 class OrganizeRide extends View {
 
     _parentElement = document.querySelector('.organize-ride')
+    _routeSelectorElement = document.querySelector('#route')
     _navBar = document.querySelector('.nav')
     _errorMessage = 'Unable to load the Organize Ride form.'
     _data;
@@ -13,6 +14,25 @@ class OrganizeRide extends View {
             if(!button) return
             if(!button.dataset.page === 'profile') return
             handler()
+        })
+    }
+
+    addHandlerToggleRouteSelection(routes) {
+        this._routeSelectorElement.addEventListener('change', function(e) {
+            console.log('EVENT', e.target.value)
+            const routePreviewBoxElement = document.querySelector('.route-preview-box')
+            const newRouteDetailsElement = document.querySelector('.new-route-details')
+            const routeId = +e.target.value
+            if (routeId) {
+                console.log(routePreviewBoxElement, newRouteDetailsElement)
+                routePreviewBoxElement.classList.remove('hidden')
+                newRouteDetailsElement.classList.add('hidden')
+                const selectedRoute = routes.routes.find(route => route.id === routeId)
+                routePreviewBoxElement.innerHTML = selectedRoute.map_url
+            } else {
+                routePreviewBoxElement.classList.add('hidden')
+                newRouteDetailsElement.classList.remove('hidden')
+            }
         })
     }
 

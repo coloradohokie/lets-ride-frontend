@@ -179,14 +179,9 @@
                 <label for="description">Description</label>
                 <textarea id="description" name="description" placeholder="Description"></textarea>
                 
-                <div class="organize__date">
-                    <label id="date" for="date">Date:</label>
+                <div class="form-row">
                     <input type="date" name="date" id="date" placeholder="date">
-        
-                    <label id="start-time" for="start">Start Time:</label>
                     <input type="time" name="start" />
-        
-                    <label id="end-time" for="end">End Time:</label>
                     <input type="time" name="end" />
                 </div>
             </div>
@@ -195,19 +190,24 @@
                 <label for="route">Route</label>
                 <select id="route" name="route">
                     <option value="0">Create New Route</option>
+                    <option disabled> ----Existing Routes----</option>
                 </select>
-                <div class="route-preview-box">
+                <div class="route-preview-box hidden">
                     <p>Route Preview Box</p>
                 </div>
                 <div class="new-route-details">
                     <input type="text" id="r-title" name="r-title" placeholder="Route Title" />
-                    <input type="text" id="r-start" name="r-start" placeholder="Start Location" />
-                    <input type="text" id="r-end" name="r-end" placeholder="End Location" />
+                    <div class="form-row">
+                        <input type="text" id="r-start" name="r-start" placeholder="Start Location" />
+                        <input type="text" id="r-end" name="r-end" placeholder="End Location" />
+                    </div>
                     <textarea id="r-description" name="r-description" placeholder="Route Description"></textarea>
                     <textarea id="r-link" name="r-link" placeholder="Paste Google Map Link"></textarea>
-                    <input type="text" id="r-difficulty" name="r-difficulty" placeholder="Difficulty" />
-                    <input type="text" id="r-miles" name="r-miles" placeholder="Miles" />
-                    <input type="text" id="r-minutes" name="r-minutes" placeholder="Minutes" />
+                    <div class="form-row">
+                        <input type="text" id="r-difficulty" name="r-difficulty" placeholder="Difficulty" />
+                        <input type="text" id="r-miles" name="r-miles" placeholder="Miles" />
+                        <input type="text" id="r-minutes" name="r-minutes" placeholder="Minutes" />
+                    </div>
                 </div>
                         
                 <div class="organize-ride-submit">

@@ -78,12 +78,12 @@ section {
 }
 
 body {
-    background-color: whitesmoke;
+    background-color: $color-secondary;
     font-family: 'Roboto', sans-serif;
-    background-image: url(https://images.unsplash.com/photo-1558979159-2b18a4070a87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80);
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-attachment: fixed;
+    // background-image: url(https://images.unsplash.com/photo-1558979159-2b18a4070a87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80);
+    // background-repeat: no-repeat;
+    // background-size: cover;
+    // background-attachment: fixed;
 }
 
 h1 {

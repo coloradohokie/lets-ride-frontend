@@ -305,6 +305,7 @@ const init = function() {
         NavBarView.addHandlerTogglePage()
 
         OrganizeRide.addHandlerRender(controlOrganizeRide)
+        OrganizeRide.addHandlerToggleRouteSelection(model.state)
         OrganizeRide.addHandlerSubmitForm(controlUploadRide)
 
         ProfileView.addHandlerRender(controlProfileView)

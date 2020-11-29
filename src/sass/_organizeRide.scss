@@ -1,16 +1,31 @@
 .upload-ride {
     display: flex;
     flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
     background-color: white;
     margin: auto;
     padding: 2rem;
-    min-width: 15rem;
-    width: 40rem;
+    min-width: 600px;
+    max-width: 700px;
+
     border: 1px solid $color-gray-light-2;
     border-radius: 8px;
     box-shadow: 5px 5px 5px $color-gray-light-2;
+
+    input,
+    select {
+        height: 4rem;
+        border: 2px solid $color-gray-light-2;
+        border-radius: 8px;
+        font-size: 1.3rem;
+    }
+
+    textarea {
+        height: 8rem;
+        border: 2px solid $color-gray-light-2;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 1.3rem;        
+    }
 }
 
 .ride-information,
@@ -22,20 +37,23 @@
 
 .route-preview-box {
     margin-top: 1rem;
-    height: 20rem;
-    border: 1px solid green;
-    background-color: #ddd;
-    text-align: center;
-    vertical-align: middle;
-    line-height: 20rem;
+    border: 1px solid $color-primary;
 }
 
-.organize__date {
+.form-row {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 
     input {
-        width: 8rem;
+        margin: 1rem;
+    }
+
+    :first-child {
+        margin-left: 0;
+    }
+
+    :last-child {
+        margin-right: 0;
     }
 }
