@@ -1,4 +1,7 @@
 .profile {
+    background-color: $color-primary;
+    padding: 2rem;
+
     h2 {
         padding-bottom: 0;
         margin-bottom: 0;
@@ -15,7 +18,7 @@
         }
     
         .profile-picture {
-            background-color: #7395AE;
+            background-color: $color-primary;
             width: 200px;
             max-height: 200px;
         }
@@ -70,6 +73,7 @@
         padding: 0 1.5rem 1.5rem 1.5rem;
         border-radius: 0.25rem;
         margin-bottom: 0.25rem;
+        min-height: 5rem;
     
         .motorcycle-card {
             display: flex;
@@ -99,6 +103,7 @@
         padding: 0 1.5rem 1.5rem 1.5rem;
         border-radius: 0.25rem;
         margin-bottom: 0.25rem;
+        min-height: 5rem;
     
         .ride-attendance-card {
             display: flex;

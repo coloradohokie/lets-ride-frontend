@@ -26,6 +26,7 @@
     align-items: center;
     height: 100%;
     width: 50%;
+    max-width: 30rem;
 }
 
 .nav-link {
@@ -40,6 +41,6 @@
 .logout-button {
     width: 4rem;
     height: 100%;
-    background-color: #7395AE;
+    background-color: $color-primary;
     color: white;
 }

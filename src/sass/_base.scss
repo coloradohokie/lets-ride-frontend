@@ -9,6 +9,8 @@ $color-gray-light-3: #c3c3d3; // Light text (placeholder)
 $color-gray-dark-1: #515361; // Normal text
 $color-gray-dark-2: #838191; // Lighter text
 
+$hline: linear-gradient(90deg, $color-gray-dark-1, transparent) 1;
+
 * {
     box-sizing: border-box;
 }
@@ -73,17 +75,12 @@ textarea {
     resize: none;
 }
 
-section {
-    margin-bottom: 5rem;
-}
-
 body {
-    background-color: $color-secondary;
     font-family: 'Roboto', sans-serif;
-    // background-image: url(https://images.unsplash.com/photo-1558979159-2b18a4070a87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80);
-    // background-repeat: no-repeat;
-    // background-size: cover;
-    // background-attachment: fixed;
+    background-image: url(https://images.unsplash.com/photo-1558979159-2b18a4070a87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-attachment: fixed;
 }
 
 h1 {
@@ -101,6 +98,8 @@ h2 {
     margin-left: 0;
     margin-right: 3rem;
     margin-bottom: 0.2rem;
+    border-bottom: 1px solid $color-gray-dark-1;
+    border-image: $hline;
 }
 
 h3 {
@@ -142,11 +141,12 @@ img {
 }
 
 .rides {
-    min-height: calc(100vh - 8rem);
+    min-height: 80vh;
     display: flex;
     justify-content: flex-start;
     margin: 1rem;
-    width: 90%;   
+    width: 90%;  
+    box-shadow: 5px 5px 10px $color-gray-light-1; 
 }
 
 .header {
