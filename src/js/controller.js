@@ -50,6 +50,7 @@ const controlSearchResults = async function() {
 }
 
 const controlNavBar = function() {
+    console.log(model.state.user)
     WelcomeMessageView.render(model.state.user)
 }
 
@@ -269,6 +270,7 @@ const controlChangeAvatar = async function(uploadInfo) {
             mode: 'view', 
             profileOwner
         })
+        WelcomeMessageView.render(model.state.user)
     } catch (error) {
         console.error(error)
         ProfileView.renderError('There was a problem updating the Avatar.')

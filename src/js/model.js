@@ -320,6 +320,7 @@ export const updateAvatar = async function(id, uploadInfo) {
         const result = await response.json()
         this.state.user.avatarUrl = result.url
         this.state.selectedMemberProfile.avatarUrl = result.url
+        localStorage.setItem('avatar_url', result.url)
         const newAvatarUrl = {avatar_url : result.url}
         await AJAX(`${BASE_URL}users/${id}`, 'PATCH', newAvatarUrl)
     } catch (error) {

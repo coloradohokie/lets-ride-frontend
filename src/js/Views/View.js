@@ -13,8 +13,10 @@ export default class View {
         element.innerHTML= ''
     }
 
-    _displayAvatar(avatarUrl) {
-        return avatarUrl ? avatarUrl : profileImage
+    _displayAvatar(avatarUrl = undefined) {
+        const stringArray = avatarUrl.split('image/upload/')
+        const updatedAvatarUrl = stringArray[0] + 'image/upload/' + 'g_face,c_thumb,w_200,h_200/' + stringArray[1]
+        return avatarUrl ? updatedAvatarUrl : profileImage
     }
 
     renderSpinner() {
