@@ -2,7 +2,6 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 90vh;
 }
 
 .login-banner {
@@ -23,7 +22,6 @@
     width: 30rem;
     border: 1px solid $color-gray-light-2;
     border-radius: 8px;
-    box-shadow: 5px 5px 5px $color-gray-light-2;
     
     .login-form,
     .sign-up-form {

@@ -30,192 +30,192 @@
     <!-------OVERLAY-------->
     <div class="overlay hidden"></div>
 
+    <div class="content">
+        <!-------LOGIN/SIGNUP-------->
+        <div class="login page hidden">
+            <div class="entry-form-box">
+                <!-------LOGIN FORM-------->
+                <p class="login-banner">Let's Ride</p>
+                <div class="info-box">
+                    <svg>
+                        <use href="./src/assets/icons.svg#icon-alert-triangle" style="width:10px;"></use>
+                    </svg>
+                    <p>You must log in to continue</p>
+                </div>
+                <form class="login-form">
+                    <label for="email">Email</label>
+                    <input type="text" id="email" name="email" placeholder="Email"></select>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" name="password" placeholder="Password"></select>
+                    <input class="submit" type="submit" value="Log In" />
+                </form>
 
-    <!-------LOGIN/SIGNUP-------->
-    <div class="login page hidden">
-        <div class="entry-form-box">
-            <!-------LOGIN FORM-------->
-            <p class="login-banner">Let's Ride</p>
-            <div class="info-box">
-                <svg>
-                    <use href="./src/assets/icons.svg#icon-alert-triangle" style="width:10px;"></use>
-                </svg>
-                <p>You must log in to continue</p>
+
+            
+                <!-------SIGN UP FORM-------->
+                <form class="sign-up-form hidden">
+                    <h1>Create New Account</h1>
+                    
+                    <label for="email">Email Address</label>
+                    <input type="text" id="s-email" name="email" placeholder="Email Address"></select>
+                    
+                    <label for="username">User Name</label>
+                    <input type="text" id="s-username" name="username" placeholder="User Name"></select>
+                    
+                    <label for="password">Password</label>
+                    <input type="password" id="s-password" name="password" placeholder="Password"></select>
+                    
+                    <label for="city">City</label>
+                    <input type="text" id="s-city" name="city" placeholder="City"></select>
+                    
+                    <label for="State">State</label>
+                    <input type="text" id="s-state" name="state" placeholder="State"></select>
+                    
+                    
+                    <input class="submit" type="submit" value="Sign Up!" />
+                </form>
+
+                <span class="form-seperator">
+                    or
+                </span>
+
+                <button class="toggle-screen-button">Create New Account</button>
             </div>
-            <form class="login-form">
-                <label for="email">Email</label>
-                <input type="text" id="email" name="email" placeholder="Email"></select>
-                <label for="password">Password</label>
-                <input type="password" id="password" name="password" placeholder="Password"></select>
-                <input class="submit" type="submit" value="Log In" />
-            </form>
-
-
-        
-            <!-------SIGN UP FORM-------->
-            <form class="sign-up-form hidden">
-                <h1>Create New Account</h1>
-                
-                <label for="email">Email Address</label>
-                <input type="text" id="s-email" name="email" placeholder="Email Address"></select>
-                
-                <label for="username">User Name</label>
-                <input type="text" id="s-username" name="username" placeholder="User Name"></select>
-                
-                <label for="password">Password</label>
-                <input type="password" id="s-password" name="password" placeholder="Password"></select>
-                
-                <label for="city">City</label>
-                <input type="text" id="s-city" name="city" placeholder="City"></select>
-                
-                <label for="State">State</label>
-                <input type="text" id="s-state" name="state" placeholder="State"></select>
-                
-                
-                <input class="submit" type="submit" value="Sign Up!" />
-            </form>
-
-            <span class="form-seperator">
-                or
-            </span>
-
-            <button class="toggle-screen-button">Create New Account</button>
         </div>
-    </div>
 
 
-    <!-------RIDES PAGE-------->
-    <div class="page rides">
-        <section class ="search-results">
-                <div class="search-results-ride-container">
-                    <!-- <div class="ride-list">
-                        <h2>Upcoming Rides</h2>
-                        <ul class="upcoming-rides">
-                        </ul>
-                        <br>
+        <!-------RIDES PAGE-------->
+        <div class="page rides">
+            <section class ="search-results">
+                    <div class="search-results-ride-container">
+                        <!-- <div class="ride-list">
+                            <h2>Upcoming Rides</h2>
+                            <ul class="upcoming-rides">
+                            </ul>
+                            <br>
+                        </div>
+                        <div class="ride-list">
+                            <h2>Past Rides</h2>
+                            <ul class="past-rides">
+                            </ul>       
+                        </div> -->
                     </div>
-                    <div class="ride-list">
-                        <h2>Past Rides</h2>
-                        <ul class="past-rides">
-                        </ul>       
-                    </div> -->
+
+                    <div class="pagination">
+                        <button>Back</button>
+                        <button>Next</button>
+                    </div>
+            </section>
+
+            <section class=selected-ride-section>
+                <!-- <div class="selected-ride-section-titlebar">
                 </div>
-
-                <div class="pagination">
-                    <button>Back</button>
-                    <button>Next</button>
+                <div class="selected-ride-description">
                 </div>
-        </section>
+                <div class="selected-route-description"></div> -->
+            </section>
+        </div>
 
-        <section class=selected-ride-section>
-            <!-- <div class="selected-ride-section-titlebar">
+
+
+
+
+
+        <!-------PROFILE PAGE-------->
+        <div class="page profile hidden">
+            <h2>My Profile</h2>
+            <div class="profile-container">
+                <ul>
+                    <li>User Name: User</li>
+                    <li>Email: email</li>
+                    <li>City: City</li>
+                    <li>State: State</li>
+                </ul>
             </div>
-            <div class="selected-ride-description">
-            </div>
-            <div class="selected-route-description"></div> -->
-        </section>
-    </div>
-
-
-
-
-
-
-    <!-------PROFILE PAGE-------->
-    <div class="page profile hidden">
-        <h2>My Profile</h2>
-        <div class="profile-container">
-            <ul>
-                <li>User Name: User</li>
-                <li>Email: email</li>
-                <li>City: City</li>
-                <li>State: State</li>
+        
+        
+            <a name="motorcycles-section"></a>
+            <h2>My Garage</h2>
+            <ul class="motorcycle">
+                <li>
+                    <!-- <img src="./assets/plus.png" /> -->
+                    Add Motorcycle
+                </li>
             </ul>
-        </div>
-    
-    
-        <a name="motorcycles-section"></a>
-        <h2>My Garage</h2>
-        <ul class="motorcycle">
-            <li>
-                <!-- <img src="./assets/plus.png" /> -->
-                Add Motorcycle
-            </li>
-        </ul>
-    
-        <!-- <div class="section-container">
-            <div id="motorcycle-container" class="motorcycle-container"></div>
-            <form id="create-motorcycle" class="all-forms" method="POST" action="https://lets-ride-motorcycle-app.herokuapp.com/motorcycles">
-                <h2>Add a Motorcycle</h2>
-                <label for="make">Make</label>
-                <input type="text" name="make" placeholder="Make"></select>
-                <label for="model">Model</label>
-                <input type="text" name="model" placeholder="Model"></select>
-                <label for="year">Year</label>
-                <input type="number" name="year" placeholder="Year" min="1895" max="2020"></select>
-                <label for="rider">Rider</label>
-                <input type="hidden" id ="rider-id" name="rider_id" placeholder="Rider" value=""></select>
-                <input type="submit" value="Add To My Garage">
-            </form>
-        </div> -->
-    </div>
-
-
-
-
-
-
-
-    <!-------ORGANIZE RIDE PAGE-------->
-    <div class="page organize-ride hidden">
         
-        <form method="POST" class="upload-ride">
-            <div class="ride-information">
-                <h1>Organize a Ride</h1>
-                <h2>About the Ride</h2>
-                <label for="title">Title</label>
-                <input type="text" id="title" name="title" placeholder="Title" />
-                <label for="description">Description</label>
-                <textarea id="description" name="description" placeholder="Description"></textarea>
-                
-                <div class="form-row">
-                    <input type="date" name="date" id="date" placeholder="date">
-                    <input type="time" name="start" />
-                    <input type="time" name="end" />
-                </div>
-            </div>
-            <div class="route-information">
-                <h2>About the Route</h2>
-                <label for="route">Route</label>
-                <select id="route" name="route">
-                    <option value="0">Create New Route</option>
-                    <option disabled> ----Existing Routes----</option>
-                </select>
-                <div class="route-preview-box hidden">
-                    <p>Route Preview Box</p>
-                </div>
-                <div class="new-route-details">
-                    <input type="text" id="r-title" name="rTitle" placeholder="Route Title" />
-                    <div class="form-row">
-                        <input type="text" id="r-start" name="rStart" placeholder="Start Location" />
-                        <input type="text" id="r-end" name="rEnd" placeholder="End Location" />
-                    </div>
-                    <textarea id="r-description" name="rDescription" placeholder="Route Description"></textarea>
-                    <textarea id="r-link" name="rLink" placeholder="Paste Google Map Link"></textarea>
-                    <div class="form-row">
-                        <input type="text" id="r-difficulty" name="rDifficulty" placeholder="Difficulty" />
-                        <input type="text" id="r-miles" name="rMiles" placeholder="Miles" />
-                        <input type="text" id="r-minutes" name="rMinutes" placeholder="Minutes" />
-                    </div>
-                </div>
-                        
-                <div class="organize-ride-submit">
-                    <input class="submit" type="submit" value="Create Ride">
-                </div>
-            </div>
-        </form>
-    </div>
+            <!-- <div class="section-container">
+                <div id="motorcycle-container" class="motorcycle-container"></div>
+                <form id="create-motorcycle" class="all-forms" method="POST" action="https://lets-ride-motorcycle-app.herokuapp.com/motorcycles">
+                    <h2>Add a Motorcycle</h2>
+                    <label for="make">Make</label>
+                    <input type="text" name="make" placeholder="Make"></select>
+                    <label for="model">Model</label>
+                    <input type="text" name="model" placeholder="Model"></select>
+                    <label for="year">Year</label>
+                    <input type="number" name="year" placeholder="Year" min="1895" max="2020"></select>
+                    <label for="rider">Rider</label>
+                    <input type="hidden" id ="rider-id" name="rider_id" placeholder="Rider" value=""></select>
+                    <input type="submit" value="Add To My Garage">
+                </form>
+            </div> -->
+        </div>
 
+
+
+
+
+
+
+        <!-------ORGANIZE RIDE PAGE-------->
+        <div class="page organize-ride hidden">
+            
+            <form method="POST" class="upload-ride">
+                <div class="ride-information">
+                    <h1>Organize a Ride</h1>
+                    <h2>About the Ride</h2>
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Title" />
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Description"></textarea>
+                    
+                    <div class="form-row">
+                        <input type="date" name="date" id="date" placeholder="date">
+                        <input type="time" name="start" />
+                        <input type="time" name="end" />
+                    </div>
+                </div>
+                <div class="route-information">
+                    <h2>About the Route</h2>
+                    <label for="route">Route</label>
+                    <select id="route" name="route">
+                        <option value="0">Create New Route</option>
+                        <option disabled> ----Existing Routes----</option>
+                    </select>
+                    <div class="route-preview-box hidden">
+                        <p>Route Preview Box</p>
+                    </div>
+                    <div class="new-route-details">
+                        <input type="text" id="r-title" name="rTitle" placeholder="Route Title" />
+                        <div class="form-row">
+                            <input type="text" id="r-start" name="rStart" placeholder="Start Location" />
+                            <input type="text" id="r-end" name="rEnd" placeholder="End Location" />
+                        </div>
+                        <textarea id="r-description" name="rDescription" placeholder="Route Description"></textarea>
+                        <textarea id="r-link" name="rLink" placeholder="Paste Google Map Link"></textarea>
+                        <div class="form-row">
+                            <input type="text" id="r-difficulty" name="rDifficulty" placeholder="Difficulty" />
+                            <input type="text" id="r-miles" name="rMiles" placeholder="Miles" />
+                            <input type="text" id="r-minutes" name="rMinutes" placeholder="Minutes" />
+                        </div>
+                    </div>
+                            
+                    <div class="organize-ride-submit">
+                        <input class="submit" type="submit" value="Create Ride">
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
 
     <footer>
         Copyright: 2020 Michael Newman
