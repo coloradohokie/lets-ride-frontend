@@ -8,7 +8,7 @@
     }
 
     .profile-container {
-        background-color: #9c9c9c;
+        background-color: $color-gray-light-1;
         display: flex;
         width: 90%;
         margin: 1rem;
@@ -24,7 +24,7 @@
         }
 
         table {
-            border: 1px solid black;
+            border: 1px solid $color-gray-light-2;
             padding: 1rem;
         }
     
@@ -56,7 +56,7 @@
     }
 
     .change-avatar-form {
-        border: 1px solid black;
+        border: 1px solid $color-gray-light-2;
         padding: 1rem;
         max-width: 20rem;
 
@@ -82,8 +82,8 @@
             width: 15rem;
             height: 12rem;
             padding: 2rem;
-            background-color: whitesmoke;
-            box-shadow: 5px 5px 5px lightgray;
+            background-color: $color-gray-light-1;
+            box-shadow: 5px 5px 5px $color-gray-dark-2;
             margin: 1rem;
             text-align: center;
             margin-left: 0;
@@ -112,8 +112,8 @@
             width: 15rem;
             height: 12rem;
             padding: 2rem;
-            background-color: whitesmoke;
-            box-shadow: 5px 5px 5px lightgray;
+            background-color: $color-gray-light-1;
+            box-shadow: 5px 5px 5px $color-gray-dark-2;
             margin: 1rem;
             text-align: center;
             margin-left: 0;

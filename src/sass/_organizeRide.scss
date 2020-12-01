@@ -1,7 +1,7 @@
 .upload-ride {
     display: flex;
     flex-direction: column;
-    background-color: white;
+    background-color: $color-gray-light-1;
     margin: auto;
     padding: 2rem;
     min-width: 600px;
@@ -9,14 +9,14 @@
 
     border: 1px solid $color-gray-light-2;
     border-radius: 8px;
-    box-shadow: 5px 5px 5px $color-gray-light-2;
-
+    
     input,
     select {
         height: 4rem;
         border: 2px solid $color-gray-light-2;
         border-radius: 8px;
         font-size: 1.3rem;
+        color: $color-gray-dark-3;
     }
 
     textarea {
@@ -24,7 +24,8 @@
         border: 2px solid $color-gray-light-2;
         border-radius: 8px;
         font-family: inherit;
-        font-size: 1.3rem;        
+        font-size: 1.3rem;
+        color: $color-gray-dark-3;
     }
 }
 

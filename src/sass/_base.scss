@@ -1,13 +1,15 @@
 $color-primary: #557A95;
+$color-light-blue: #7395AE;
 $color-secondary: #5D5C61;
 $color-grad-1: #89b1fb;
 $color-grad-2: #82d9f4;
 
 $color-gray-light-1: #f3f3f9; // Light background
 $color-gray-light-2: #eeeef2; // Light lines
-$color-gray-light-3: #c3c3d3; // Light text (placeholder)
+$color-gray-light-3:#e0e9fd; // Light text (placeholder)
 $color-gray-dark-1: #515361; // Normal text
 $color-gray-dark-2: #838191; // Lighter text
+$color-gray-dark-3: #212025; // Darker text
 
 $hline: linear-gradient(90deg, $color-gray-dark-1, transparent) 1;
 
@@ -29,8 +31,9 @@ body {
 
 header {
     width: 100%;
+    background-image: linear-gradient(hsla(0,0%,80%,1), hsla(0,0%,0%,0));
     background-color: $color-secondary;
-    color: whitesmoke;
+    color:  $color-gray-light-3;
     height: 4rem;
     padding: 0, 1rem;
     padding-left: 1rem;
@@ -50,18 +53,8 @@ footer {
     padding: 0.5rem;
     border-top: 2px solid $color-primary;
     font-size: 0.7rem;
-    color: rgb(20, 20, 20);
-    text-align: center;
-    z-index: 3000;
-    
-}
-
-.all-forms {
-    width: 80%;
-    margin: auto;
-    padding: 2rem;
-    background-color: whitesmoke;
-    box-shadow: 5px 5px 5px lightgray;
+    color: $color-gray-dark-3;
+    text-align: center;    
 }
 
 label {
@@ -78,13 +71,13 @@ button {
     font-size: 14px;
     min-width: 7rem;
     min-height: 2rem;
-    border: 1px solid steelblue;
-    background-color: gray;
+    border: 1px solid $color-secondary;
+    background-color: $color-primary;
     cursor: pointer;
     border-radius: 4px;
 
     &:hover {
-        box-shadow: 0 4px 6px 2px lightgray;
+        box-shadow: 0 4px 6px 2px $color-gray-light-1;
     }
 }
 
@@ -100,6 +93,7 @@ h1 {
     font-size: 1.5rem;
     margin-right: 3rem;
     font-weight: bold;
+    color: $color-gray-dark-3;
 }
 
 h2 {
@@ -112,15 +106,18 @@ h2 {
     margin-bottom: 0.2rem;
     border-bottom: 1px solid $color-gray-dark-1;
     border-image: $hline;
+    color: $color-gray-dark-3;
 }
 
 h3 {
     font-size: 1.25rem;
     padding: 0.5rem;
+    color: $color-gray-dark-3;
 }
 
 h4 {
     font-size: 1rem;
+    color: $color-gray-dark-3;
 }
 
 p {
@@ -128,20 +125,13 @@ p {
     padding: 0.2rem 0rem;
     margin-top: 0.2rem;
     margin-right: 1rem;
+    color: $color-gray-dark-3;
 }
 
 a {
     font-size: 14px;
     text-decoration: none;
-    color: rgb(20, 20, 20);
-}
-
-.warn-a {
-    color: darkred;
-    font-weight: bold;
-    width: 140px;
-    border-radius: 4px;
-    float: right;
+    color: $color-gray-dark-3;
 }
 
 img {
@@ -161,11 +151,6 @@ img {
     box-shadow: 5px 5px 10px $color-secondary; 
 }
 
-.header {
-    width: 100%;
-    background-image: linear-gradient(hsla(0,0%,80%,1), hsla(0,0%,0%,0));
-}
-
 
 .ride {
     list-style-type: none;
@@ -180,11 +165,6 @@ img {
 .selected-ride {
     width: 100%
 }
-
-// .hidden {
-//     display: none
-// }
-
 
 .spinner {
     margin: 5rem auto;

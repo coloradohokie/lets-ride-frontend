@@ -20,7 +20,7 @@
             $color-grad-1,
             $color-grad-2
         );
-        opacity: 0.4;
+        opacity: 0.1;
     }
 }
 
@@ -36,7 +36,7 @@
     bottom: 30%;
     left: 50%;
     transform: translate(-50%, 20%) skewY(-6deg);
-    color: black;
+    color: $color-gray-dark-3;
     font-weight: bold;
     font-size: 3rem;
     text-transform: uppercase;
@@ -70,7 +70,7 @@
 
 .selected-ride-section {
     min-height: 80vh;
-    background-color: #7395AE;
+    background-color: $color-light-blue;
     box-sizing: border-box;
     width: 80%;
 }
@@ -79,7 +79,7 @@
     display: flex;
     justify-content: space-between;
     border-bottom: 2px solid; 
-    border-image: linear-gradient(90deg, #557A95, transparent) 1;
+    border-image: linear-gradient(90deg,$color-primary, transparent) 1;
 }
 
 .whos-going {
@@ -90,7 +90,7 @@
     flex-direction: flex-start;
     
     li {
-        background-color: #9C9C9C;
+        background-color: $color-primary;
         width: 120px;
         height: 140px;
         margin: 0.5rem;
@@ -110,16 +110,16 @@
 .join-ride-toggle-button {
     width: 4rem;
     height: 4rem;
-    background-color: #557A95;
-    border: 1px solid #9C9C9C;
-    color: white;
+    background-color:$color-primary;
+    border: 1px solid $color-secondary;
+    color: $color-gray-light-3;
     font-size: 1.2rem;
     margin-right: 1rem;
-    box-shadow: 0px 5px 10px gray;
+    box-shadow: 0px 5px 10px $color-secondary;
 }
 
 .join-ride-toggle-button:hover {
-    box-shadow: 0px 5px 10px white;
+    box-shadow: 0px 5px 10px $color-gray-light-1;
 
 }
 
@@ -128,7 +128,6 @@
     max-width: 40rem;
     margin: auto;
     margin-top: 5rem;
-    // border: 2px solid green;
     border-radius: 8px;
     padding: 1rem 2rem;
     font-size: 1.5rem;
@@ -147,7 +146,7 @@
 }
 
 .ride-photo {
-    border: 2px solid black;
+    border: 2px solid $color-gray-dark-3;
     margin: 10px;
     /* box-shadow: 10px 10px 10px gray; */
     width: 100px;

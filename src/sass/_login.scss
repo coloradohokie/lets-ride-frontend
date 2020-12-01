@@ -16,7 +16,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: white;
+    background-color: #f3f3f9;
     padding: 2rem;
     min-width: 15rem;
     width: 30rem;
@@ -37,7 +37,7 @@
             background-color: $color-primary;
             font-size: 1.5rem;
             font-weight: bold;
-            color: white;
+            color: $color-gray-light-3;
             border: none;
 
             &:hover {
@@ -47,7 +47,7 @@
     }
 
     .form-seperator {
-        color: #96999e;
+        color: $color-secondary;
         display: inline-block;
         position: relative;
         font-size: 1rem;
@@ -65,7 +65,7 @@
 
         &:before, 
         &:after {
-            background-color: #d7dade;
+            background-color: $color-gray-dark-2;
             right: 100%;
             content: "";
             height: 1px;
@@ -97,8 +97,8 @@
 }
 
 .toggle-screen-button {
-    background-color: #42b72a;
-    color: white;
+    background-color: $color-grad-1;
+    color: $color-gray-light-3;
     font-size: 1.5rem;
     font-weight: bold;
     padding: 1rem;
