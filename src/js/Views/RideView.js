@@ -47,10 +47,7 @@ class RideView extends View {
                 <figure class="ride__fig">
                     <img src="${motoCoverImage}" class="ride__img" />
                     <h1 class="ride__title">
-                        <span>${editMode ? 
-                            `<input id="u-title" name="title" type="text" value="${ride.title}`: 
-                            ride.title}
-                        </span>
+                        <span>${ride.title}</span>
                     </h1>
                 </figure>
             </div>
@@ -59,6 +56,7 @@ class RideView extends View {
                     <p>
                         ${editMode ? 
                             `
+                            <input id="u-title" name="title" type="text" value="${ride.title}" />
                             <input id="u-date" name="date" type="date" value=${ride.date} /> 
                             <input id="u-start" name="start-time" type="time" value=${ride.startTime} /> - 
                             <input id="u-end" name="end-time" type="time" value=${ride.endTime} />

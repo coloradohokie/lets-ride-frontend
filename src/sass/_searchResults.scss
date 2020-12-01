@@ -71,13 +71,28 @@
 }
 
 .pagination {
-    display: flex;
-    justify-content: space-between;
-    padding: 0.5rem;
-    background-color: $color-primary;
-    height: 4rem;
+    // display: flex;
+    // justify-content: space-between;
+    // padding: 0.5rem;
+    // background-color: $color-primary;
+    // height: 4rem;
+
+    margin-top: auto;
+    padding: 0 0.5rem;
+
+    // &::after {
+    //     content: '';
+    //     display: table;
+    //     clear: both;
+    //   }
 
     .page-button {
-        margin: 0.3rem;
+        &--next {
+            float: right
+        }
+
+        &--prev {
+            float: left
+        }
     }
 }

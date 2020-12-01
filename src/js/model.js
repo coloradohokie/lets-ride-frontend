@@ -160,9 +160,9 @@ export async function uploadRide(data) {
                 id: route.id,
                 name: route.name,
                 description: route.description,
-                startLocation: route.startLocation,
+                startLocation: route.start_location,
                 endLocation: route.end_location,
-                mapUrl: route.map_path,
+                mapUrl: route.map_url,
                 createdAt: route.created_at,
                 updatedAt: route.updated_at                
             },

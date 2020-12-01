@@ -8,7 +8,7 @@ class PaginationView extends View {
 
     addHandlerClick(handler) {
         this._parentElement.addEventListener('click', function(e) {
-            const button = e.target.closest('.page-button')
+            const button = e.target.closest('.btn--inline')
             if(!button) return
             const goToPage = +button.dataset.goto
             handler(goToPage)
@@ -18,7 +18,7 @@ class PaginationView extends View {
     _nextButtonMarkup() {
         const currentPage = this._data.page
         return `
-            <button class="btn--inline page-button" data-goto="${currentPage + 1}">
+            <button class="btn--inline page-button--next" data-goto="${currentPage + 1}">
             <span>Page ${currentPage +1}</span>
             <svg class="search__icon">
                 <use href="${icons}#icon-arrow-right"></use>
@@ -30,7 +30,7 @@ class PaginationView extends View {
     _prevButtonMarkup() {
         const currentPage = this._data.page
         return `
-            <button class="btn--inline page-button" data-goto="${currentPage - 1}">
+            <button class="btn--inline page-button--prev" data-goto="${currentPage - 1}">
                 <svg class= "search__icon">
                     <use href="${icons}#icon-arrow-left"></use>
                 </svg>
