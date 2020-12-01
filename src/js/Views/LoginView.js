@@ -38,12 +38,13 @@ class LoginView extends View {
             _this._signUpForm.classList.toggle('hidden')
 
             //change the screen title and message at the bottom.
+            console.log(_this._loginForm.classList)
             if (_this._loginForm.classList.contains('hidden')) {
-                _this._loginPageTitle.innerText = 'Create a New Account'
+                // _this._loginPageTitle.innerText = 'Create a New Account'
                 _this._toggleScreenButton.innerText = 'Log into Existing Account'
                 _this._infoBox.classList.add('hidden')
             } else {
-                _this._loginPageTitle.innerText = 'Log Into Let\'s Ride'
+                // _this._loginPageTitle.innerText = 'Log Into Let\'s Ride'
                 _this._toggleScreenButton.innerText = 'Create New Account'
                 _this._infoBox.classList.remove('hidden')
             }

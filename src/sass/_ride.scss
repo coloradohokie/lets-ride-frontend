@@ -1,16 +1,60 @@
 .ride-cover-image {
-    width: 100%;
-    height: 15rem;
     margin-bottom: 1rem;
+}
 
-    img {
-        width: 100%;
-        height: 100%;
-        object-fit: cover;
-        object-position: 0 80%;
+.ride__fig {
+    height: 15rem;
+    position: relative;
+    transform-origin: top;
+
+    &::before {
+        content: '';
         display: block;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        background-image: linear-gradient(
+            to right bottom,
+            $color-grad-1,
+            $color-grad-2
+        );
+        opacity: 0.4;
     }
+}
 
+.ride__img {
+    width: 100%;
+    display: block;
+    height: 100%;
+    object-fit: cover;
+}
+
+.ride__title {
+    position: absolute;
+    bottom: 30%;
+    left: 50%;
+    transform: translate(-50%, 20%) skewY(-6deg);
+    color: black;
+    font-weight: bold;
+    font-size: 3rem;
+    text-transform: uppercase;
+    width: 80%;
+    line-height: 1.95;
+    text-align: center;
+
+    span {
+        -webkit-box-direction-break: clone;
+        box-decoration-break: clone;
+        padding: 1.3rem 2rem;
+        background-image: linear-gradient(
+            to right bottom,
+            $color-grad-1,
+            $color-grad-2
+        );
+        opacity: 0.9;
+    }
 }
 
 .ride--header {

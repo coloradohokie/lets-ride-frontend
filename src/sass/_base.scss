@@ -77,7 +77,8 @@ textarea {
 
 body {
     font-family: 'Roboto', sans-serif;
-    background-image: url(https://images.unsplash.com/photo-1558979159-2b18a4070a87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80);
+    background: linear-gradient( rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.5) ), url('https://images.unsplash.com/photo-1558979159-2b18a4070a87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80');
+    // background-image: url(https://images.unsplash.com/photo-1558979159-2b18a4070a87?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1951&q=80);
     background-repeat: no-repeat;
     background-size: cover;
     background-attachment: fixed;
@@ -146,7 +147,7 @@ img {
     justify-content: flex-start;
     margin: 1rem;
     width: 90%;  
-    box-shadow: 5px 5px 10px $color-gray-light-1; 
+    box-shadow: 5px 5px 10px $color-secondary; 
 }
 
 .header {
@@ -169,9 +170,9 @@ img {
     width: 100%
 }
 
-.hidden {
-    display: none
-}
+// .hidden {
+//     display: none
+// }
 
 
 .spinner {

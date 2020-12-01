@@ -44,15 +44,18 @@ class RideView extends View {
         if(!ride || !ride.id) return this._noSelectedRideMarkup()
         return `
             <div class="ride-cover-image">
-                <img src="${motoCoverImage}" />
+                <figure class="ride__fig">
+                    <img src="${motoCoverImage}" class="ride__img" />
+                    <h1 class="ride__title">
+                        <span>${editMode ? 
+                            `<input id="u-title" name="title" type="text" value="${ride.title}`: 
+                            ride.title}
+                        </span>
+                    </h1>
+                </figure>
             </div>
             <div class = "ride--header">
                 <div>
-                    <h1>
-                        ${editMode ? 
-                            `<input id="u-title" name="title" type="text" value="${ride.title}" />` :
-                             ride.title}
-                    </h1>
                     <p>
                         ${editMode ? 
                             `
