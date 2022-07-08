@@ -19,7 +19,7 @@
   "homepage": "https://github.com/coloradohokie/mod2-project-frontend#readme",
   "dependencies": {
     "assets": "^3.0.1",
-    "moment": "^2.29.1",
+    "moment": "^2.29.4",
     "sass": "^1.29.0"
   },
   "devDependencies": {
